@@ -1,0 +1,555 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CAD681586AB6480ACAA2A76A /* GCDIParameterBagProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68294DFB7F0E753AA27CF /* GCDIParameterBagProtocol.h */; };
+		CAD681F80E09EF78090E837C /* GCDIParameterBag.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6849701A38CFD99E38C8D /* GCDIParameterBag.m */; };
+		CAD68321D28E38393E4ABDD9 /* GCDIAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */; };
+		CAD68351E86C4501E306F357 /* GCDIReference.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68426A32F953C5C33E31A /* GCDIReference.h */; };
+		CAD6837597A00443886D9CCA /* GCDIParameterNotFoundException.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68CBE212B79F08DF64DA5 /* GCDIParameterNotFoundException.m */; };
+		CAD683D6E3B440C9676A4411 /* GCDIServiceCircularReferenceException.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD682C260CD90863AD2EB3D /* GCDIServiceCircularReferenceException.h */; };
+		CAD684D635FB4840BEC262C2 /* GCDIDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68A694AE7F2080CA2443F /* GCDIDefinition.h */; };
+		CAD6862C76D3F8A73CA47A96 /* GCDIAlternativeSuggesterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */; };
+		CAD686746B4E785989B46DBF /* GCDIExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68BE609EDF89384B61BAA /* GCDIExampleService.m */; };
+		CAD686B3F171CE8ECDF7E17B /* GCDIDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685878852F9FFBA8E9D56 /* GCDIDefinition.m */; };
+		CAD6872874FE91853B63A17E /* GCDIParameterBag.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD685132B449F1318D4B043 /* GCDIParameterBag.h */; };
+		CAD6876BB126A9C259486C8E /* GCDIDefinitionContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C4536C3B9C227D0F2EE /* GCDIDefinitionContainer.h */; };
+		CAD687BC7E080A1BE7CFB7F4 /* GCDIServiceNotFoundException.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6850A2A9AC01531C6E862 /* GCDIServiceNotFoundException.h */; };
+		CAD689867969E15E65E8BFF7 /* GCDIParameterCircularReferenceException.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68A56A1230FE1DA24A523 /* GCDIParameterCircularReferenceException.m */; };
+		CAD68A3BF0146F5AC476A55D /* GCDIAliasableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */; };
+		CAD68A864948B6D78535A47B /* GCDIContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */; };
+		CAD68ABBD37DCCB0BDF19388 /* GCDIServiceCircularReferenceException.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD682BFB3CBCA0508B42FF5 /* GCDIServiceCircularReferenceException.m */; };
+		CAD68B3AD562B7C44531ADAD /* GCDIAlternativeSuggester.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68DEA9B0A4257B2B30DE3 /* GCDIAlternativeSuggester.m */; };
+		CAD68C1BE2E9EA011D5CDE0F /* GCDIDefinitionContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */; };
+		CAD68C5CEF0185CCB3404A8C /* GCDIAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68009CEF258A4DCFDBD82 /* GCDIAlias.m */; };
+		CAD68C6C677B070A0139AC74 /* GCDIServiceNotFoundException.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68260F004058CB86D8008 /* GCDIServiceNotFoundException.m */; };
+		CAD68CF10CB8EDF4942C14F8 /* GCDIAlternativeSuggester.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6842113F30EEE8EBE9757 /* GCDIAlternativeSuggester.h */; };
+		CAD68D5C178D03426C6C2CCD /* GCDIDefinitionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD687B14EB0738306C9B61D /* GCDIDefinitionContainer.m */; };
+		CAD68D786002027B631E5FB5 /* GCDIDependentExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD682193C37BA40D9F98187 /* GCDIDependentExampleService.m */; };
+		CAD68D9C8CED8F538C6CEE43 /* GCDIContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6815B4824F5D1AABD05C4 /* GCDIContainer.m */; };
+		CAD68DAC5CF31263AE4C86C2 /* GCDIReference.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6896C6E58D699026EB77A /* GCDIReference.m */; };
+		CAD68DD20377DCCA81DA4747 /* GCDIParameterCircularReferenceException.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B2F5949349CEEE90604 /* GCDIParameterCircularReferenceException.h */; };
+		CAD68DEB816972317332E25A /* GCDIResettableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */; };
+		CAD68FA0097E9448A137A86C /* GCDIParameterNotFoundException.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6875DC4C2BE921D9F48EA /* GCDIParameterNotFoundException.h */; };
+		CAD68FCCB56B61518C708CD5 /* GCDIContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */; };
+		F689F97D1CAD5F8800F6C8ED /* GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F689F9841CAD5F8900F6C8ED /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */; };
+		F689F9891CAD5F8900F6C8ED /* GCDependencyInjectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F689F9851CAD5F8900F6C8ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F689F9701CAD5F8800F6C8ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F689F9781CAD5F8800F6C8ED;
+			remoteInfo = GCDependencyInjection;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CAD68009CEF258A4DCFDBD82 /* GCDIAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIAlias.m; sourceTree = "<group>"; };
+		CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDefinitionContainerProtocol.h; sourceTree = "<group>"; };
+		CAD6815B4824F5D1AABD05C4 /* GCDIContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIContainer.m; sourceTree = "<group>"; };
+		CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIContainer.h; sourceTree = "<group>"; };
+		CAD681D6B8BC16F89FD72EA6 /* GCDIExampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIExampleService.h; sourceTree = "<group>"; };
+		CAD682193C37BA40D9F98187 /* GCDIDependentExampleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIDependentExampleService.m; sourceTree = "<group>"; };
+		CAD68260F004058CB86D8008 /* GCDIServiceNotFoundException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIServiceNotFoundException.m; sourceTree = "<group>"; };
+		CAD68294DFB7F0E753AA27CF /* GCDIParameterBagProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIParameterBagProtocol.h; sourceTree = "<group>"; };
+		CAD682BFB3CBCA0508B42FF5 /* GCDIServiceCircularReferenceException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIServiceCircularReferenceException.m; sourceTree = "<group>"; };
+		CAD682C260CD90863AD2EB3D /* GCDIServiceCircularReferenceException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIServiceCircularReferenceException.h; sourceTree = "<group>"; };
+		CAD6842113F30EEE8EBE9757 /* GCDIAlternativeSuggester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIAlternativeSuggester.h; sourceTree = "<group>"; };
+		CAD68426A32F953C5C33E31A /* GCDIReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIReference.h; sourceTree = "<group>"; };
+		CAD684367E8FFCBD523D49B8 /* GCDIContainerNSDictionaryLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIContainerNSDictionaryLoader.m; sourceTree = "<group>"; };
+		CAD6849701A38CFD99E38C8D /* GCDIParameterBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIParameterBag.m; sourceTree = "<group>"; };
+		CAD6850A2A9AC01531C6E862 /* GCDIServiceNotFoundException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIServiceNotFoundException.h; sourceTree = "<group>"; };
+		CAD685132B449F1318D4B043 /* GCDIParameterBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIParameterBag.h; sourceTree = "<group>"; };
+		CAD685878852F9FFBA8E9D56 /* GCDIDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIDefinition.m; sourceTree = "<group>"; };
+		CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIAlternativeSuggesterProtocol.h; sourceTree = "<group>"; };
+		CAD6875DC4C2BE921D9F48EA /* GCDIParameterNotFoundException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIParameterNotFoundException.h; sourceTree = "<group>"; };
+		CAD687B14EB0738306C9B61D /* GCDIDefinitionContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIDefinitionContainer.m; sourceTree = "<group>"; };
+		CAD687DAD9A648042C977B74 /* GCDIContainerNSDictionaryLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIContainerNSDictionaryLoader.h; sourceTree = "<group>"; };
+		CAD6896C6E58D699026EB77A /* GCDIReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIReference.m; sourceTree = "<group>"; };
+		CAD68A56A1230FE1DA24A523 /* GCDIParameterCircularReferenceException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIParameterCircularReferenceException.m; sourceTree = "<group>"; };
+		CAD68A694AE7F2080CA2443F /* GCDIDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDefinition.h; sourceTree = "<group>"; };
+		CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIAlias.h; sourceTree = "<group>"; };
+		CAD68B2F5949349CEEE90604 /* GCDIParameterCircularReferenceException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIParameterCircularReferenceException.h; sourceTree = "<group>"; };
+		CAD68BE609EDF89384B61BAA /* GCDIExampleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIExampleService.m; sourceTree = "<group>"; };
+		CAD68C4536C3B9C227D0F2EE /* GCDIDefinitionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDefinitionContainer.h; sourceTree = "<group>"; };
+		CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIContainerProtocol.h; sourceTree = "<group>"; };
+		CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIAliasableContainerProtocol.h; sourceTree = "<group>"; };
+		CAD68CBE212B79F08DF64DA5 /* GCDIParameterNotFoundException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIParameterNotFoundException.m; sourceTree = "<group>"; };
+		CAD68DEA9B0A4257B2B30DE3 /* GCDIAlternativeSuggester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIAlternativeSuggester.m; sourceTree = "<group>"; };
+		CAD68F30E744EAD2D8048F77 /* GCDIDependentExampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDependentExampleService.h; sourceTree = "<group>"; };
+		CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIResettableContainerProtocol.h; sourceTree = "<group>"; };
+		F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDependencyInjection.h; sourceTree = "<group>"; };
+		F689F97E1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F689F9831CAD5F8900F6C8ED /* GCDependencyInjectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDependencyInjectionTests.m; sourceTree = "<group>"; };
+		F689F98A1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F689F9751CAD5F8800F6C8ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F689F9801CAD5F8900F6C8ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F689F9841CAD5F8900F6C8ED /* GCDependencyInjection.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CAD680ADE24D678EB29FF234 /* AlternativeSuggester */ = {
+			isa = PBXGroup;
+			children = (
+				CAD6842113F30EEE8EBE9757 /* GCDIAlternativeSuggester.h */,
+				CAD68DEA9B0A4257B2B30DE3 /* GCDIAlternativeSuggester.m */,
+				CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */,
+			);
+			path = AlternativeSuggester;
+			sourceTree = "<group>";
+		};
+		CAD6823BBB2FD74B245704E6 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				CAD687DAD9A648042C977B74 /* GCDIContainerNSDictionaryLoader.h */,
+				CAD684367E8FFCBD523D49B8 /* GCDIContainerNSDictionaryLoader.m */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
+		CAD686DB1164F00B82F5E524 /* Exception */ = {
+			isa = PBXGroup;
+			children = (
+				CAD6850A2A9AC01531C6E862 /* GCDIServiceNotFoundException.h */,
+				CAD68260F004058CB86D8008 /* GCDIServiceNotFoundException.m */,
+				CAD6875DC4C2BE921D9F48EA /* GCDIParameterNotFoundException.h */,
+				CAD68CBE212B79F08DF64DA5 /* GCDIParameterNotFoundException.m */,
+				CAD682C260CD90863AD2EB3D /* GCDIServiceCircularReferenceException.h */,
+				CAD682BFB3CBCA0508B42FF5 /* GCDIServiceCircularReferenceException.m */,
+				CAD68B2F5949349CEEE90604 /* GCDIParameterCircularReferenceException.h */,
+				CAD68A56A1230FE1DA24A523 /* GCDIParameterCircularReferenceException.m */,
+			);
+			path = Exception;
+			sourceTree = "<group>";
+		};
+		CAD68C4EEA3D2967701E4CAB /* ParameterBag */ = {
+			isa = PBXGroup;
+			children = (
+				CAD685132B449F1318D4B043 /* GCDIParameterBag.h */,
+				CAD6849701A38CFD99E38C8D /* GCDIParameterBag.m */,
+				CAD68294DFB7F0E753AA27CF /* GCDIParameterBagProtocol.h */,
+			);
+			path = ParameterBag;
+			sourceTree = "<group>";
+		};
+		F689F96F1CAD5F8800F6C8ED = {
+			isa = PBXGroup;
+			children = (
+				F689F97B1CAD5F8800F6C8ED /* GCDependencyInjection */,
+				F689F9871CAD5F8900F6C8ED /* GCDependencyInjectionTests */,
+				F689F97A1CAD5F8800F6C8ED /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F689F97A1CAD5F8800F6C8ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */,
+				F689F9831CAD5F8900F6C8ED /* GCDependencyInjectionTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F689F97B1CAD5F8800F6C8ED /* GCDependencyInjection */ = {
+			isa = PBXGroup;
+			children = (
+				CAD680ADE24D678EB29FF234 /* AlternativeSuggester */,
+				CAD686DB1164F00B82F5E524 /* Exception */,
+				CAD6823BBB2FD74B245704E6 /* Loader */,
+				CAD68C4EEA3D2967701E4CAB /* ParameterBag */,
+				F689F97E1CAD5F8900F6C8ED /* Info.plist */,
+				F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */,
+				CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */,
+				CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */,
+				CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */,
+				CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */,
+				CAD68009CEF258A4DCFDBD82 /* GCDIAlias.m */,
+				CAD68A694AE7F2080CA2443F /* GCDIDefinition.h */,
+				CAD685878852F9FFBA8E9D56 /* GCDIDefinition.m */,
+				CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */,
+				CAD6815B4824F5D1AABD05C4 /* GCDIContainer.m */,
+				CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */,
+				CAD687B14EB0738306C9B61D /* GCDIDefinitionContainer.m */,
+				CAD68C4536C3B9C227D0F2EE /* GCDIDefinitionContainer.h */,
+				CAD6896C6E58D699026EB77A /* GCDIReference.m */,
+				CAD68426A32F953C5C33E31A /* GCDIReference.h */,
+			);
+			path = GCDependencyInjection;
+			sourceTree = "<group>";
+		};
+		F689F9871CAD5F8900F6C8ED /* GCDependencyInjectionTests */ = {
+			isa = PBXGroup;
+			children = (
+				F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */,
+				F689F98A1CAD5F8900F6C8ED /* Info.plist */,
+				CAD68BE609EDF89384B61BAA /* GCDIExampleService.m */,
+				CAD681D6B8BC16F89FD72EA6 /* GCDIExampleService.h */,
+				CAD682193C37BA40D9F98187 /* GCDIDependentExampleService.m */,
+				CAD68F30E744EAD2D8048F77 /* GCDIDependentExampleService.h */,
+			);
+			path = GCDependencyInjectionTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F689F9761CAD5F8800F6C8ED /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F689F97D1CAD5F8800F6C8ED /* GCDependencyInjection.h in Headers */,
+				CAD68CF10CB8EDF4942C14F8 /* GCDIAlternativeSuggester.h in Headers */,
+				CAD6862C76D3F8A73CA47A96 /* GCDIAlternativeSuggesterProtocol.h in Headers */,
+				CAD68C1BE2E9EA011D5CDE0F /* GCDIDefinitionContainerProtocol.h in Headers */,
+				CAD68A864948B6D78535A47B /* GCDIContainerProtocol.h in Headers */,
+				CAD68321D28E38393E4ABDD9 /* GCDIAlias.h in Headers */,
+				CAD684D635FB4840BEC262C2 /* GCDIDefinition.h in Headers */,
+				CAD68FCCB56B61518C708CD5 /* GCDIContainer.h in Headers */,
+				CAD687BC7E080A1BE7CFB7F4 /* GCDIServiceNotFoundException.h in Headers */,
+				CAD68FA0097E9448A137A86C /* GCDIParameterNotFoundException.h in Headers */,
+				CAD683D6E3B440C9676A4411 /* GCDIServiceCircularReferenceException.h in Headers */,
+				CAD68DD20377DCCA81DA4747 /* GCDIParameterCircularReferenceException.h in Headers */,
+				CAD6872874FE91853B63A17E /* GCDIParameterBag.h in Headers */,
+				CAD681586AB6480ACAA2A76A /* GCDIParameterBagProtocol.h in Headers */,
+				CAD68A3BF0146F5AC476A55D /* GCDIAliasableContainerProtocol.h in Headers */,
+				CAD68DEB816972317332E25A /* GCDIResettableContainerProtocol.h in Headers */,
+				CAD6876BB126A9C259486C8E /* GCDIDefinitionContainer.h in Headers */,
+				CAD68351E86C4501E306F357 /* GCDIReference.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		F689F9781CAD5F8800F6C8ED /* GCDependencyInjection */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F689F98D1CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjection" */;
+			buildPhases = (
+				F689F9741CAD5F8800F6C8ED /* Sources */,
+				F689F9751CAD5F8800F6C8ED /* Frameworks */,
+				F689F9761CAD5F8800F6C8ED /* Headers */,
+				F689F9771CAD5F8800F6C8ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GCDependencyInjection;
+			productName = GCDependencyInjection;
+			productReference = F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F689F9821CAD5F8900F6C8ED /* GCDependencyInjectionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F689F9901CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjectionTests" */;
+			buildPhases = (
+				F689F97F1CAD5F8900F6C8ED /* Sources */,
+				F689F9801CAD5F8900F6C8ED /* Frameworks */,
+				F689F9811CAD5F8900F6C8ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F689F9861CAD5F8900F6C8ED /* PBXTargetDependency */,
+			);
+			name = GCDependencyInjectionTests;
+			productName = GCDependencyInjectionTests;
+			productReference = F689F9831CAD5F8900F6C8ED /* GCDependencyInjectionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F689F9701CAD5F8800F6C8ED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Jake Wise";
+				TargetAttributes = {
+					F689F9781CAD5F8800F6C8ED = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 5E9ZEMQJ2D;
+					};
+					F689F9821CAD5F8900F6C8ED = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 5E9ZEMQJ2D;
+					};
+				};
+			};
+			buildConfigurationList = F689F9731CAD5F8800F6C8ED /* Build configuration list for PBXProject "GCDependencyInjection" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F689F96F1CAD5F8800F6C8ED;
+			productRefGroup = F689F97A1CAD5F8800F6C8ED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F689F9781CAD5F8800F6C8ED /* GCDependencyInjection */,
+				F689F9821CAD5F8900F6C8ED /* GCDependencyInjectionTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F689F9771CAD5F8800F6C8ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F689F9811CAD5F8900F6C8ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F689F9741CAD5F8800F6C8ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAD68B3AD562B7C44531ADAD /* GCDIAlternativeSuggester.m in Sources */,
+				CAD686B3F171CE8ECDF7E17B /* GCDIDefinition.m in Sources */,
+				CAD68D9C8CED8F538C6CEE43 /* GCDIContainer.m in Sources */,
+				CAD68C6C677B070A0139AC74 /* GCDIServiceNotFoundException.m in Sources */,
+				CAD6837597A00443886D9CCA /* GCDIParameterNotFoundException.m in Sources */,
+				CAD68ABBD37DCCB0BDF19388 /* GCDIServiceCircularReferenceException.m in Sources */,
+				CAD689867969E15E65E8BFF7 /* GCDIParameterCircularReferenceException.m in Sources */,
+				CAD681F80E09EF78090E837C /* GCDIParameterBag.m in Sources */,
+				CAD68C5CEF0185CCB3404A8C /* GCDIAlias.m in Sources */,
+				CAD68D5C178D03426C6C2CCD /* GCDIDefinitionContainer.m in Sources */,
+				CAD68DAC5CF31263AE4C86C2 /* GCDIReference.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F689F97F1CAD5F8900F6C8ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F689F9891CAD5F8900F6C8ED /* GCDependencyInjectionTests.m in Sources */,
+				CAD686746B4E785989B46DBF /* GCDIExampleService.m in Sources */,
+				CAD68D786002027B631E5FB5 /* GCDIDependentExampleService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F689F9861CAD5F8900F6C8ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F689F9781CAD5F8800F6C8ED /* GCDependencyInjection */;
+			targetProxy = F689F9851CAD5F8900F6C8ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F689F98B1CAD5F8900F6C8ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F689F98C1CAD5F8900F6C8ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F689F98E1CAD5F8900F6C8ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = GCDependencyInjection/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F689F98F1CAD5F8900F6C8ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = GCDependencyInjection/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F689F9911CAD5F8900F6C8ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = GCDependencyInjectionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F689F9921CAD5F8900F6C8ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = GCDependencyInjectionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F689F9731CAD5F8800F6C8ED /* Build configuration list for PBXProject "GCDependencyInjection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F689F98B1CAD5F8900F6C8ED /* Debug */,
+				F689F98C1CAD5F8900F6C8ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F689F98D1CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F689F98E1CAD5F8900F6C8ED /* Debug */,
+				F689F98F1CAD5F8900F6C8ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F689F9901CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjectionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F689F9911CAD5F8900F6C8ED /* Debug */,
+				F689F9921CAD5F8900F6C8ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F689F9701CAD5F8800F6C8ED /* Project object */;
+}
