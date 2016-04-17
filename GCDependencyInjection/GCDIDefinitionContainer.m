@@ -223,6 +223,12 @@
 }
 
 - (void)setDefinition:(GCDIDefinition *)definition forServiceNamed:(NSString *)serviceId {
+  if (![definition isKindOfClass:[GCDIDefinition class]]) {
+    @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                   reason:@"Definition must be an instance of GCDIDefinition."
+                                 userInfo:nil];
+  }
+
   serviceId = [serviceId lowercaseString];
   [_aliases removeObjectForKey:serviceId];
   _definitions[serviceId] = definition;

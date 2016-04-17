@@ -13,6 +13,7 @@
 		CAD68351E86C4501E306F357 /* GCDIReference.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68426A32F953C5C33E31A /* GCDIReference.h */; };
 		CAD6837597A00443886D9CCA /* GCDIParameterNotFoundException.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68CBE212B79F08DF64DA5 /* GCDIParameterNotFoundException.m */; };
 		CAD683D6E3B440C9676A4411 /* GCDIServiceCircularReferenceException.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD682C260CD90863AD2EB3D /* GCDIServiceCircularReferenceException.h */; };
+		CAD68452E8A43F858BCC7AA2 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68D55D09D210FBD446080 /* GCDIContainerNSDictionaryLoaderTests.m */; };
 		CAD684D635FB4840BEC262C2 /* GCDIDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68A694AE7F2080CA2443F /* GCDIDefinition.h */; };
 		CAD6862C76D3F8A73CA47A96 /* GCDIAlternativeSuggesterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */; };
 		CAD686746B4E785989B46DBF /* GCDIExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68BE609EDF89384B61BAA /* GCDIExampleService.m */; };
@@ -37,6 +38,8 @@
 		CAD68DEB816972317332E25A /* GCDIResettableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */; };
 		CAD68FA0097E9448A137A86C /* GCDIParameterNotFoundException.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6875DC4C2BE921D9F48EA /* GCDIParameterNotFoundException.h */; };
 		CAD68FCCB56B61518C708CD5 /* GCDIContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */; };
+		F66978AB1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD687DAD9A648042C977B74 /* GCDIContainerNSDictionaryLoader.h */; };
+		F66978AC1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD684367E8FFCBD523D49B8 /* GCDIContainerNSDictionaryLoader.m */; };
 		F689F97D1CAD5F8800F6C8ED /* GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F689F9841CAD5F8900F6C8ED /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */; };
 		F689F9891CAD5F8900F6C8ED /* GCDependencyInjectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */; };
@@ -84,6 +87,7 @@
 		CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIContainerProtocol.h; sourceTree = "<group>"; };
 		CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIAliasableContainerProtocol.h; sourceTree = "<group>"; };
 		CAD68CBE212B79F08DF64DA5 /* GCDIParameterNotFoundException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIParameterNotFoundException.m; sourceTree = "<group>"; };
+		CAD68D55D09D210FBD446080 /* GCDIContainerNSDictionaryLoaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIContainerNSDictionaryLoaderTests.m; sourceTree = "<group>"; };
 		CAD68DEA9B0A4257B2B30DE3 /* GCDIAlternativeSuggester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIAlternativeSuggester.m; sourceTree = "<group>"; };
 		CAD68F30E744EAD2D8048F77 /* GCDIDependentExampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDependentExampleService.h; sourceTree = "<group>"; };
 		CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIResettableContainerProtocol.h; sourceTree = "<group>"; };
@@ -158,6 +162,14 @@
 			path = ParameterBag;
 			sourceTree = "<group>";
 		};
+		CAD68EFB50FF0D1039D9D100 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				CAD68D55D09D210FBD446080 /* GCDIContainerNSDictionaryLoaderTests.m */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
 		F689F96F1CAD5F8800F6C8ED = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +224,7 @@
 				CAD681D6B8BC16F89FD72EA6 /* GCDIExampleService.h */,
 				CAD682193C37BA40D9F98187 /* GCDIDependentExampleService.m */,
 				CAD68F30E744EAD2D8048F77 /* GCDIDependentExampleService.h */,
+				CAD68EFB50FF0D1039D9D100 /* Loader */,
 			);
 			path = GCDependencyInjectionTests;
 			sourceTree = "<group>";
@@ -233,6 +246,7 @@
 				CAD68FCCB56B61518C708CD5 /* GCDIContainer.h in Headers */,
 				CAD687BC7E080A1BE7CFB7F4 /* GCDIServiceNotFoundException.h in Headers */,
 				CAD68FA0097E9448A137A86C /* GCDIParameterNotFoundException.h in Headers */,
+				F66978AB1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.h in Headers */,
 				CAD683D6E3B440C9676A4411 /* GCDIServiceCircularReferenceException.h in Headers */,
 				CAD68DD20377DCCA81DA4747 /* GCDIParameterCircularReferenceException.h in Headers */,
 				CAD6872874FE91853B63A17E /* GCDIParameterBag.h in Headers */,
@@ -342,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F66978AC1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.m in Sources */,
 				CAD68B3AD562B7C44531ADAD /* GCDIAlternativeSuggester.m in Sources */,
 				CAD686B3F171CE8ECDF7E17B /* GCDIDefinition.m in Sources */,
 				CAD68D9C8CED8F538C6CEE43 /* GCDIContainer.m in Sources */,
@@ -363,6 +378,7 @@
 				F689F9891CAD5F8900F6C8ED /* GCDependencyInjectionTests.m in Sources */,
 				CAD686746B4E785989B46DBF /* GCDIExampleService.m in Sources */,
 				CAD68D786002027B631E5FB5 /* GCDIDependentExampleService.m in Sources */,
+				CAD68452E8A43F858BCC7AA2 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

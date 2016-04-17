@@ -9,7 +9,7 @@
 
 @property (nonatomic, copy) NSString *klass;
 @property (nonatomic, strong) id factory;
-@property (nonatomic) SEL pSelector;
+@property (nonatomic, getter=getSelector, setter=setSelector:) SEL pSelector;
 @property (nonatomic, copy) NSString *pathToLibrary;
 
 @property (nonatomic, copy) NSMutableArray *arguments;

@@ -131,6 +131,7 @@
       args[resolvedKey] = [self resolveParameterPlaceholderForValue:value[key]
                                                           resolving:resolvedParameters];
     }
+    return args.copy;
   }
   else if ([_value isKindOfClass:[NSArray class]]) {
     NSArray *value = _value;
@@ -140,6 +141,7 @@
       args[i] = [self resolveParameterPlaceholderForValue:value[i]
                                                 resolving:resolvedParameters];
     }
+    return args.copy;
   }
 
   return _value;
@@ -147,7 +149,7 @@
 
 - (id)resolveParameterPlaceholderForValueTypeString:(NSString *)value
                                           resolving:(NSMutableDictionary *)resolvedParameters {
-  NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"/^\%([^\%\\s]+)\%$/"
+  NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"%([^%\\s]+)%$"
                                                                          options:0
                                                                            error:nil];
   NSArray *matches = [regex matchesInString:value
@@ -155,7 +157,7 @@
                                       range:NSMakeRange(0, value.length)];
 
   if (matches.count) {
-    NSString *key = [matches[1] lowercaseString];
+    NSString *key = [[value substringWithRange:[matches[0] rangeAtIndex:1]] lowercaseString];
     if (resolvedParameters[key]) {
       @throw [GCDIParameterCircularReferenceException exceptionWithReferences:resolvedParameters];
     }
@@ -169,33 +171,6 @@
     }
 
     return keyValue;
-  }
-
-  regex = [NSRegularExpression regularExpressionWithPattern:@"/\%\%|\%([^%\\s]+)\%/"
-                                                    options:0
-                                                      error:nil];
-
-  matches = [regex matchesInString:value
-                           options:0
-                             range:NSMakeRange(0, value.length)];
-
-  for (NSString *key in matches) {
-    if (key.length == 0) {
-      return @"%%";
-    }
-
-    if (resolvedParameters[key]) {
-      @throw [GCDIParameterCircularReferenceException exceptionWithReferences:resolvedParameters];
-    }
-
-    NSString *resolved = [self getParameter:key];
-    resolvedParameters[key] = @TRUE;
-
-    if (!_resolved) {
-      resolved = [self resolveParameterPlaceholderForValueTypeString:resolved resolving:resolvedParameters];
-    }
-
-    return resolved;
   }
 
   return value;
