@@ -5,9 +5,9 @@
 
 #import "GCDIDefinitionContainer.h"
 #import "GCDIDefinition.h"
-#import "GCDIServiceNotFoundException.h"
 #import "GCDIParameterBagProtocol.h"
 #import "GCDIReference.h"
+#import "GCDIExceptions.h"
 
 @implementation GCDIDefinitionContainer {
  @protected
@@ -73,11 +73,8 @@
 - (id)createServiceNamed:(NSString *)serviceId
           fromDefinition:(GCDIDefinition *)definition {
   if ([definition isSynthetic]) {
-    @throw [NSException exceptionWithName:@"Requested a synthetic service"
-                                   reason:[NSString stringWithFormat:
-                                     @"Cannot construct synthetic service \"%@\"",
-                                     serviceId]
-                                 userInfo:nil];
+    [NSException raise:GCDIRequestedSyntheticService
+                format:@"Cannot construct synthetic service \"%@\"", serviceId];
   }
 
   if ([definition isDepreciated]) {
@@ -106,7 +103,8 @@
     // Invoke the required initialisation on the service.
     Class klass = NSClassFromString([_parameterBag resolveParameterPlaceholderForValue:definition.klass]);
     if (klass == nil) {
-      @throw [GCDIServiceNotFoundException exceptionForServiceNamed:definition.klass];
+      [NSException raise:GCDIServiceNotFoundException
+                  format:@"Service with Class \"%@\" not found. %@", klass, definition];
     }
 
     invocation = [self buildInvocationForClass:klass
@@ -128,11 +126,8 @@
   for (NSString *setter in definition.properties) {
     NSMethodSignature *setterSignature = [[service class] methodSignatureForSelector:NSSelectorFromString(setter)];
     if (setterSignature == nil) {
-      @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                     reason:[NSString stringWithFormat:
-                                       @"Could not apply setter \"%@\" to service \"%@\"",
-                                       setter, serviceId]
-                                   userInfo:nil];
+      [NSException raise:NSInvalidArgumentException
+                  format:@"Could not apply setter \"%@\" to service \"%@\"", setter, serviceId];
     }
 
     id argument = definition.properties[setter];
@@ -224,9 +219,8 @@
 
 - (void)setDefinition:(GCDIDefinition *)definition forServiceNamed:(NSString *)serviceId {
   if (![definition isKindOfClass:[GCDIDefinition class]]) {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:@"Definition must be an instance of GCDIDefinition."
-                                 userInfo:nil];
+    [NSException raise:NSInvalidArgumentException
+                format:@"Definition must be an instance of GCDIDefinition."];
   }
 
   serviceId = [serviceId lowercaseString];
@@ -237,7 +231,8 @@
 - (id)getDefinitionForServiceNamed:(NSString *)serviceId {
   serviceId = [serviceId lowercaseString];
   if (!_definitions[serviceId]) {
-    @throw [GCDIServiceNotFoundException exceptionForServiceNamed:serviceId];
+    [NSException raise:GCDIServiceNotFoundException
+                format:@"Service \"%@\" not found", serviceId];
   }
 
   return _definitions[serviceId];

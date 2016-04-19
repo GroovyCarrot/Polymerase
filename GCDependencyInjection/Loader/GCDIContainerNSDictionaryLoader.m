@@ -29,9 +29,8 @@
 
 - (void)loadIntoContainer:(NSObject<GCDIDefinitionContainerProtocol> *)container {
   if (![[(NSObject *) container class] conformsToProtocol:@protocol(GCDIDefinitionContainerProtocol)]) {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:@"Container must conform to protocol GCDIContainerProtocol."
-                                 userInfo:nil];
+    [NSException raise:NSInvalidArgumentException
+                format:@"Container must conform to protocol GCDIContainerProtocol."];
   }
 
   [self parseParametersIntoContainer:container];
@@ -43,9 +42,8 @@
     return;
   }
   else if (![_dictionary[@"Parameters"] isKindOfClass:[NSDictionary class]]) {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:@"The \"Parameters\" key should contain a dictionary."
-                                 userInfo:nil];
+    [NSException raise:NSInvalidArgumentException
+                format:@"The \"Parameters\" key should contain a dictionary."];
   }
 
   NSDictionary *parameters = _dictionary[@"Parameters"];
@@ -59,9 +57,8 @@
     return;
   }
   else if (![_dictionary[@"Services"] isKindOfClass:[NSDictionary class]]) {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:@"The \"Services\" key should contain a dictionary."
-                                 userInfo:nil];
+    [NSException raise:NSInvalidArgumentException
+                format:@"The \"Services\" key should contain a dictionary."];
   }
 
   NSDictionary *services = _dictionary[@"Services"];
@@ -78,11 +75,8 @@
 
   if ([definition isKindOfClass:[NSString class]]) {
     if (![[definition substringToIndex:1] isEqualToString:@"@"]) {
-      @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                     reason:[NSString stringWithFormat:
-                                       @"A service definition identifier string must start with \"@\". Instead received: \"%@\".",
-                                       serviceId]
-                                   userInfo:nil];
+      [NSException raise:NSInvalidArgumentException
+                  format:@"A service definition identifier string must start with \"@\". Instead received: \"%@\".", serviceId];
     }
 
     // Attempt to load alias into container if it supports them.
@@ -94,9 +88,8 @@
     return;
   }
   else if (![definition isKindOfClass:[NSDictionary class]]) {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:@"A service definition must be a string identifier (@service_id) or a dictionary definition."
-                                 userInfo:nil];
+    [NSException raise:NSInvalidArgumentException
+                format:@"A service definition must be a string identifier (\"@service_id\") or a dictionary definition."];
   }
 
   NSDictionary *definitionDictionary = definition;
@@ -129,11 +122,8 @@
                              withArguments:[self resolveServices:methodInvocation[@"Arguments"]]];
         }
         else {
-          @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                         reason:[NSString stringWithFormat:
-                                           @"Expected \"Selector\" and \"Arguments\" keys for MethodInvocations definition: %@",
-                                           methodInvocation]
-                                       userInfo:nil];
+          [NSException raise:NSInvalidArgumentException
+                      format:@"Expected \"Selector\" and \"Arguments\" keys for MethodInvocations definition: %@", methodInvocation];
         }
       }
     }

@@ -4,8 +4,7 @@
 //
 
 #import "GCDIParameterBag.h"
-#import "GCDIParameterNotFoundException.h"
-#import "GCDIParameterCircularReferenceException.h"
+#import "GCDIExceptions.h"
 #import "GCDIAlternativeSuggesterProtocol.h"
 #import "GCDIAlternativeSuggester.h"
 
@@ -60,16 +59,16 @@
 - (id)getParameter:(NSString *)name {
   name = [name lowercaseString];
   if (name == nil) {
-    @throw [GCDIParameterNotFoundException exceptionForParameterNamed:name];
+    [NSException raise:GCDIParameterNotFoundException
+                format:@"Parameter \"%@\" not found", name];
   }
 
   if (_parameters[name] == nil) {
     NSArray *alternatives = [_alternativeSuggester alternativesForItem:name
                                                      inPossibleOptions:_parameters.allKeys];
 
-    @throw [GCDIParameterNotFoundException exceptionForParameterNamed:name
-                                                          andSourceId:nil
-                                           withAlternativeSuggestions:alternatives];
+    [NSException raise:GCDIParameterNotFoundException
+                format:@"Parameter \"%@\" not found. Did you mean one of the following? %@", name, alternatives];
   }
 
   return _parameters[name];
@@ -99,9 +98,12 @@
       id resolvedValue = [self resolveParameterPlaceholderForValue:value];
       parameters[name] = [self unescapeParameterPlaceholdersForValue:resolvedValue];
     }
-    @catch (GCDIParameterNotFoundException *e) {
-      [e setSourceKey:name];
-      @throw e;
+    @catch (NSException *e) {
+      NSMutableDictionary *info = e.userInfo.mutableCopy;
+      info[@"SourceKey"] = name;
+      @throw [NSException exceptionWithName:[e name]
+                                     reason:[e reason]
+                                   userInfo:info.copy];
     }
   }
 
@@ -149,7 +151,7 @@
 
 - (id)resolveParameterPlaceholderForValueTypeString:(NSString *)value
                                           resolving:(NSMutableDictionary *)resolvedParameters {
-  NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"%([^%\\s]+)%$"
+  NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^%([^%\\s]+)%$"
                                                                          options:0
                                                                            error:nil];
   NSArray *matches = [regex matchesInString:value
@@ -159,7 +161,8 @@
   if (matches.count) {
     NSString *key = [[value substringWithRange:[matches[0] rangeAtIndex:1]] lowercaseString];
     if (resolvedParameters[key]) {
-      @throw [GCDIParameterCircularReferenceException exceptionWithReferences:resolvedParameters];
+      [NSException raise:GCDICircularReferenceException
+                  format:@"Circular reference detected. Previously resolved parameters: %@", resolvedParameters];
     }
 
     resolvedParameters[key] = @TRUE;
@@ -171,6 +174,55 @@
     }
 
     return keyValue;
+  }
+
+  regex = [NSRegularExpression regularExpressionWithPattern:@"%%|%([^%\\s]+)%"
+                                                    options:0
+                                                      error:nil];
+
+  NSArray *allReplacements = [regex matchesInString:value options:0 range:NSMakeRange(0, value.length)];
+  if (!allReplacements.count) {
+    return value;
+  }
+
+  for (NSTextCheckingResult *match in allReplacements) {
+    NSRange matchRange = [match rangeAtIndex:0];
+    NSRange keyRange = [match rangeAtIndex:1];
+
+    if (keyRange.location == NSNotFound) {
+      continue;
+    }
+
+    NSString *matchedText = [value substringWithRange:keyRange];
+    if ([matchedText isEqualToString:@"%%"]) {
+      continue;
+    }
+
+    NSString *key = [matchedText lowercaseString];
+
+    if (resolvedParameters[key]) {
+      [NSException raise:GCDICircularReferenceException
+                  format:@"Circular reference detected with resolved parameters: %@.", resolvedParameters];
+    }
+
+    id resolved = [self getParameter:key];
+
+    if (![resolved isKindOfClass:[NSString class]] && ![resolved isKindOfClass:[NSNumber class]]) {
+      [NSException raise:GCDIRuntimeException
+                  format:@"A string value must be composed of strings and/or numbers. Parameter \"%@\" instance: %@", key, resolved];
+    }
+
+    if ([resolved isKindOfClass:[NSNumber class]]) {
+      resolved = [resolved stringValue];
+    }
+
+    if (!_resolved) {
+      resolved = [self resolveParameterPlaceholderForValueTypeString:resolved
+                                                           resolving:nil];
+    }
+
+    value = [value stringByReplacingCharactersInRange:matchRange
+                                           withString:resolved];
   }
 
   return value;

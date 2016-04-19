@@ -5,11 +5,10 @@
 #import "GCDIContainer.h"
 #import "GCDIParameterBagProtocol.h"
 #import "GCDIParameterBag.h"
-#import "GCDIServiceCircularReferenceException.h"
-#import "GCDIServiceNotFoundException.h"
 #import "GCDIAlias.h"
 #import "GCDIAlternativeSuggesterProtocol.h"
 #import "GCDIAlternativeSuggester.h"
+#import "GCDIExceptions.h"
 
 NSString * const kGCDIServiceContainerId = @"service_container";
 
@@ -70,8 +69,8 @@ NSString * const kGCDIServiceContainerId = @"service_container";
     }
 
     if (_loading[serviceId]) {
-      @throw [GCDIServiceCircularReferenceException exceptionForServiceNamed:serviceId
-                                                                    previous:_loading.allKeys];
+      [NSException raise:GCDICircularReferenceException
+                  format:@"Circular reference detected for service \"%@\", previously loaded: %@", serviceId, _loading.allKeys];
     }
 
     SEL method = [self getSelectorForServiceNamed:serviceId];
@@ -88,14 +87,15 @@ NSString * const kGCDIServiceContainerId = @"service_container";
     else {
       if (invalidBehaviourType == kExceptionOnInvalidReference) {
         if (!serviceId) {
-          @throw [GCDIServiceNotFoundException exceptionForServiceNamed:serviceId];
+          [NSException raise:GCDIServiceNotFoundException
+                      format:@"Service \"%@\" not found", serviceId];
         }
 
         NSArray *alternatives = [_alternativeSuggester alternativesForItem:serviceId
                                                          inPossibleOptions:[self getServiceIds]];
 
-        @throw [GCDIServiceNotFoundException exceptionForServiceNamed:serviceId
-                                                     withAlternatives:alternatives];
+        [NSException raise:GCDIServiceNotFoundException
+                    format:@"Service \"%@\" not found, did you mean any of the following? %@", serviceId, alternatives];
       }
 
       return nil;
@@ -139,9 +139,8 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   serviceId = [serviceId lowercaseString];
 
   if ([serviceId isEqualToString:kGCDIServiceContainerId]) {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:@"You cannot set service \"service_container\"."
-                                 userInfo:nil];
+    [NSException raise:NSInvalidArgumentException
+                format:@"You cannot set service \"service_container\"."];
   }
 
   if (_aliases[serviceId]) {
@@ -197,9 +196,8 @@ NSString * const kGCDIServiceContainerId = @"service_container";
     serviceId = [GCDIAlias aliasForId:serviceId];
   }
   else if (![serviceId isKindOfClass:[GCDIAlias class]]) {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:@"Service id must be of type NSString or GCDIAlias."
-                                 userInfo:nil];
+    [NSException raise:NSInvalidArgumentException
+                format:@"Service id must be of type NSString or GCDIAlias."];
   }
 
   _aliases[[alias lowercaseString]] = serviceId;
@@ -220,11 +218,8 @@ NSString * const kGCDIServiceContainerId = @"service_container";
 - (GCDIAlias *)getAliasNamed:(NSString *)alias {
   alias = [alias lowercaseString];
   if (!_aliases[alias]) {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:[NSString stringWithFormat:
-                                     @"The service alias \"%@\" does not exist.",
-                                     alias]
-                                 userInfo:nil];
+    [NSException raise:NSInvalidArgumentException
+                format:@"The service alias \"%@\" does not exist.", alias];
   }
 
   return _aliases[alias];
