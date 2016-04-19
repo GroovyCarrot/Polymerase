@@ -94,7 +94,7 @@
   NSMutableDictionary *parameters = @{}.mutableCopy;
   for (NSString *name in _parameters.allKeys) {
     @try {
-      id value = parameters[name];
+      id value = _parameters[name];
       id resolvedValue = [self resolveParameterPlaceholders:value];
       parameters[name] = [self unescapeParameterPlaceholders:resolvedValue];
     }
