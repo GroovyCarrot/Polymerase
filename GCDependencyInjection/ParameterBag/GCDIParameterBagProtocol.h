@@ -14,7 +14,7 @@
 - (void)setParameter:(NSString *)name value:(id)value;
 - (BOOL)hasParameter:(NSString *)name;
 - (void)resolveParameterPlaceholders;
-- (id)resolveParameterPlaceholderForValue:(id)value;
-- (id)escapeParameterPlaceholdersForValue:(id)_value;
-- (id)unescapeParameterPlaceholdersForValue:(id)value;
+- (id)resolveParameterPlaceholders:(id)value;
+- (id)escapeParameterPlaceholders:(id)_value;
+- (id)unescapeParameterPlaceholders:(id)value;
 @end

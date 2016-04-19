@@ -95,8 +95,8 @@
   for (NSString *name in _parameters.allKeys) {
     @try {
       id value = parameters[name];
-      id resolvedValue = [self resolveParameterPlaceholderForValue:value];
-      parameters[name] = [self unescapeParameterPlaceholdersForValue:resolvedValue];
+      id resolvedValue = [self resolveParameterPlaceholders:value];
+      parameters[name] = [self unescapeParameterPlaceholders:resolvedValue];
     }
     @catch (NSException *e) {
       NSMutableDictionary *info = e.userInfo.mutableCopy;
@@ -111,7 +111,7 @@
   _resolved = TRUE;
 }
 
-- (id)resolveParameterPlaceholderForValue:(id)value {
+- (id)resolveParameterPlaceholders:(id)value {
   NSMutableDictionary *resolvedParameters = @{}.mutableCopy;
   return [self resolveParameterPlaceholderForValue:value resolving:resolvedParameters];
 }
@@ -119,8 +119,8 @@
 - (id)resolveParameterPlaceholderForValue:(id)_value
                                 resolving:(NSMutableDictionary *)resolvedParameters {
   if ([_value isKindOfClass:[NSString class]]) {
-    return [self resolveParameterPlaceholderForValueTypeString:_value
-                                                     resolving:resolvedParameters];
+    return [self resolveParameterPlaceholdersInString:_value
+                                            resolving:resolvedParameters];
   }
   else if ([_value isKindOfClass:[NSDictionary class]]) {
     NSDictionary *value = _value;
@@ -149,8 +149,8 @@
   return _value;
 }
 
-- (id)resolveParameterPlaceholderForValueTypeString:(NSString *)value
-                                          resolving:(NSMutableDictionary *)resolvedParameters {
+- (id)resolveParameterPlaceholdersInString:(NSString *)value
+                                 resolving:(NSMutableDictionary *)resolvedParameters {
   NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^%([^%\\s]+)%$"
                                                                          options:0
                                                                            error:nil];
@@ -217,8 +217,8 @@
     }
 
     if (!_resolved) {
-      resolved = [self resolveParameterPlaceholderForValueTypeString:resolved
-                                                           resolving:nil];
+      resolved = [self resolveParameterPlaceholdersInString:resolved
+                                                  resolving:nil];
     }
 
     value = [value stringByReplacingCharactersInRange:matchRange
@@ -228,7 +228,7 @@
   return value;
 }
 
-- (id)escapeParameterPlaceholdersForValue:(id)_value {
+- (id)escapeParameterPlaceholders:(id)_value {
   if ([_value isKindOfClass:[NSString class]]) {
     return [_value stringByReplacingOccurrencesOfString:@"%" withString:@"%%"];
   }
@@ -237,7 +237,7 @@
 
     NSMutableDictionary *escapedValues = @{}.mutableCopy;
     for (NSString *key in value.allKeys) {
-      escapedValues[key] = [self escapeParameterPlaceholdersForValue:value[key]];
+      escapedValues[key] = [self escapeParameterPlaceholders:value[key]];
     }
     return escapedValues;
   }
@@ -246,7 +246,7 @@
 
     NSMutableArray *escapedValues = @[].mutableCopy;
     for (NSUInteger i = 0; i < value.count; i++) {
-      escapedValues[i] = [self escapeParameterPlaceholdersForValue:value[i]];
+      escapedValues[i] = [self escapeParameterPlaceholders:value[i]];
     }
     return escapedValues;
   }
@@ -254,7 +254,7 @@
   return _value;
 }
 
-- (id)unescapeParameterPlaceholdersForValue:(id)_value {
+- (id)unescapeParameterPlaceholders:(id)_value {
   if ([_value isKindOfClass:[NSString class]]) {
     return [_value stringByReplacingOccurrencesOfString:@"%%" withString:@"%"];
   }
@@ -263,7 +263,7 @@
 
     NSMutableDictionary *unescapedValues = @{}.mutableCopy;
     for (NSString *key in value.allKeys) {
-      unescapedValues[key] = [self unescapeParameterPlaceholdersForValue:value[key]];
+      unescapedValues[key] = [self unescapeParameterPlaceholders:value[key]];
     }
     return unescapedValues;
   }
@@ -272,7 +272,7 @@
 
     NSMutableArray *unescapedValues = @[].mutableCopy;
     for (NSUInteger i = 0; i < value.count; i++) {
-      unescapedValues[i] = [self unescapeParameterPlaceholdersForValue:value[i]];
+      unescapedValues[i] = [self unescapeParameterPlaceholders:value[i]];
     }
     return unescapedValues;
   }

@@ -101,7 +101,7 @@
   }
   else {
     // Invoke the required initialisation on the service.
-    Class klass = NSClassFromString([_parameterBag resolveParameterPlaceholderForValue:definition.klass]);
+    Class klass = NSClassFromString([_parameterBag resolveParameterPlaceholders:definition.klass]);
     if (klass == nil) {
       [NSException raise:GCDIServiceNotFoundException
                   format:@"Service with Class \"%@\" not found. %@", klass, definition];
@@ -158,8 +158,8 @@
 }
 
 - (void)addArguments:(NSArray *)arguments toInvocation:(NSInvocation *)invocation {
-  arguments = [_parameterBag resolveParameterPlaceholderForValue:arguments];
-  arguments = [_parameterBag unescapeParameterPlaceholdersForValue:arguments];
+  arguments = [_parameterBag resolveParameterPlaceholders:arguments];
+  arguments = [_parameterBag unescapeParameterPlaceholders:arguments];
   arguments = [self resolveServices:arguments];
 
   NSInteger i = 2;
