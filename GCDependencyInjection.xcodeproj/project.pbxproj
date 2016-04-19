@@ -37,6 +37,7 @@
 		F689F97D1CAD5F8800F6C8ED /* GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F689F9841CAD5F8900F6C8ED /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */; };
 		F689F9891CAD5F8900F6C8ED /* GCDependencyInjectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */; };
+		F69258031CC66FAF00B6BA46 /* GCDIParameterBagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685C4194210045EB48980 /* GCDIParameterBagTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -365,6 +366,7 @@
 				CAD686746B4E785989B46DBF /* GCDIExampleService.m in Sources */,
 				CAD68D786002027B631E5FB5 /* GCDIDependentExampleService.m in Sources */,
 				CAD68452E8A43F858BCC7AA2 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */,
+				F69258031CC66FAF00B6BA46 /* GCDIParameterBagTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
