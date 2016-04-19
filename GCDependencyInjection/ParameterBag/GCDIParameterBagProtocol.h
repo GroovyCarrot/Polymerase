@@ -13,7 +13,7 @@
 - (void)removeParameter:(NSString *)name;
 - (void)setParameter:(NSString *)name value:(id)value;
 - (BOOL)hasParameter:(NSString *)name;
-- (void)resolveParameterPlaceholders;
+- (void)resolveAllParameters;
 - (id)resolveParameterPlaceholders:(id)value;
 - (id)escapeParameterPlaceholders:(id)_value;
 - (id)unescapeParameterPlaceholders:(id)value;

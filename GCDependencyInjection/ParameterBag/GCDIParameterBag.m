@@ -42,11 +42,17 @@
   return self;
 }
 
+# pragma mark - Setting and getting parameters
+
 - (void)clearParameters {
+  [self checkIfBagIsInResolvedState];
+
   [_parameters removeAllObjects];
 }
 
 - (void)addParameters:(NSDictionary *)parameters {
+  [self checkIfBagIsInResolvedState];
+
   for (NSString *key in parameters.allKeys) {
     _parameters[[key lowercaseString]] = parameters[key];
   }
@@ -75,10 +81,14 @@
 }
 
 - (void)removeParameter:(NSString *)name {
+  [self checkIfBagIsInResolvedState];
+
   [_parameters removeObjectForKey:[name lowercaseString]];
 }
 
 - (void)setParameter:(NSString *)name value:(id)value {
+  [self checkIfBagIsInResolvedState];
+
   _parameters[[name lowercaseString]] = value;
 }
 
@@ -86,7 +96,16 @@
   return (BOOL) _parameters[[name lowercaseString]];
 }
 
-- (void)resolveParameterPlaceholders {
+- (void)checkIfBagIsInResolvedState {
+  if (_resolved) {
+    [NSException raise:GCDIRuntimeException
+                format:@"Cannot modify GCDIParameterBag after -resolveAllParameters has been invoked."];
+  }
+}
+
+# pragma mark - Resolving parameter placeholders
+
+- (void)resolveAllParameters {
   if (_resolved) {
     return;
   }

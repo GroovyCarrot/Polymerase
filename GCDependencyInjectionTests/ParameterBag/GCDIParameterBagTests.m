@@ -85,7 +85,7 @@
     @"foo": @"bar",
     @"bar": @"%foo%",
   }];
-  [_parameterBag resolveParameterPlaceholders];
+  [_parameterBag resolveAllParameters];
   XCTAssert([[_parameterBag allParameters][@"bar"] isEqualToString:@"bar"]);
 }
 
@@ -101,7 +101,7 @@
     @"bar": @"%%foo%%",
   }];
 
-  [_parameterBag resolveParameterPlaceholders];
+  [_parameterBag resolveAllParameters];
 
   XCTAssert([[_parameterBag getParameter:@"foo"][0] isEqualToString:@"%bar%"]);
   XCTAssert([[_parameterBag getParameter:@"bar"] isEqualToString:@"%foo%"]);
@@ -114,7 +114,7 @@
   }];
 
   @try {
-    [_parameterBag resolveParameterPlaceholders];
+    [_parameterBag resolveAllParameters];
     XCTFail(@"Failed to throw GCDICircularReferenceException exception for parameters that reference each other.");
   }
   @catch (NSException *e) {
@@ -126,6 +126,18 @@
   XCTAssert([[_parameterBag resolveParameterPlaceholders:@"%foo%"] isEqualToString:@"bar"]);
   XCTAssert([[_parameterBag resolveParameterPlaceholders:@"% foo %"] isEqualToString:@"% foo %"]);
   XCTAssert([[_parameterBag resolveParameterPlaceholders:@"5% to 15%"] isEqualToString:@"5% to 15%"]);
+}
+
+- (void)testParameterBagIsLockedWhenResolved {
+  [_parameterBag resolveAllParameters];
+
+  @try {
+    [_parameterBag setParameter:@"foobar" value:@"foobar"];
+    XCTFail(@"Failed to throw GCDIRuntimeException exception when attempting to set parameters on a frozen parameter bag.");
+  }
+  @catch (NSException *e) {
+    XCTAssertNil([_parameterBag allParameters][@"foobar"]);
+  }
 }
 
 @end
