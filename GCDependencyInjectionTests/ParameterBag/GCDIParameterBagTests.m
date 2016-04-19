@@ -122,4 +122,10 @@
   }
 }
 
+- (void)testSpacesIgnoredInParameterNames {
+  XCTAssert([[_parameterBag resolveParameterPlaceholders:@"%foo%"] isEqualToString:@"bar"]);
+  XCTAssert([[_parameterBag resolveParameterPlaceholders:@"% foo %"] isEqualToString:@"% foo %"]);
+  XCTAssert([[_parameterBag resolveParameterPlaceholders:@"5% to 15%"] isEqualToString:@"5% to 15%"]);
+}
+
 @end
