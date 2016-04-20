@@ -5,8 +5,8 @@
 
 #import "GCDIExceptions.h"
 
-const NSString *GCDICircularReferenceException = @"GCDICircularReferenceException";
-const NSString *GCDIParameterNotFoundException = @"GCDIParameterNotFoundException";
-const NSString *GCDIServiceNotFoundException = @"GCDIServiceNotFoundException";
-const NSString *GCDIRequestedSyntheticService = @"GCDIRequestedSyntheticService";
-const NSString *GCDIRuntimeException = @"GCDIRuntimeException";
+NSString * const GCDICircularReferenceException = @"GCDICircularReferenceException";
+NSString * const GCDIParameterNotFoundException = @"GCDIParameterNotFoundException";
+NSString * const GCDIServiceNotFoundException = @"GCDIServiceNotFoundException";
+NSString * const GCDIRequestedSyntheticService = @"GCDIRequestedSyntheticService";
+NSString * const GCDIRuntimeException = @"GCDIRuntimeException";
