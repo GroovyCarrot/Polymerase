@@ -68,16 +68,22 @@
 
 # pragma mark - Alias tests
 
-- (void)testGetSetAliasedServices {
+- (void)testGetSetHasAliasedServices {
   GCDIExampleService *exampleService = [[GCDIExampleService alloc] initService];
   [_container setService:@"example" instance:exampleService];
 
+  XCTAssertFalse([_container hasAlias:@"example"]);
+  XCTAssertFalse([_container hasAlias:@"example.object"]);
+  XCTAssertFalse([_container hasAlias:@"example.string"]);
+
   // Test setting
   [_container setAlias:@"example_alias.object" to:[GCDIAlias aliasForId:@"example"]];
+  XCTAssert([_container hasAlias:@"example_alias.object"]);
   XCTAssertEqual([_container getService:@"example_alias.object"], exampleService);
 
   // Test setting an alias via a string.
   [_container setAlias:@"example_alias.string" to:@"example"];
+  XCTAssert([_container hasAlias:@"example_alias.string"]);
   XCTAssertEqual([_container getService:@"example_alias.string"], exampleService);
 }
 
