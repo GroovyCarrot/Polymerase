@@ -28,8 +28,7 @@
   [super setUp];
 
   GCDIParameterBag *parameterBag = [[GCDIParameterBag alloc] initWithParameters:@{
-    @"example.parameter": [GCDIReference referenceForServiceNamed:@"example.service"
-                                             invalidBehaviourType:kExceptionOnInvalidReference]
+    @"example.parameter": [GCDIReference referenceForServiceNamed:@"example.service"]
   }];
 
   _container = [[GCDIDefinitionContainer alloc] initWithParameterBag:parameterBag];
