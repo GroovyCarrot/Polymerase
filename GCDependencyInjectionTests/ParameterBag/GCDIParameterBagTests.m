@@ -1,9 +1,11 @@
 //
-//  GCDIParameterBagTests.m
-//  GCDIParameterBagTests
+// GCDependencyInjection
 //
-//  Created by Jake Wise on 18/04/2016.
-//  Copyright (c) 2016 GroovyCarrot Ltd. All rights reserved.
+// Created by Jake Wise on 18/04/2016.
+// Copyright (c) 2016 GroovyCarrot Ltd. All rights reserved.
+//
+// You are permitted to use, modify, and distribute this file in accordance with
+// the terms of the license agreement accompanying it.
 //
 
 #import <XCTest/XCTest.h>

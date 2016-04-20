@@ -1,6 +1,11 @@
 //
+// GCDependencyInjection
+//
 // Created by Jake Wise on 17/04/2016.
-// Copyright (c) 2016 Jake Wise. All rights reserved.
+// Copyright (c) 2016 GroovyCarrot Ltd. All rights reserved.
+//
+// You are permitted to use, modify, and distribute this file in accordance with
+// the terms of the license agreement accompanying it.
 //
 
 #import "GCDIReference.h"
