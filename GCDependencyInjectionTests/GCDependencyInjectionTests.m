@@ -41,7 +41,7 @@
   GCDIDefinition *definition = [[GCDIDefinition alloc] initForClass:@"GCDIExampleService"
                                                        withSelector:@selector(initService)];
 
-  [_container setDefinition:definition forServiceNamed:@"example.service"];
+  [_container setDefinition:definition forService:@"example.service"];
 
   GCDIExampleService *exampleService = [_container getService:@"example.service"];
   XCTAssertTrue([exampleService exampleServiceInitialised]);
@@ -51,7 +51,7 @@
   GCDIDefinition *definition = [[GCDIDefinition alloc] initForClass:@"GCDIExampleService"
                                                        withSelector:@selector(initService)];
   [_container setDefinition:definition
-            forServiceNamed:@"example.service"];
+                 forService:@"example.service"];
 
   GCDIExampleService *exampleService = [_container getService:@"example.service"];
   XCTAssertTrue([exampleService exampleServiceInitialised]);
@@ -64,7 +64,7 @@
                                        ]];
 
   [_container setDefinition:definition
-            forServiceNamed:@"example.dependent_service"];
+                 forService:@"example.dependent_service"];
 
   GCDIDependentExampleService *exampleDependentService = [_container getService:@"example.dependent_service"];
   XCTAssertTrue([exampleDependentService isDependentServiceInitialised]);
@@ -74,7 +74,7 @@
   GCDIDefinition *definition = [[GCDIDefinition alloc] initForClass:@"GCDIExampleService"
                                                        withSelector:@selector(initService)];
 
-  [_container setDefinition:definition forServiceNamed:@"example.service"];
+  [_container setDefinition:definition forService:@"example.service"];
 
   definition = [[GCDIDefinition alloc] initForClass:@"GCDIDependentExampleService"
                                        withSelector:@selector(initWithDependentService:)

@@ -12,7 +12,6 @@
 @implementation GCDIDefinitionContainer {
  @protected
   NSMutableDictionary *_obsoleteDefinitions;
-  NSMutableDictionary *_aliasDefinitions;
 }
 
 # pragma mark - Service methods
@@ -43,7 +42,7 @@
   GCDIDefinition *definition;
 
   @try {
-    definition = [self getDefinitionForServiceNamed:serviceId];
+    definition = [self getDefinitionForService:serviceId];
   }
   @catch (NSException *e) {
     if (invalidBehaviourType != kExceptionOnInvalidReference) {
@@ -204,7 +203,7 @@
 
 - (void)addDefinitions:(NSDictionary *)definitions {
   for (NSString *serviceId in definitions) {
-    [self setDefinition:definitions[serviceId] forServiceNamed:serviceId];
+    [self setDefinition:definitions[serviceId] forService:serviceId];
   }
 }
 
@@ -217,7 +216,7 @@
   return _definitions.copy;
 }
 
-- (void)setDefinition:(GCDIDefinition *)definition forServiceNamed:(NSString *)serviceId {
+- (void)setDefinition:(GCDIDefinition *)definition forService:(NSString *)serviceId {
   if (![definition isKindOfClass:[GCDIDefinition class]]) {
     [NSException raise:NSInvalidArgumentException
                 format:@"Definition must be an instance of GCDIDefinition."];
@@ -228,7 +227,7 @@
   _definitions[serviceId] = definition;
 }
 
-- (id)getDefinitionForServiceNamed:(NSString *)serviceId {
+- (id)getDefinitionForService:(NSString *)serviceId {
   serviceId = [serviceId lowercaseString];
   if (!_definitions[serviceId]) {
     [NSException raise:GCDIServiceNotFoundException
@@ -238,14 +237,8 @@
   return _definitions[serviceId];
 }
 
-- (BOOL)hasDefinitionForServiceNamed:(NSString *)serviceId {
+- (BOOL)hasDefinitionForService:(NSString *)serviceId {
   return (BOOL) _definitions[serviceId];
-}
-
-- (void)shareService:(GCDIDefinition *)definition service:(id)service named:(NSString *)id {
-  if ([definition isShared]) {
-    _services[[id lowercaseString]] = service;
-  }
 }
 
 @end

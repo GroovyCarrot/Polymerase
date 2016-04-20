@@ -129,7 +129,7 @@
     }
   }
 
-  [container setDefinition:serviceDefinition forServiceNamed:serviceId];
+  [container setDefinition:serviceDefinition forService:serviceId];
 }
 
 - (id)resolveServices:(id)_services {
