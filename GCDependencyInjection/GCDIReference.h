@@ -9,6 +9,7 @@
 @interface GCDIReference : NSObject
 @property (nonatomic, readonly, copy) NSString *serviceId;
 @property (nonatomic, readonly) GCDIInvalidBehaviourType invalidBehaviourType;
++ (GCDIReference *)referenceForServiceNamed:(NSString *)serviceId;
 + (GCDIReference *)referenceForServiceNamed:(NSString *)serviceId invalidBehaviourType:(GCDIInvalidBehaviourType)invalidBehaviourType;
 - (GCDIReference *)initForServiceNamed:(NSString *)serviceId invalidBehaviourType:(GCDIInvalidBehaviourType)invalidBehaviourType;
 @end

@@ -10,6 +10,11 @@
 @synthesize serviceId = _serviceId,
             invalidBehaviourType = _invalidBehaviourType;
 
++ (GCDIReference *)referenceForServiceNamed:(NSString *)serviceId {
+  return [[GCDIReference alloc] initForServiceNamed:serviceId
+                               invalidBehaviourType:kExceptionOnInvalidReference];
+}
+
 + (GCDIReference *)referenceForServiceNamed:(NSString *)serviceId
                        invalidBehaviourType:(GCDIInvalidBehaviourType)invalidBehaviourType {
   return [[GCDIReference alloc] initForServiceNamed:serviceId

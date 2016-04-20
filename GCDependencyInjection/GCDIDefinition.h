@@ -28,8 +28,12 @@
 @property (nonatomic, readonly, getter=isDepreciated) BOOL depreciated;
 @property (nonatomic, copy, readonly, getter=getDepreciationMessage) NSString *depreciationMessage;
 
-- (id)initForClass:(NSString *)class withSelector:(SEL)pSelector;
-- (id)initForClass:(NSString *)class withSelector:(SEL)pSelector andArguments:(NSArray *)arguments;
++ (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector;
++ (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments;
++ (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector;
++ (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments;
+
+- (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments;
 
 - (void)setArguments:(NSArray *)arguments;
 - (void)setProperties:(NSDictionary *)properties;

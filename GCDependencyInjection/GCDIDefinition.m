@@ -44,26 +44,43 @@
   return self;
 }
 
-- (id)initForClass:(NSString *)class withSelector:(SEL)pSelector {
++ (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector {
+  return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
+                                      withSelector:pSelector
+                                      andArguments:@[]];
+}
+
++ (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
+  return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
+                                      withSelector:pSelector
+                                      andArguments:arguments];
+}
+
++ (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector {
+  return [[GCDIDefinition alloc] initForClassNamed:klass
+                                      withSelector:pSelector
+                                      andArguments:@[]];
+}
+
++ (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
+  return [[GCDIDefinition alloc] initForClassNamed:klass
+                                      withSelector:pSelector
+                                      andArguments:arguments];
+}
+
+- (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
   if ([self init] == nil) {
     return nil;
   }
 
-  _klass = class.copy;
+  _klass = klass.copy;
   _pSelector = pSelector;
-
-  return self;
-}
-
-- (id)initForClass:(NSString *)class withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
-  if ([self initForClass:class withSelector:pSelector] == nil) {
-    return nil;
-  }
-
   _arguments = arguments.mutableCopy;
 
   return self;
 }
+
+# pragma mark - Setters
 
 - (void)setArguments:(NSArray *)arguments {
   _arguments = arguments.mutableCopy;

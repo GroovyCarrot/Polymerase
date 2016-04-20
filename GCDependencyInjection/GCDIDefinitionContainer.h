@@ -12,4 +12,5 @@
   NSMutableDictionary *_definitions;
 }
 
+- (void)registerService:(NSString *)serviceId forClass:(Class)klass andSelector:(SEL)pSelector;
 @end

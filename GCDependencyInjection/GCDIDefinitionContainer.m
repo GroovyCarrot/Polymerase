@@ -209,6 +209,12 @@
   return serviceIds;
 }
 
+- (void)registerService:(NSString *)serviceId forClass:(Class)klass andSelector:(SEL)pSelector {
+  [self setDefinition:[GCDIDefinition definitionForClass:klass
+                                            withSelector:pSelector]
+           forService:serviceId];
+}
+
 # pragma mark - Definition methods
 
 - (void)addDefinitions:(NSDictionary *)definitions {
