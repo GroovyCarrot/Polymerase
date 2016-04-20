@@ -18,7 +18,8 @@
 
 @implementation GCDIContainerNSDictionaryLoaderTests
 
-@synthesize container = _container;
+@synthesize container = _container,
+            loader = _loader;
 
 - (void)setUp {
   [super setUp];
