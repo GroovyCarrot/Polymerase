@@ -12,8 +12,8 @@
   for (NSString *option in options) {
     NSInteger lev = [self compareWord:item
                              withWord:option
-                                matchGain:1
-                              missingCost:1];
+                            matchGain:1
+                          missingCost:1];
 
     if (lev <= item.length / 3 || [item rangeOfString:option].location != NSNotFound) {
       alternatives[alternatives.count] = option;

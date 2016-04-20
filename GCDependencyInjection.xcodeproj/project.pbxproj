@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CAD680EA91B0037177FAC758 /* GCDIAlternativeSuggesterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68151F33FD3DBEEC4FF50 /* GCDIAlternativeSuggesterTests.m */; };
 		CAD681586AB6480ACAA2A76A /* GCDIParameterBagProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68294DFB7F0E753AA27CF /* GCDIParameterBagProtocol.h */; };
 		CAD681F80E09EF78090E837C /* GCDIParameterBag.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6849701A38CFD99E38C8D /* GCDIParameterBag.m */; };
 		CAD68321D28E38393E4ABDD9 /* GCDIAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		CAD68009CEF258A4DCFDBD82 /* GCDIAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIAlias.m; sourceTree = "<group>"; };
 		CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDefinitionContainerProtocol.h; sourceTree = "<group>"; };
+		CAD68151F33FD3DBEEC4FF50 /* GCDIAlternativeSuggesterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIAlternativeSuggesterTests.m; sourceTree = "<group>"; };
 		CAD6815B4824F5D1AABD05C4 /* GCDIContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIContainer.m; sourceTree = "<group>"; };
 		CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIContainer.h; sourceTree = "<group>"; };
 		CAD681D6B8BC16F89FD72EA6 /* GCDIExampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIExampleService.h; sourceTree = "<group>"; };
@@ -156,6 +158,14 @@
 			path = ParameterBag;
 			sourceTree = "<group>";
 		};
+		CAD68D5A2EFA925B973AAC55 /* AlternativeSuggester */ = {
+			isa = PBXGroup;
+			children = (
+				CAD68151F33FD3DBEEC4FF50 /* GCDIAlternativeSuggesterTests.m */,
+			);
+			path = AlternativeSuggester;
+			sourceTree = "<group>";
+		};
 		CAD68EFB50FF0D1039D9D100 /* Loader */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +231,7 @@
 				CAD68EFB50FF0D1039D9D100 /* Loader */,
 				CAD685D37731D0627D7C8B52 /* ParameterBag */,
 				CAD6834B4225BB79585BCBF6 /* GCDIContainerTests.m */,
+				CAD68D5A2EFA925B973AAC55 /* AlternativeSuggester */,
 			);
 			path = GCDependencyInjectionTests;
 			sourceTree = "<group>";
@@ -371,6 +382,7 @@
 				CAD68452E8A43F858BCC7AA2 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */,
 				F69258031CC66FAF00B6BA46 /* GCDIParameterBagTests.m in Sources */,
 				CAD683CA62A4613807326397 /* GCDIContainerTests.m in Sources */,
+				CAD680EA91B0037177FAC758 /* GCDIAlternativeSuggesterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
