@@ -194,6 +194,7 @@
 - (void)setService:(NSString *)serviceId instance:(id)service {
   if (_definitions[serviceId]) {
     _obsoleteDefinitions[serviceId] = _definitions[serviceId];
+    [_definitions removeObjectForKey:serviceId];
   }
 
   [super setService:serviceId instance:service];
