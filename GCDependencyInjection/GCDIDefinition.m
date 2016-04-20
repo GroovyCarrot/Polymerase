@@ -159,7 +159,7 @@
 }
 
 - (void)clearTags {
-  _tags = @{}.mutableCopy;
+  [_tags removeAllObjects];
 }
 
 # pragma mark - Depreciation methods
