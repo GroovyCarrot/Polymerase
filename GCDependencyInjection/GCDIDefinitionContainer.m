@@ -199,6 +199,16 @@
   [super setService:serviceId instance:service];
 }
 
+- (BOOL)hasService:(NSString *)serviceId {
+  return [super hasService:serviceId] || (bool) _definitions[serviceId];
+}
+
+- (NSArray *)getServiceIds {
+  NSArray *serviceIds = [super getServiceIds];
+  serviceIds = [serviceIds arrayByAddingObjectsFromArray:_definitions.allKeys.copy];
+  return serviceIds;
+}
+
 # pragma mark - Definition methods
 
 - (void)addDefinitions:(NSDictionary *)definitions {
