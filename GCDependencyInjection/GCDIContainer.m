@@ -45,7 +45,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
 
 # pragma mark - Service methods
 
-- (id)getServiceNamed:(NSString *)serviceId {
+- (id)getService:(NSString *)serviceId {
   return [self getServiceNamed:serviceId
           withInvalidBehaviour:kExceptionOnInvalidReference];
 }
@@ -59,8 +59,8 @@ NSString * const kGCDIServiceContainerId = @"service_container";
       return self;
     }
 
-    if (_aliases[serviceId]) {
-      return [self getServiceNamed:_aliases[serviceId]
+    if ([self hasAlias:serviceId]) {
+      return [self getServiceNamed:[self getAlias:serviceId].aliasId
               withInvalidBehaviour:invalidBehaviourType];
     }
 
@@ -124,6 +124,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
 }
 
 - (SEL)getSelectorForServiceNamed:(NSString *)serviceId {
+  serviceId = [serviceId capitalizedString];
   serviceId = [serviceId stringByReplacingOccurrencesOfString:@"_" withString:@""];
   serviceId = [serviceId stringByReplacingOccurrencesOfString:@"." withString:@"_"];
   return NSSelectorFromString([NSString stringWithFormat:@"get%@Service", serviceId]);
@@ -135,7 +136,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   return serviceIds;
 }
 
-- (void)setServiceNamed:(NSString *)serviceId instance:(id)service {
+- (void)setService:(NSString *)serviceId instance:(id)service {
   serviceId = [serviceId lowercaseString];
 
   if ([serviceId isEqualToString:kGCDIServiceContainerId]) {
@@ -152,11 +153,11 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   }
 }
 
-- (BOOL)hasServiceNamed:(NSString *)serviceId {
+- (BOOL)hasService:(NSString *)serviceId {
   return _aliases[serviceId] || _services[serviceId];
 }
 
-- (BOOL)isServiceInitialisedNamed:(NSString*)serviceId {
+- (BOOL)isServiceInitialised:(NSString*)serviceId {
   return (bool) _services[[serviceId lowercaseString]];
 }
 
@@ -182,7 +183,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
 
 - (void)addAliases:(NSDictionary *)aliases {
   for (NSString *alias in aliases) {
-    [self setAliasNamed:alias toAlias:aliases[alias]];
+    [self setAlias:alias to:aliases[alias]];
   }
 }
 
@@ -191,7 +192,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   [self addAliases:aliases];
 }
 
-- (void)setAliasNamed:(NSString *)alias toAlias:(id)serviceId {
+- (void)setAlias:(NSString *)alias to:(id)serviceId {
   if ([serviceId isKindOfClass:[NSString class]]) {
     serviceId = [GCDIAlias aliasForId:serviceId];
   }
@@ -203,11 +204,11 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   _aliases[[alias lowercaseString]] = serviceId;
 }
 
-- (void)removeAliasNamed:(NSString *)alias {
+- (void)removeAlias:(NSString *)alias {
   [_aliases removeObjectForKey:[alias lowercaseString]];
 }
 
-- (BOOL)hasAliasNamed:(NSString *)alias {
+- (BOOL)hasAlias:(NSString *)alias {
   return (BOOL) _aliases[[alias lowercaseString]];
 }
 
@@ -215,7 +216,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   return _aliases.copy;
 }
 
-- (GCDIAlias *)getAliasNamed:(NSString *)alias {
+- (GCDIAlias *)getAlias:(NSString *)alias {
   alias = [alias lowercaseString];
   if (!_aliases[alias]) {
     [NSException raise:NSInvalidArgumentException

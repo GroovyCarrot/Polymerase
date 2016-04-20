@@ -43,7 +43,7 @@
 
   [_container setDefinition:definition forServiceNamed:@"example.service"];
 
-  GCDIExampleService *exampleService = [_container getServiceNamed:@"example.service"];
+  GCDIExampleService *exampleService = [_container getService:@"example.service"];
   XCTAssertTrue([exampleService exampleServiceInitialised]);
 }
 
@@ -53,7 +53,7 @@
   [_container setDefinition:definition
             forServiceNamed:@"example.service"];
 
-  GCDIExampleService *exampleService = [_container getServiceNamed:@"example.service"];
+  GCDIExampleService *exampleService = [_container getService:@"example.service"];
   XCTAssertTrue([exampleService exampleServiceInitialised]);
 
   definition = [[GCDIDefinition alloc] initForClass:@"GCDIDependentExampleService"
@@ -66,7 +66,7 @@
   [_container setDefinition:definition
             forServiceNamed:@"example.dependent_service"];
 
-  GCDIDependentExampleService *exampleDependentService = [_container getServiceNamed:@"example.dependent_service"];
+  GCDIDependentExampleService *exampleDependentService = [_container getService:@"example.dependent_service"];
   XCTAssertTrue([exampleDependentService isDependentServiceInitialised]);
 }
 
@@ -80,7 +80,7 @@
                                        withSelector:@selector(initWithDependentService:)
                                        andArguments:@[@"%example.parameter%"]];
 
-  GCDIExampleService *exampleService = [_container getServiceNamed:@"example.service"];
+  GCDIExampleService *exampleService = [_container getService:@"example.service"];
   XCTAssertTrue([exampleService exampleServiceInitialised]);
 }
 

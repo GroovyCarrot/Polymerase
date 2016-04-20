@@ -81,8 +81,8 @@
 
     // Attempt to load alias into container if it supports them.
     if ([[container class] conformsToProtocol:@protocol(GCDIAliasableContainerProtocol)]) {
-      [(NSObject<GCDIAliasableContainerProtocol> *) container setAliasNamed:[definition substringFromIndex:1]
-                                                                    toAlias:serviceId];
+      [(NSObject <GCDIAliasableContainerProtocol> *) container setAlias:[definition substringFromIndex:1]
+                                                                     to:serviceId];
     }
 
     return;

@@ -11,6 +11,7 @@
 		CAD681F80E09EF78090E837C /* GCDIParameterBag.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6849701A38CFD99E38C8D /* GCDIParameterBag.m */; };
 		CAD68321D28E38393E4ABDD9 /* GCDIAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */; };
 		CAD68351E86C4501E306F357 /* GCDIReference.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68426A32F953C5C33E31A /* GCDIReference.h */; };
+		CAD683CA62A4613807326397 /* GCDIContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6834B4225BB79585BCBF6 /* GCDIContainerTests.m */; };
 		CAD68452E8A43F858BCC7AA2 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68D55D09D210FBD446080 /* GCDIContainerNSDictionaryLoaderTests.m */; };
 		CAD684D635FB4840BEC262C2 /* GCDIDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68A694AE7F2080CA2443F /* GCDIDefinition.h */; };
 		CAD6862C76D3F8A73CA47A96 /* GCDIAlternativeSuggesterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */; };
@@ -58,6 +59,7 @@
 		CAD681D6B8BC16F89FD72EA6 /* GCDIExampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIExampleService.h; sourceTree = "<group>"; };
 		CAD682193C37BA40D9F98187 /* GCDIDependentExampleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIDependentExampleService.m; sourceTree = "<group>"; };
 		CAD68294DFB7F0E753AA27CF /* GCDIParameterBagProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIParameterBagProtocol.h; sourceTree = "<group>"; };
+		CAD6834B4225BB79585BCBF6 /* GCDIContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIContainerTests.m; sourceTree = "<group>"; };
 		CAD6842113F30EEE8EBE9757 /* GCDIAlternativeSuggester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIAlternativeSuggester.h; sourceTree = "<group>"; };
 		CAD68426A32F953C5C33E31A /* GCDIReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIReference.h; sourceTree = "<group>"; };
 		CAD684367E8FFCBD523D49B8 /* GCDIContainerNSDictionaryLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIContainerNSDictionaryLoader.m; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				CAD68F30E744EAD2D8048F77 /* GCDIDependentExampleService.h */,
 				CAD68EFB50FF0D1039D9D100 /* Loader */,
 				CAD685D37731D0627D7C8B52 /* ParameterBag */,
+				CAD6834B4225BB79585BCBF6 /* GCDIContainerTests.m */,
 			);
 			path = GCDependencyInjectionTests;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				CAD68D786002027B631E5FB5 /* GCDIDependentExampleService.m in Sources */,
 				CAD68452E8A43F858BCC7AA2 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */,
 				F69258031CC66FAF00B6BA46 /* GCDIParameterBagTests.m in Sources */,
+				CAD683CA62A4613807326397 /* GCDIContainerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -192,12 +192,12 @@
   return _resolveServices;
 }
 
-- (void)setServiceNamed:(NSString *)serviceId instance:(id)service {
+- (void)setService:(NSString *)serviceId instance:(id)service {
   if (_definitions[serviceId]) {
     _obsoleteDefinitions[serviceId] = _definitions[serviceId];
   }
 
-  [super setServiceNamed:serviceId instance:service];
+  [super setService:serviceId instance:service];
 }
 
 # pragma mark - Definition methods

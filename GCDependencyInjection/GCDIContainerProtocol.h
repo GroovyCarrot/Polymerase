@@ -11,11 +11,11 @@ typedef enum {
 } GCDIInvalidBehaviourType;
 
 @protocol GCDIContainerProtocol
-- (id)getServiceNamed:(NSString *)serviceId;
+- (id)getService:(NSString *)serviceId;
 - (id)getServiceNamed:(NSString *)serviceId withInvalidBehaviour:(GCDIInvalidBehaviourType)invalidBehaviourType;
-- (void)setServiceNamed:(NSString *)serviceId instance:(id)service;
-- (BOOL)hasServiceNamed:(NSString *)serviceId;
-- (BOOL)isServiceInitialisedNamed:(NSString*)serviceId;
+- (void)setService:(NSString *)serviceId instance:(id)service;
+- (BOOL)hasService:(NSString *)serviceId;
+- (BOOL)isServiceInitialised:(NSString*)serviceId;
 - (id)getParameter:(NSString*)name;
 - (BOOL)hasParameter:(NSString*)name;
 - (void)setParameter:(NSString*)name value:(id)value;

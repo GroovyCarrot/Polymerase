@@ -10,8 +10,8 @@
 @protocol GCDIAliasableContainerProtocol <GCDIContainerProtocol>
 - (void)addAliases:(NSDictionary *)aliases;
 - (void)setAliases:(NSDictionary *)aliases;
-- (void)setAliasNamed:(NSString *)alias toAlias:(id)serviceId;
-- (void)removeAliasNamed:(NSString *)alias;
-- (BOOL)hasAliasNamed:(NSString *)alias;
-- (GCDIAlias *)getAliasNamed:(NSString *)alias;
+- (void)setAlias:(NSString *)alias to:(id)serviceId;
+- (void)removeAlias:(NSString *)alias;
+- (BOOL)hasAlias:(NSString *)alias;
+- (GCDIAlias *)getAlias:(NSString *)alias;
 @end
