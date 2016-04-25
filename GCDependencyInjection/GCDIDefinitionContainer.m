@@ -131,14 +131,14 @@
   }
 
   // Configure properties on the service using setters and values.
-  for (NSString *setter in definition.properties) {
+  for (NSString *setter in definition.properties.allKeys) {
     NSMethodSignature *setterSignature = [[service class] methodSignatureForSelector:NSSelectorFromString(setter)];
     if (setterSignature == nil) {
       [NSException raise:NSInvalidArgumentException
                   format:@"Could not apply setter \"%@\" to service \"%@\"", setter, serviceId];
     }
 
-    id argument = definition.properties[setter];
+    id argument = [self resolveServices:definition.properties[setter]];
     invocation = [NSInvocation invocationWithMethodSignature:setterSignature];
     [invocation setArgument:&argument atIndex:2];
     [invocation invokeWithTarget:service];
