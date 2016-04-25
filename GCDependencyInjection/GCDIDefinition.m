@@ -22,7 +22,7 @@
             tags = _tags,
             pathToLibrary = _pathToLibrary,
             shared = _shared,
-            public = _public,
+            isPublic = _public,
             lazy = _lazy,
             synthetic = _synthetic,
             depreciated = _deprecated,

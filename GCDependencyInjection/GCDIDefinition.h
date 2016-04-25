@@ -26,7 +26,7 @@
 @property (nonatomic) SEL configuratorSelector;
 
 @property (nonatomic, getter=isShared) BOOL shared;
-@property (nonatomic, getter=isPublic) BOOL public;
+@property (nonatomic, getter=isPublic) BOOL isPublic;
 @property (nonatomic, getter=isLazy) BOOL lazy;
 @property (nonatomic, getter=isSynthetic) BOOL synthetic;
 

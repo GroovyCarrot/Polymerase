@@ -56,6 +56,10 @@
     @throw e;
   }
 
+  if ([definition isLazy]) {
+    // @todo Serve a proxy object
+  }
+
   _loading[serviceId] = @TRUE;
 
   @try {
@@ -148,6 +152,10 @@
                                   andArguments:@[service]];
     [invocation setArgument:&service atIndex:2];
     [invocation invoke];
+  }
+
+  if ([definition isShared]) {
+    _services[serviceId] = service;
   }
 
   return service;
