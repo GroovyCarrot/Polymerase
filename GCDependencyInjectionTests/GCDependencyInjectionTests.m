@@ -65,7 +65,7 @@
                                      ]];
   [_container setDefinition:definition forService:@"example.dependent_service"];
 
-  NSArray *expectedServices = @[@"service_container", @"example.service", @"example.dependent_service"];
+  NSArray *expectedServices = @[@"example.service", @"service_container", @"example.dependent_service"];
   XCTAssertEqualObjects(expectedServices, [_container getServiceIds]);
 
   GCDIDependentExampleService *exampleDependentService = [_container getService:@"example.dependent_service"];

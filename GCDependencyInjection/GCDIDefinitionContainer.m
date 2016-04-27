@@ -218,9 +218,9 @@
 }
 
 - (NSArray *)getServiceIds {
-  NSArray *serviceIds = [super getServiceIds];
-  serviceIds = [serviceIds arrayByAddingObjectsFromArray:_definitions.allKeys.copy];
-  return serviceIds;
+  NSMutableOrderedSet *serviceIds = [NSMutableOrderedSet orderedSetWithArray:[super getServiceIds]];
+  [serviceIds addObjectsFromArray:_definitions.allKeys.copy];
+  return [serviceIds array];
 }
 
 - (void)registerService:(NSString *)serviceId forClass:(Class)klass andSelector:(SEL)pSelector {
