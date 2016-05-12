@@ -69,12 +69,12 @@
 
 - (id)getParameter:(NSString *)name {
   name = [name lowercaseString];
-  if (name == nil) {
+  if (!name) {
     [NSException raise:GCDIParameterNotFoundException
                 format:@"Parameter \"%@\" not found", name];
   }
 
-  if (_parameters[name] == nil) {
+  if (!_parameters[name]) {
     NSArray *alternatives = [_alternativeSuggester alternativesForItem:name
                                                      inPossibleOptions:_parameters.allKeys];
 

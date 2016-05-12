@@ -32,7 +32,7 @@
 
 - (id)init {
   self = [super init];
-  if (self == nil) {
+  if (!self) {
     return nil;
   }
 
@@ -74,7 +74,7 @@
 }
 
 - (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
-  if ([self init] == nil) {
+  if (![self init]) {
     return nil;
   }
 

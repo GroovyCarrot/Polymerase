@@ -20,12 +20,9 @@ NSString * const kGCDIServiceContainerId = @"service_container";
 
 @implementation GCDIContainer
 
-@synthesize parameterBag = _parameterBag,
-            alternativeSuggester = _alternativeSuggester;
-
 - (id)init {
   self = [super init];
-  if (self == nil) {
+  if (!self) {
     return nil;
   }
 

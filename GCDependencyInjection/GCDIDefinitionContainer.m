@@ -23,7 +23,7 @@
 
 - (id)init {
   self = [super init];
-  if (self == nil) {
+  if (!self) {
     return nil;
   }
 
@@ -110,7 +110,7 @@
   else {
     // Invoke the required initialisation on the service.
     Class klass = NSClassFromString([_parameterBag resolveParameterPlaceholders:definition.klass]);
-    if (klass == nil) {
+    if (!klass) {
       [NSException raise:GCDIServiceNotFoundException
                   format:@"Service with Class \"%@\" not found. %@", klass, definition];
     }
@@ -127,13 +127,18 @@
   [invocation invoke];
 
   for (NSInvocation *setupInvocation in definition.methodInvocations) {
+    NSInteger n = 0;
+    for (id argument; argument != nil; [setupInvocation getArgument:&argument atIndex:n]) {
+      argument = [self resolveServices:argument];
+    }
+
     [setupInvocation invokeWithTarget:service];
   }
 
   // Configure properties on the service using setters and values.
   for (NSString *setter in definition.properties.allKeys) {
     NSMethodSignature *setterSignature = [[service class] methodSignatureForSelector:NSSelectorFromString(setter)];
-    if (setterSignature == nil) {
+    if (!setterSignature) {
       [NSException raise:NSInvalidArgumentException
                   format:@"Could not apply setter \"%@\" to service \"%@\"", setter, serviceId];
     }

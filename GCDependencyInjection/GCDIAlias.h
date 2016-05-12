@@ -12,6 +12,6 @@
 
 @interface GCDIAlias : NSObject
 @property (nonatomic, copy, readonly) NSString *aliasId;
-@property (nonatomic) BOOL public;
+@property (nonatomic) BOOL isPublic;
 + (id)aliasForId:(NSString *)aliasId;
 @end

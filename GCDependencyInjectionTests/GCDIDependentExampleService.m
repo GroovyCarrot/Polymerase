@@ -15,7 +15,7 @@
 
 - (GCDIDependentExampleService *)initWithDependentService:(GCDIExampleService *)dependency {
   self = [super init];
-  if (self == nil) {
+  if (!self) {
     return nil;
   }
 

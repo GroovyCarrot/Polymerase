@@ -13,7 +13,7 @@
 @implementation GCDIAlias
 
 @synthesize aliasId = _aliasId,
-            public = _public;
+            isPublic = _isPublic;
 
 + (id)aliasForId:(NSString *)aliasId {
   return [[GCDIAlias alloc] initForAliasId:aliasId];
@@ -21,12 +21,12 @@
 
 - (id)initForAliasId:(NSString *)aliasId {
   self = [super init];
-  if (self == nil) {
+  if (!self) {
     return nil;
   }
 
   _aliasId = aliasId.copy;
-  _public = TRUE;
+  _isPublic = TRUE;
 
   return self;
 }

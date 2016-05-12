@@ -17,7 +17,7 @@
 
 - (GCDIExampleService *)initService {
   self = [super init];
-  if (self == nil) {
+  if (!self) {
     return nil;
   }
 

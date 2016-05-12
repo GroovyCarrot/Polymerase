@@ -29,7 +29,7 @@
 - (GCDIReference *)initForServiceNamed:(NSString *)serviceId
                        invalidBehaviourType:(GCDIInvalidBehaviourType)invalidBehaviourType {
   self = [super init];
-  if (self == nil) {
+  if (!self) {
     return nil;
   }
 

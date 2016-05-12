@@ -23,7 +23,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
   self = [super init];
-  if (self == nil) {
+  if (!self) {
     return nil;
   }
 
