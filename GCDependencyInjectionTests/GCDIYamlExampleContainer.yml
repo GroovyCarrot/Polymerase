@@ -1,0 +1,23 @@
+Parameters:
+  example.parameter: '@example.service'
+
+Services:
+  example.service:
+    Class: GCDIExampleService
+    Selector: initService
+    Tags:
+      type: controller
+
+  example.alias: '@example.dependent_service'
+
+  example.dependent_service:
+    Class: GCDIDependentExampleService
+    Selector: 'initWithDependentService:'
+    Arguments:
+      - '%example.parameter%'
+
+  example.injected_service:
+    Class: GCDIInjectedExampleService
+    Selector: init
+    MethodCalls:
+      - { Selector: 'setInjectedService:', Arguments: ['%example.parameter%'] }

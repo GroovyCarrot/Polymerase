@@ -9,9 +9,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "GCDIContainer.h"
+#import <GCDependencyInjection/GCDependencyInjection.h>
 #import "GCDIExampleService.h"
-#import "GCDIAlias.h"
 
 @interface GCDIContainer (Tests)
 - (SEL)getSelectorForServiceNamed:(NSString *)serviceId;

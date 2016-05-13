@@ -8,42 +8,59 @@
 
 /* Begin PBXBuildFile section */
 		CAD680EA91B0037177FAC758 /* GCDIAlternativeSuggesterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68151F33FD3DBEEC4FF50 /* GCDIAlternativeSuggesterTests.m */; };
-		CAD681586AB6480ACAA2A76A /* GCDIParameterBagProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68294DFB7F0E753AA27CF /* GCDIParameterBagProtocol.h */; };
-		CAD681E841D6C94822C5963B /* GCDIMethodCall.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68E3F4EF35E9E580955AE /* GCDIMethodCall.h */; };
+		CAD681586AB6480ACAA2A76A /* GCDIParameterBagProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68294DFB7F0E753AA27CF /* GCDIParameterBagProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAD681E841D6C94822C5963B /* GCDIMethodCall.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68E3F4EF35E9E580955AE /* GCDIMethodCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD681F80E09EF78090E837C /* GCDIParameterBag.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6849701A38CFD99E38C8D /* GCDIParameterBag.m */; };
-		CAD68321D28E38393E4ABDD9 /* GCDIAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */; };
-		CAD68351E86C4501E306F357 /* GCDIReference.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68426A32F953C5C33E31A /* GCDIReference.h */; };
+		CAD68321D28E38393E4ABDD9 /* GCDIAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAD68351E86C4501E306F357 /* GCDIReference.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68426A32F953C5C33E31A /* GCDIReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD683CA62A4613807326397 /* GCDIContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6834B4225BB79585BCBF6 /* GCDIContainerTests.m */; };
 		CAD68452E8A43F858BCC7AA2 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68D55D09D210FBD446080 /* GCDIContainerNSDictionaryLoaderTests.m */; };
-		CAD684D635FB4840BEC262C2 /* GCDIDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68A694AE7F2080CA2443F /* GCDIDefinition.h */; };
-		CAD6862C76D3F8A73CA47A96 /* GCDIAlternativeSuggesterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */; };
+		CAD684D635FB4840BEC262C2 /* GCDIDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68A694AE7F2080CA2443F /* GCDIDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAD6862C76D3F8A73CA47A96 /* GCDIAlternativeSuggesterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD686746B4E785989B46DBF /* GCDIExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68BE609EDF89384B61BAA /* GCDIExampleService.m */; };
 		CAD686A620F29A07155A83C5 /* GCDIMethodCall.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD688BAE3C29AC6B35B8356 /* GCDIMethodCall.m */; };
 		CAD686B3F171CE8ECDF7E17B /* GCDIDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685878852F9FFBA8E9D56 /* GCDIDefinition.m */; };
-		CAD6872874FE91853B63A17E /* GCDIParameterBag.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD685132B449F1318D4B043 /* GCDIParameterBag.h */; };
-		CAD6876BB126A9C259486C8E /* GCDIDefinitionContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C4536C3B9C227D0F2EE /* GCDIDefinitionContainer.h */; };
+		CAD6872874FE91853B63A17E /* GCDIParameterBag.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD685132B449F1318D4B043 /* GCDIParameterBag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAD6876BB126A9C259486C8E /* GCDIDefinitionContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C4536C3B9C227D0F2EE /* GCDIDefinitionContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD689867969E15E65E8BFF7 /* GCDIExceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68A56A1230FE1DA24A523 /* GCDIExceptions.m */; };
-		CAD68A3BF0146F5AC476A55D /* GCDIAliasableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */; };
-		CAD68A864948B6D78535A47B /* GCDIContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */; };
+		CAD68A3BF0146F5AC476A55D /* GCDIAliasableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAD68A864948B6D78535A47B /* GCDIContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68B3AD562B7C44531ADAD /* GCDIAlternativeSuggester.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68DEA9B0A4257B2B30DE3 /* GCDIAlternativeSuggester.m */; };
-		CAD68C1BE2E9EA011D5CDE0F /* GCDIDefinitionContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */; };
+		CAD68C1BE2E9EA011D5CDE0F /* GCDIDefinitionContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68C5CEF0185CCB3404A8C /* GCDIAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68009CEF258A4DCFDBD82 /* GCDIAlias.m */; };
 		CAD68CE7BE42FD7C975BE02D /* GCDIInjectedExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68E32F5E5A6CCD0C00409 /* GCDIInjectedExampleService.m */; };
-		CAD68CF10CB8EDF4942C14F8 /* GCDIAlternativeSuggester.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6842113F30EEE8EBE9757 /* GCDIAlternativeSuggester.h */; };
+		CAD68CF10CB8EDF4942C14F8 /* GCDIAlternativeSuggester.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6842113F30EEE8EBE9757 /* GCDIAlternativeSuggester.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68D5C178D03426C6C2CCD /* GCDIDefinitionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD687B14EB0738306C9B61D /* GCDIDefinitionContainer.m */; };
 		CAD68D786002027B631E5FB5 /* GCDIDependentExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD682193C37BA40D9F98187 /* GCDIDependentExampleService.m */; };
 		CAD68D9C8CED8F538C6CEE43 /* GCDIContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6815B4824F5D1AABD05C4 /* GCDIContainer.m */; };
 		CAD68DAC5CF31263AE4C86C2 /* GCDIReference.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6896C6E58D699026EB77A /* GCDIReference.m */; };
-		CAD68DD20377DCCA81DA4747 /* GCDIExceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B2F5949349CEEE90604 /* GCDIExceptions.h */; };
-		CAD68DEB816972317332E25A /* GCDIResettableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */; };
-		CAD68FCCB56B61518C708CD5 /* GCDIContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */; };
-		F66978AB1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD687DAD9A648042C977B74 /* GCDIContainerNSDictionaryLoader.h */; };
+		CAD68DD20377DCCA81DA4747 /* GCDIExceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B2F5949349CEEE90604 /* GCDIExceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAD68DEB816972317332E25A /* GCDIResettableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAD68EDE2A758D178FABA9F4 /* GCDIYamlExampleContainer.yml in Resources */ = {isa = PBXBuildFile; fileRef = CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */; };
+		CAD68F756593B78D216ECBF6 /* GCDIYamlCompilerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68FEC169BD5574D0AFDB0 /* GCDIYamlCompilerTests.m */; };
+		CAD68FCCB56B61518C708CD5 /* GCDIContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F66978AB1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD687DAD9A648042C977B74 /* GCDIContainerNSDictionaryLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F66978AC1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD684367E8FFCBD523D49B8 /* GCDIContainerNSDictionaryLoader.m */; };
 		F689F97D1CAD5F8800F6C8ED /* GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F689F9841CAD5F8900F6C8ED /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */; };
 		F689F9891CAD5F8900F6C8ED /* GCDependencyInjectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */; };
 		F69258031CC66FAF00B6BA46 /* GCDIParameterBagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685C4194210045EB48980 /* GCDIParameterBagTests.m */; };
+		F6DF95AE1CE5ED030008FA16 /* GCDIYamlExampleContainer.yml in Sources */ = {isa = PBXBuildFile; fileRef = CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		F6DF95AC1CE5E0F10008FA16 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.yml";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/${INPUT_FILE_BASE}.m",
+			);
+			script = "/Users/jakewise/iOSProjects/GCDependencyInjection/GCDependencyInjection/GCDIYamlCompiler.rb \"${INPUT_FILE_PATH}\" \"${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}.m\"";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		F689F9851CAD5F8900F6C8ED /* PBXContainerItemProxy */ = {
@@ -58,6 +75,9 @@
 /* Begin PBXFileReference section */
 		CAD68009CEF258A4DCFDBD82 /* GCDIAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIAlias.m; sourceTree = "<group>"; };
 		CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDefinitionContainerProtocol.h; sourceTree = "<group>"; };
+		CAD680C67E402A4E1B3C1643 /* GCDIYamlExampleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIYamlExampleContainer.h; sourceTree = "<group>"; };
+		CAD68108AC8889F396575881 /* GCDIYamlCompiler.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = GCDIYamlCompiler.rb; sourceTree = "<group>"; };
+		CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = GCDIYamlExampleContainer.yml; sourceTree = "<group>"; };
 		CAD68151F33FD3DBEEC4FF50 /* GCDIAlternativeSuggesterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIAlternativeSuggesterTests.m; sourceTree = "<group>"; };
 		CAD6815B4824F5D1AABD05C4 /* GCDIContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIContainer.m; sourceTree = "<group>"; };
 		CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIContainer.h; sourceTree = "<group>"; };
@@ -92,6 +112,7 @@
 		CAD68E3F4EF35E9E580955AE /* GCDIMethodCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIMethodCall.h; sourceTree = "<group>"; };
 		CAD68F30E744EAD2D8048F77 /* GCDIDependentExampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDependentExampleService.h; sourceTree = "<group>"; };
 		CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIResettableContainerProtocol.h; sourceTree = "<group>"; };
+		CAD68FEC169BD5574D0AFDB0 /* GCDIYamlCompilerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIYamlCompilerTests.m; sourceTree = "<group>"; };
 		F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDependencyInjection.h; sourceTree = "<group>"; };
 		F689F97E1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -177,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				CAD68D55D09D210FBD446080 /* GCDIContainerNSDictionaryLoaderTests.m */,
+				CAD68FEC169BD5574D0AFDB0 /* GCDIYamlCompilerTests.m */,
 			);
 			path = Loader;
 			sourceTree = "<group>";
@@ -224,6 +246,7 @@
 				CAD68426A32F953C5C33E31A /* GCDIReference.h */,
 				CAD688BAE3C29AC6B35B8356 /* GCDIMethodCall.m */,
 				CAD68E3F4EF35E9E580955AE /* GCDIMethodCall.h */,
+				CAD68108AC8889F396575881 /* GCDIYamlCompiler.rb */,
 			);
 			path = GCDependencyInjection;
 			sourceTree = "<group>";
@@ -243,6 +266,8 @@
 				CAD68D5A2EFA925B973AAC55 /* AlternativeSuggester */,
 				CAD68E32F5E5A6CCD0C00409 /* GCDIInjectedExampleService.m */,
 				CAD68ABD5B31D0D3A6A5D71F /* GCDIInjectedExampleService.h */,
+				CAD680C67E402A4E1B3C1643 /* GCDIYamlExampleContainer.h */,
+				CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */,
 			);
 			path = GCDependencyInjectionTests;
 			sourceTree = "<group>";
@@ -304,6 +329,7 @@
 				F689F9811CAD5F8900F6C8ED /* Resources */,
 			);
 			buildRules = (
+				F6DF95AC1CE5E0F10008FA16 /* PBXBuildRule */,
 			);
 			dependencies = (
 				F689F9861CAD5F8900F6C8ED /* PBXTargetDependency */,
@@ -362,6 +388,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAD68EDE2A758D178FABA9F4 /* GCDIYamlExampleContainer.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +424,8 @@
 				CAD683CA62A4613807326397 /* GCDIContainerTests.m in Sources */,
 				CAD680EA91B0037177FAC758 /* GCDIAlternativeSuggesterTests.m in Sources */,
 				CAD68CE7BE42FD7C975BE02D /* GCDIInjectedExampleService.m in Sources */,
+				F6DF95AE1CE5ED030008FA16 /* GCDIYamlExampleContainer.yml in Sources */,
+				CAD68F756593B78D216ECBF6 /* GCDIYamlCompilerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

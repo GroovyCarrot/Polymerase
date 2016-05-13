@@ -9,13 +9,9 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "GCDIDefinitionContainer.h"
-#import "GCDIDefinition.h"
+#import <GCDependencyInjection/GCDependencyInjection.h>
 #import "GCDIExampleService.h"
 #import "GCDIDependentExampleService.h"
-#import "GCDIReference.h"
-#import "GCDIMethodCall.h"
-#import "GCDIParameterBag.h"
 #import "GCDIInjectedExampleService.h"
 
 @interface GCDependencyInjectionTests : XCTestCase

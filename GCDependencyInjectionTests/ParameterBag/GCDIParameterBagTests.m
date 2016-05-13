@@ -9,8 +9,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "GCDIParameterBag.h"
-#import "GCDIExceptions.h"
+#import <GCDependencyInjection/GCDependencyInjection.h>
 
 @interface GCDIParameterBagTests : XCTestCase
 @property (nonatomic, strong) GCDIParameterBag *parameterBag;

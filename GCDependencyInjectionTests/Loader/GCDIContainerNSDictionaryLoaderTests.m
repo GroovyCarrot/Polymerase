@@ -9,11 +9,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "GCDIDefinitionContainer.h"
-#import "GCDIContainerNSDictionaryLoader.h"
+#import <GCDependencyInjection/GCDependencyInjection.h>
+#import "GCDIExampleService.h"
 #import "GCDIDependentExampleService.h"
 #import "GCDIInjectedExampleService.h"
-#import "GCDIExampleService.h"
 
 @interface GCDIContainerNSDictionaryLoaderTests : XCTestCase
 @property (nonatomic, strong) GCDIDefinitionContainer *container;
@@ -95,9 +94,6 @@
 
 - (void)testTagging {
   [_loader setDictionary:@{
-    @"Parameters": @{
-      @"example.parameter": @"@example.service",
-    },
     @"Services": @{
       @"example.service": @{
         @"Class": @"GCDIExampleService",

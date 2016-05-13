@@ -9,7 +9,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "GCDIAlternativeSuggester.h"
+#import <GCDependencyInjection/GCDependencyInjection.h>
 
 @interface GCDIAlternativeSuggesterTests : XCTestCase
 @property (nonatomic, strong) GCDIAlternativeSuggester *suggester;

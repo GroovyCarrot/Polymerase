@@ -8,11 +8,17 @@
 // the terms of the license agreement accompanying it.
 //
 
-extern NSString * const kGCDIServiceContainerId;
+#import <Foundation/Foundation.h>
 
-#import "GCDIContainer.h"
-#import "GCDIDefinitionContainer.h"
+FOUNDATION_EXPORT NSString * const kGCDIServiceContainerId;
+
 #import "GCDIAlias.h"
-#import "GCDIDefinition.h"
-#import "GCDIParameterBag.h"
 #import "GCDIAlternativeSuggester.h"
+#import "GCDIContainer.h"
+#import "GCDIContainerNSDictionaryLoader.h"
+#import "GCDIDefinition.h"
+#import "GCDIDefinitionContainer.h"
+#import "GCDIExceptions.h"
+#import "GCDIMethodCall.h"
+#import "GCDIParameterBag.h"
+#import "GCDIReference.h"
