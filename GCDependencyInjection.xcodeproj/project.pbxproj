@@ -49,6 +49,7 @@
 		F689F9891CAD5F8900F6C8ED /* GCDependencyInjectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */; };
 		F69258031CC66FAF00B6BA46 /* GCDIParameterBagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685C4194210045EB48980 /* GCDIParameterBagTests.m */; };
 		F6DF95AE1CE5ED030008FA16 /* GCDIYamlExampleContainer.yml in Sources */ = {isa = PBXBuildFile; fileRef = CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */; };
+		F6E3B4F61CE604DF000DCC05 /* GCDIYamlCompiler in Resources */ = {isa = PBXBuildFile; fileRef = CAD68108AC8889F396575881 /* GCDIYamlCompiler */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -391,6 +392,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6E3B4F61CE604DF000DCC05 /* GCDIYamlCompiler in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
