@@ -117,8 +117,8 @@
     [serviceDefinition setProperties:definitionDictionary[@"Properties"]];
   }
 
-  if (definitionDictionary[@"MethodInvocations"]) {
-    for (id methodCall in definitionDictionary[@"MethodInvocations"]) {
+  if (definitionDictionary[@"MethodCalls"]) {
+    for (id methodCall in definitionDictionary[@"MethodCalls"]) {
       if ([methodCall isKindOfClass:[GCDIMethodCall class]]) {
         [serviceDefinition addMethodCall:methodCall];
       }
@@ -130,7 +130,7 @@
         }
         else {
           [NSException raise:NSInvalidArgumentException
-                      format:@"Expected \"Selector\" and \"Arguments\" keys for MethodInvocations definition: %@", methodCall];
+                      format:@"Expected \"Selector\" and \"Arguments\" keys for MethodCalls definition: %@", methodCall];
         }
       }
     }
