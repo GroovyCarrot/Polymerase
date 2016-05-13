@@ -24,7 +24,7 @@
 		CAD686B3F171CE8ECDF7E17B /* GCDIDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685878852F9FFBA8E9D56 /* GCDIDefinition.m */; };
 		CAD6872874FE91853B63A17E /* GCDIParameterBag.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD685132B449F1318D4B043 /* GCDIParameterBag.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD6876BB126A9C259486C8E /* GCDIDefinitionContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C4536C3B9C227D0F2EE /* GCDIDefinitionContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CAD6894073C3C2AF4A15DC02 /* GCDIDefinitionContainer+Yaml.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6814619AC5DD62B91D24E /* GCDIDefinitionContainer+Yaml.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CAD6894073C3C2AF4A15DC02 /* GCDIDefinitionContainer+Yaml.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6814619AC5DD62B91D24E /* GCDIDefinitionContainer+Yaml.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		CAD689867969E15E65E8BFF7 /* GCDIExceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68A56A1230FE1DA24A523 /* GCDIExceptions.m */; };
 		CAD68A3BF0146F5AC476A55D /* GCDIAliasableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68A864948B6D78535A47B /* GCDIContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -304,9 +304,9 @@
 				CAD68A3BF0146F5AC476A55D /* GCDIAliasableContainerProtocol.h in Headers */,
 				CAD68DEB816972317332E25A /* GCDIResettableContainerProtocol.h in Headers */,
 				CAD6876BB126A9C259486C8E /* GCDIDefinitionContainer.h in Headers */,
-				CAD6894073C3C2AF4A15DC02 /* GCDIDefinitionContainer+Yaml.h in Headers */,
 				CAD68351E86C4501E306F357 /* GCDIReference.h in Headers */,
 				CAD681E841D6C94822C5963B /* GCDIMethodCall.h in Headers */,
+				CAD6894073C3C2AF4A15DC02 /* GCDIDefinitionContainer+Yaml.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

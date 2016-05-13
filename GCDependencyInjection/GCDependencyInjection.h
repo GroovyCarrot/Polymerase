@@ -18,7 +18,6 @@ FOUNDATION_EXPORT NSString * const kGCDIServiceContainerId;
 #import "GCDIContainerNSDictionaryLoader.h"
 #import "GCDIDefinition.h"
 #import "GCDIDefinitionContainer.h"
-#import "GCDIDefinitionContainer+Yaml.h"
 #import "GCDIExceptions.h"
 #import "GCDIMethodCall.h"
 #import "GCDIParameterBag.h"
