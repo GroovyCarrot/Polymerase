@@ -75,7 +75,6 @@
 
       @"example.injected_service": @{
         @"Class": @"GCDIInjectedExampleService",
-        @"Selector": @"init",
         @"MethodCalls": @[
           @{
             @"Selector": @"setInjectedService:",

@@ -121,7 +121,7 @@
     }
 
     invocation = [self buildInvocationForClass:klass
-                                  withSelector:definition.pSelector
+                                  withSelector:definition.pSelector ?: @selector(init)
                                   andArguments:definition.arguments];
 
     service = [klass alloc];
