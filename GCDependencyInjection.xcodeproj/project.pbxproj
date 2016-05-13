@@ -61,7 +61,7 @@
 			outputFiles = (
 				"$(DERIVED_FILE_DIR)/${INPUT_FILE_BASE}.m",
 			);
-			script = "/Users/jakewise/iOSProjects/GCDependencyInjection/GCDependencyInjection/GCDIYamlCompiler.rb \"${INPUT_FILE_PATH}\" \"${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}.m\"";
+			script = "/Users/jakewise/iOSProjects/GCDependencyInjection/GCDependencyInjection/GCDIYamlCompiler \"${INPUT_FILE_PATH}\" \"${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}.m\"";
 		};
 /* End PBXBuildRule section */
 
@@ -79,7 +79,7 @@
 		CAD68009CEF258A4DCFDBD82 /* GCDIAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIAlias.m; sourceTree = "<group>"; };
 		CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDefinitionContainerProtocol.h; sourceTree = "<group>"; };
 		CAD680C67E402A4E1B3C1643 /* GCDIYamlExampleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIYamlExampleContainer.h; sourceTree = "<group>"; };
-		CAD68108AC8889F396575881 /* GCDIYamlCompiler.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = GCDIYamlCompiler.rb; sourceTree = "<group>"; };
+		CAD68108AC8889F396575881 /* GCDIYamlCompiler */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GCDIYamlCompiler; sourceTree = "<group>"; };
 		CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = GCDIYamlExampleContainer.yml; sourceTree = "<group>"; };
 		CAD6814619AC5DD62B91D24E /* GCDIDefinitionContainer+Yaml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GCDIDefinitionContainer+Yaml.h"; sourceTree = "<group>"; };
 		CAD68151F33FD3DBEEC4FF50 /* GCDIAlternativeSuggesterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIAlternativeSuggesterTests.m; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 				CAD68426A32F953C5C33E31A /* GCDIReference.h */,
 				CAD688BAE3C29AC6B35B8356 /* GCDIMethodCall.m */,
 				CAD68E3F4EF35E9E580955AE /* GCDIMethodCall.h */,
-				CAD68108AC8889F396575881 /* GCDIYamlCompiler.rb */,
+				CAD68108AC8889F396575881 /* GCDIYamlCompiler */,
 			);
 			path = GCDependencyInjection;
 			sourceTree = "<group>";
