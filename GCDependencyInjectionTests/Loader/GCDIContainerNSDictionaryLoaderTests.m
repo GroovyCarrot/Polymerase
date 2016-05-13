@@ -93,4 +93,26 @@
   XCTAssertTrue([service.injectedService exampleServiceInitialised]);
 }
 
+- (void)testTagging {
+  [_loader setDictionary:@{
+    @"Parameters": @{
+      @"example.parameter": @"@example.service",
+    },
+    @"Services": @{
+      @"example.service": @{
+        @"Class": @"GCDIExampleService",
+        @"Selector": @"initService",
+        @"Tags": @{
+          @"type": @"controller",
+        },
+      },
+    },
+  }];
+
+  [_loader loadIntoContainer:_container];
+
+  NSDictionary *services = [_container findServiceIdsForTag:@"type"];
+  XCTAssertTrue([services[@"example.service"] isEqualToString:@"controller"]);
+}
+
 @end

@@ -19,4 +19,5 @@
 - (NSDictionary *)getDefinitions;
 - (BOOL)hasDefinitionForService:(NSString *)serviceId;
 - (GCDIDefinition *)getDefinitionForService:(NSString *)serviceId;
+- (NSDictionary *)findServiceIdsForTag:(NSString *)name;
 @end

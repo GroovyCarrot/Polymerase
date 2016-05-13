@@ -136,6 +136,10 @@
     }
   }
 
+  if (definitionDictionary[@"Tags"]) {
+    [serviceDefinition setTags:definitionDictionary[@"Tags"]];
+  }
+
   [container setDefinition:serviceDefinition forService:serviceId];
 }
 

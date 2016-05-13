@@ -280,4 +280,20 @@
   return (BOOL) _definitions[serviceId];
 }
 
+# pragma mark Tagging
+
+- (NSDictionary *)findServiceIdsForTag:(NSString *)name {
+  NSMutableDictionary *services = @{}.mutableCopy;
+
+  id tag;
+  for (NSString *id in _definitions.allKeys) {
+    GCDIDefinition *definition = _definitions[id];
+    if ((tag = [definition getTag:name])) {
+      services[id] = tag;
+    }
+  }
+
+  return services.copy;
+}
+
 @end
