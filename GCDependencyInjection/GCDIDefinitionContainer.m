@@ -14,6 +14,7 @@
 #import "GCDIReference.h"
 #import "GCDIExceptions.h"
 #import "GCDIMethodCall.h"
+#import "GCDIDefinitionContainer+Yaml.h"
 
 @implementation GCDIDefinitionContainer {
  @protected
@@ -30,6 +31,9 @@
 
   _definitions = @{}.mutableCopy;
   _obsoleteDefinitions = @{}.mutableCopy;
+
+  // Add the Yaml provision method to the default init method for overriding.
+  [self yamlProvisionContainer];
 
   return self;
 }

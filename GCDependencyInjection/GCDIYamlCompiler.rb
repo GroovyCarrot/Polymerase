@@ -82,17 +82,14 @@ klass = File.basename(ARGV[0], '.*')
 instruction = YAML.load_file(ARGV[0])
 output = File.open(ARGV[1], 'w+');
 
-output.puts '#import "' + klass + '.h"'
 output.puts '#import <GCDependencyInjection/GCDependencyInjection.h>'
 output.puts ''
-output.puts '@implementation ' + klass
+output.puts '@interface GCDIYamlExampleContainer : GCDIDefinitionContainer'
+output.puts '@end'
 output.puts ''
-output.puts '- (id)init {'
-output.puts '  self = [super init];'
-output.puts '  if (!self) {'
-output.puts '    return nil;'
-output.puts '  }'
+output.puts '@implementation ' + klass + ' (Yaml)'
 output.puts ''
+output.puts '- (void)yamlProvisionContainer {'
 
 if instruction['Parameters'].is_a?(Hash)
   instruction['Parameters'].each do|parameter, value|
@@ -115,8 +112,6 @@ if instruction['Services'].is_a?(Hash)
   end
 end
 
-output.puts ''
-output.puts '  return self;'
 output.puts '}'
 output.puts ''
 output.puts '@end'
