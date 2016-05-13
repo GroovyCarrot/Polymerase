@@ -13,6 +13,7 @@
 #import "GCDIParameterBagProtocol.h"
 #import "GCDIReference.h"
 #import "GCDIExceptions.h"
+#import "GCDIMethodCall.h"
 
 @implementation GCDIDefinitionContainer {
  @protected
@@ -126,12 +127,15 @@
   // Invoke the method to get the service object.
   [invocation invoke];
 
-  for (NSInvocation *setupInvocation in definition.methodInvocations) {
-    NSInteger n = 0;
-    for (id argument; argument != nil; [setupInvocation getArgument:&argument atIndex:n]) {
-      argument = [self resolveServices:argument];
+  for (GCDIMethodCall *methodCall in definition.methodCalls) {
+    NSMutableArray *arguments = @[].mutableCopy;
+    for (id argument in methodCall.arguments) {
+      arguments[arguments.count] = [self resolveServices:argument];
     }
 
+    NSInvocation *setupInvocation = [self buildInvocationForClass:[service class]
+                                                     withSelector:methodCall.pSelector
+                                                     andArguments:arguments];
     [setupInvocation invokeWithTarget:service];
   }
 

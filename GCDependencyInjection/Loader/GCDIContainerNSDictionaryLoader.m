@@ -12,6 +12,7 @@
 #import "GCDIDefinitionContainerProtocol.h"
 #import "GCDIAliasableContainerProtocol.h"
 #import "GCDIDefinition.h"
+#import "GCDIMethodCall.h"
 #import "GCDIReference.h"
 
 @implementation GCDIContainerNSDictionaryLoader {
@@ -117,18 +118,19 @@
   }
 
   if (definitionDictionary[@"MethodInvocations"]) {
-    for (id methodInvocation in definitionDictionary[@"MethodInvocations"]) {
-      if ([methodInvocation isKindOfClass:[NSInvocation class]]) {
-        [serviceDefinition addMethodInvocation:methodInvocation];
+    for (id methodCall in definitionDictionary[@"MethodInvocations"]) {
+      if ([methodCall isKindOfClass:[GCDIMethodCall class]]) {
+        [serviceDefinition addMethodCall:methodCall];
       }
-      else if ([methodInvocation isKindOfClass:[NSDictionary class]]) {
-        if (methodInvocation[@"Selector"] && methodInvocation[@"Arguments"]) {
-          [serviceDefinition addMethodCall:NSSelectorFromString(methodInvocation[@"Selector"])
-                             withArguments:[self resolveServices:methodInvocation[@"Arguments"]]];
+      else if ([methodCall isKindOfClass:[NSDictionary class]]) {
+        if (methodCall[@"Selector"] && methodCall[@"Arguments"]) {
+          GCDIMethodCall *method = [GCDIMethodCall methodCallForSelector:NSSelectorFromString(methodCall[@"Selector"])
+                                                            andArguments:[self resolveServices:methodCall[@"Arguments"]]];
+          [serviceDefinition addMethodCall:method];
         }
         else {
           [NSException raise:NSInvalidArgumentException
-                      format:@"Expected \"Selector\" and \"Arguments\" keys for MethodInvocations definition: %@", methodInvocation];
+                      format:@"Expected \"Selector\" and \"Arguments\" keys for MethodInvocations definition: %@", methodCall];
         }
       }
     }

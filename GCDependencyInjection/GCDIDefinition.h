@@ -10,6 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class GCDIMethodCall;
+
 @interface GCDIDefinition : NSObject
 
 @property (nonatomic, copy) NSString *klass;
@@ -19,7 +21,7 @@
 
 @property (nonatomic, copy) NSMutableArray *arguments;
 @property (nonatomic, copy) NSMutableDictionary *properties;
-@property (nonatomic, copy) NSMutableArray *methodInvocations;
+@property (nonatomic, copy) NSMutableArray *methodCalls;
 @property (nonatomic, copy) NSMutableDictionary *tags;
 
 @property (nonatomic, strong) id configurator;
@@ -33,6 +35,7 @@
 @property (nonatomic, readonly, getter=isDepreciated) BOOL depreciated;
 @property (nonatomic, copy, readonly, getter=getDepreciationMessage) NSString *depreciationMessage;
 
++ (GCDIDefinition *)definitionForClass:(Class)klass withMethodCall:(GCDIMethodCall *)methodCall;
 + (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector;
 + (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments;
 + (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector;
@@ -42,16 +45,15 @@
 
 - (void)setArguments:(NSArray *)arguments;
 - (void)setProperties:(NSDictionary *)properties;
-- (void)setMethodInvocations:(NSArray *)methodInvocations;
+- (void)setMethodCalls:(NSArray *)methodCalls;
 - (void)setTags:(NSDictionary *)tags;
 
 - (void)addArgument:(id)argument;
 - (void)replaceArgument:(id)argument atIndex:(NSUInteger)index;
 
-- (void)addMethodInvocation:(NSInvocation *)methodInvocation;
-- (void)addMethodCall:(SEL)pSelector withArguments:(NSArray *)arguments;
-- (void)removeMethodCall:(SEL)pSelector;
-- (BOOL)hasMethodCall:(SEL)pSelector;
+- (void)addMethodCall:(GCDIMethodCall *)methodCall;
+- (void)removeMethodCall:(GCDIMethodCall *)methodCall;
+- (BOOL)hasMethodCall:(GCDIMethodCall *)methodCall;
 
 - (NSString *)getTag:(NSString *)tag;
 - (void)clearTag:(NSString *)tag;

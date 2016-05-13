@@ -9,6 +9,7 @@
 //
 
 #import "GCDIDefinition.h"
+#import "GCDIMethodCall.h"
 
 @implementation GCDIDefinition
 
@@ -18,7 +19,7 @@
             configurator = _configurator,
             arguments = _arguments,
             properties = _properties,
-            methodInvocations = _methodInvocations,
+            methodCalls = _methodCalls,
             tags = _tags,
             pathToLibrary = _pathToLibrary,
             shared = _shared,
@@ -38,7 +39,7 @@
 
   _arguments = @[].mutableCopy;
   _properties = @{}.mutableCopy;
-  _methodInvocations = @[].mutableCopy;
+  _methodCalls = @[].mutableCopy;
   _tags = @{}.mutableCopy;
 
   _shared = TRUE;
@@ -47,6 +48,12 @@
   _lazy = FALSE;
 
   return self;
+}
+
++ (GCDIDefinition *)definitionForClass:(Class)klass withMethodCall:(GCDIMethodCall *)methodCall {
+  return [[GCDIDefinition alloc] initForClassNamed:klass
+                                      withSelector:methodCall.pSelector
+                                      andArguments:methodCall.arguments];
 }
 
 + (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector {
@@ -95,8 +102,8 @@
   _properties = properties.mutableCopy;
 }
 
-- (void)setMethodInvocations:(NSArray *)methodInvocations {
-  _methodInvocations = methodInvocations.mutableCopy;
+- (void)setMethodCalls:(NSArray *)methodCalls {
+  _methodCalls = methodCalls.mutableCopy;
 }
 
 - (void)setTags:(NSDictionary *)tags {
@@ -115,33 +122,21 @@
 
 # pragma mark - Method invocations
 
-- (void)addMethodInvocation:(NSInvocation *)methodInvocation {
-  _methodInvocations[_methodInvocations.count] = methodInvocation;
+- (void)addMethodCall:(GCDIMethodCall *)methodCall {
+  _methodCalls[_methodCalls.count] = methodCall;
 }
 
-- (void)addMethodCall:(SEL)pSelector withArguments:(NSArray *)arguments {
-  NSMethodSignature *methodSignature = [NSMethodSignature methodSignatureForSelector:pSelector];
-  NSInvocation *methodInvocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-  NSInteger i = 2;
-  for (id argument in arguments) {
-    [methodInvocation setArgument:&argument atIndex:i];
-    i++;
-  }
-
-  _methodInvocations[_methodInvocations.count] = methodInvocation;
-}
-
-- (void)removeMethodCall:(SEL)pSelector {
-  for (NSInvocation *methodInvocation in _methodInvocations) {
-    if ([NSStringFromSelector(methodInvocation.selector) isEqualToString:NSStringFromSelector(pSelector)]) {
-      [_methodInvocations removeObject:methodInvocation];
+- (void)removeMethodCall:(GCDIMethodCall *)methodCall {
+  for (GCDIMethodCall *method in _methodCalls) {
+    if ([methodCall isEqualToMethodCall:method]) {
+      [_methodCalls removeObject:method];
     }
   }
 }
 
-- (BOOL)hasMethodCall:(SEL)pSelector {
-  for (NSInvocation *methodInvocation in _methodInvocations) {
-    if ([NSStringFromSelector(methodInvocation.selector) isEqualToString:NSStringFromSelector(pSelector)]) {
+- (BOOL)hasMethodCall:(GCDIMethodCall *)methodCall {
+  for (NSInvocation *method in _methodCalls) {
+    if ([methodCall isEqualToMethodCall:method]) {
       return TRUE;
     }
   }
