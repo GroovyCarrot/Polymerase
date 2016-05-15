@@ -2,69 +2,120 @@
 
 require 'yaml'
 
-def resolveServices(value)
-  if value.is_a? Array
-    resolved = []
-    value.each do|val|
-      resolved.push(resolveServices(val))
-    end
-    return '@[' + resolved.join(', ') + ']'
-  elsif value.is_a? Hash
-    resolved = '@{'
-    value.each do|key, val|
-      resolved += '@"' + key + '": ' + resolveServices(val) + ', '
-    end
-    return resolved[0, resolved.length - 2] + '}'
-  elsif value.is_a?(String) && value[0, 1] == '@'
-    service = nil
-    invalidBehaviour = nil
+class ContainerYamlCompiler
+  @@output
 
-    if value[0, 2] == '@@'
-      return '@"' + value[1, value.length - 1] + '"'
-    elsif value[0, 2] == '@?'
-      service = value[2, value.length - 2]
-      invalidBehaviour = 'kNilOnInvalidReference'
-    else
-      service = value[1, value.length - 1]
-      invalidBehaviour = 'kExceptionOnInvalidReference'
+  def initialize(lines_stream)
+    @output = lines_stream
+
+    # Write file header.
+    @output.puts '#import <GCDependencyInjection/GCDependencyInjection.h>'
+    @output.puts ''
+  end
+
+  def compile(klass, instruction)
+    self.writeImplementationStart(klass)
+
+    provision = []
+
+    if instruction['Parameters'].is_a?(Hash)
+      instruction['Parameters'].each do|parameter, value|
+        provision.push('[self setParameter:@"' + parameter + '" value:' + self.resolveServices(value) + '];')
+      end
     end
 
-    return '[GCDIReference referenceForServiceNamed:@"' + service + '" invalidBehaviourType:' + invalidBehaviour + ']'
-  end
-  return '@"' + value + '"'
-end
+    if instruction['Services'].is_a?(Hash)
+      provision.push('GCDIDefinition *serviceDefinition;')
 
-def parseServiceDefinition(variable, definition, indent)
-  output = []
+      instruction['Services'].each do|service, definition|
+        if definition.is_a?(String)
+          if definition[0, 1] == '@'
+            provision.push('[self setAlias:@"' + service + '" to:@"' + definition[1, definition.length - 1] + '"];')
+          end
+        else
+          provision.push('serviceDefinition = [[GCDIDefinition alloc] init];')
+          self.parseServiceDefinition('serviceDefinition', definition, provision)
+          provision.push('[self setDefinition:serviceDefinition forService:@"' + service + '"];')
+        end
+      end
+    end
 
-  if definition['Class']
-    output.push('[' + variable + ' setKlass:@"' + definition['Class'] + '"];')
-  end
+    @output.puts (' ' * 2) + provision.join("\n" + (' ' * 2))
 
-  if definition['Selector']
-    output.push('[' + variable + ' setSelector:@selector(' + definition['Selector'] + ')];')
-  end
-
-  if definition['Arguments']
-    output.push('[' + variable + ' setArguments:' + resolveServices(definition['Arguments']) + '];')
-  end
-
-  if definition['Properties']
-    output.push('[' + variable + ' setProperties:' + resolveServices(definition['Properties']) + '];')
+    self.writeImplementationEnd()
   end
 
-  if definition['MethodCalls']
-    definition['MethodCalls'].each do|methodCall|
-      output.push('[' + variable + ' addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall['Selector'] + ') andArguments:' + resolveServices(methodCall['Arguments']) + ']];')
+  def parseServiceDefinition(variable, definition, lines)
+    if definition['Class']
+      lines.push('[' + variable + ' setKlass:@"' + definition['Class'] + '"];')
+    end
+
+    if definition['Selector']
+      lines.push('[' + variable + ' setSelector:@selector(' + definition['Selector'] + ')];')
+    end
+
+    if definition['Arguments']
+      lines.push('[' + variable + ' setArguments:' + self.resolveServices(definition['Arguments']) + '];')
+    end
+
+    if definition['Properties']
+      lines.push('[' + variable + ' setProperties:' + self.resolveServices(definition['Properties']) + '];')
+    end
+
+    if definition['MethodCalls']
+      definition['MethodCalls'].each do|methodCall|
+        lines.push('[' + variable + ' addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall['Selector'] + ') andArguments:' + self.resolveServices(methodCall['Arguments']) + ']];')
+      end
+    end
+
+    if definition['Tags']
+      lines.push('[' + variable + ' setTags:' + self.resolveServices(definition['Tags']) + '];')
     end
   end
 
-  if definition['Tags']
-    output.push('[' + variable + ' setTags:' + resolveServices(definition['Tags']) + '];')
+  def resolveServices(value)
+    if value.is_a? Array
+      resolved = []
+      value.each do|val|
+        resolved.push(self.resolveServices(val))
+      end
+      return '@[' + resolved.join(', ') + ']'
+    elsif value.is_a? Hash
+      resolved = '@{'
+      value.each do|key, val|
+        resolved += '@"' + key + '": ' + self.resolveServices(val) + ', '
+      end
+      return resolved[0, resolved.length - 2] + '}'
+    elsif value.is_a?(String) && value[0, 1] == '@'
+      service = nil
+      invalidBehaviour = nil
+
+      if value[0, 2] == '@@'
+        return '@"' + value[1, value.length - 1] + '"'
+      elsif value[0, 2] == '@?'
+        service = value[2, value.length - 2]
+        invalidBehaviour = 'kNilOnInvalidReference'
+      else
+        service = value[1, value.length - 1]
+        invalidBehaviour = 'kExceptionOnInvalidReference'
+      end
+
+      return '[GCDIReference referenceForServiceNamed:@"' + service + '" invalidBehaviourType:' + invalidBehaviour + ']'
+    end
+    return '@"' + value + '"'
   end
 
-  indent =  (' ' * indent)
-  return indent + output.join("\n" + indent)
+  def writeImplementationStart(klass)
+    @output.puts '@interface ' + klass + ' : GCDIDefinitionContainer'
+    @output.puts '@end'
+    @output.puts '@implementation ' + klass + ' (Yaml)'
+    @output.puts '- (void)yamlProvisionContainer {'
+  end
+
+  def writeImplementationEnd()
+    @output.puts '}'
+    @output.puts '@end'
+  end
 end
 
 if !File.exists?(File.expand_path(ARGV[0])) || !ARGV[1]
@@ -82,38 +133,6 @@ klass = File.basename(ARGV[0], '.*')
 instruction = YAML.load_file(ARGV[0])
 output = File.open(ARGV[1], 'w+');
 
-output.puts '#import <GCDependencyInjection/GCDependencyInjection.h>'
-output.puts ''
-output.puts '@interface GCDIYamlExampleContainer : GCDIDefinitionContainer'
-output.puts '@end'
-output.puts ''
-output.puts '@implementation ' + klass + ' (Yaml)'
-output.puts ''
-output.puts '- (void)yamlProvisionContainer {'
-
-if instruction['Parameters'].is_a?(Hash)
-  instruction['Parameters'].each do|parameter, value|
-    output.puts '  [self setParameter:@"' + parameter + '" value:' + resolveServices(value) + '];'
-  end
-end
-
-if instruction['Services'].is_a?(Hash)
-  output.puts '  GCDIDefinition *serviceDefinition;'
-  instruction['Services'].each do|service, definition|
-    if definition.is_a?(String)
-      if definition[0, 1] == '@'
-        output.puts '  [self setAlias:@"' + service + '" to:@"' + definition[1, definition.length - 1] + '"];'
-      end
-    else
-      output.puts '  serviceDefinition = [[GCDIDefinition alloc] init];'
-      output.puts parseServiceDefinition('serviceDefinition', definition, 2)
-      output.puts '  [self setDefinition:serviceDefinition forService:@"' + service + '"];'
-    end
-  end
-end
-
-output.puts '}'
-output.puts ''
-output.puts '@end'
-
-puts 'Output ' + klass + ' implementation to ' + ARGV[1]
+writer = ContainerYamlCompiler.new(output)
+writer.compile(klass, instruction)
+puts 'Output ' + klass + ' yaml provisioning implementation to ' + ARGV[1]
