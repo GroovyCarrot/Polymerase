@@ -134,6 +134,11 @@
     NSInvocation *setupInvocation = [self buildInvocationForClass:[service class]
                                                      withSelector:methodCall.pSelector
                                                      andArguments:methodCall.arguments];
+    if (!invocation) {
+      [NSException raise:NSInvalidArgumentException
+                  format:@"Could not invoke method call \"%@\" on service \"%@\"", NSStringFromSelector(methodCall.pSelector), serviceId];
+    }
+
     [setupInvocation invokeWithTarget:service];
   }
 
@@ -157,7 +162,6 @@
     invocation = [self buildInvocationForClass:[configurator class]
                                   withSelector:definition.configuratorSelector
                                   andArguments:@[service]];
-
     if (!invocation) {
       [NSException raise:NSInvalidArgumentException
                   format:@"Could not invoke configurator \"%@\" to service \"%@\"", definition.configurator, serviceId];
