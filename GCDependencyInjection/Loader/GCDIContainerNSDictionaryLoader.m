@@ -113,8 +113,8 @@
     [serviceDefinition setArguments:[self resolveServices:definitionDictionary[@"Arguments"]]];
   }
 
-  if (definitionDictionary[@"Properties"]) {
-    [serviceDefinition setProperties:[self resolveServices:definitionDictionary[@"Properties"]]];
+  if (definitionDictionary[@"Setters"]) {
+    [serviceDefinition setSetters:[self resolveServices:definitionDictionary[@"Setters"]]];
   }
 
   if (definitionDictionary[@"MethodCalls"]) {

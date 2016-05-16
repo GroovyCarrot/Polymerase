@@ -115,8 +115,8 @@
                   andSelector:@selector(initService)];
 
   definition = [GCDIDefinition definitionForClass:[GCDIInjectedExampleService class]];
-  [definition setProperties:@{
-    @"setInjectedService:": [GCDIReference referenceForServiceNamed:@"example.service"],
+  [definition setSetters:@{
+    @"setInjectedService:" : [GCDIReference referenceForServiceNamed:@"example.service"],
   }];
   [_container setDefinition:definition forService:@"example.injected_service"];
 

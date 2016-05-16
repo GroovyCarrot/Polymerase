@@ -13,21 +13,7 @@
 
 @implementation GCDIDefinition
 
-@synthesize klass = _klass,
-            pSelector = _pSelector,
-            factory = _factory,
-            configurator = _configurator,
-            arguments = _arguments,
-            properties = _properties,
-            methodCalls = _methodCalls,
-            tags = _tags,
-            pathToLibrary = _pathToLibrary,
-            shared = _shared,
-            isPublic = _public,
-            lazy = _lazy,
-            synthetic = _synthetic,
-            depreciated = _deprecated,
-            depreciationMessage = _depreciationMessage;
+@synthesize isPublic = _public;
 
 # pragma mark - Init methods
 
@@ -38,7 +24,7 @@
   }
 
   _arguments = @[].mutableCopy;
-  _properties = @{}.mutableCopy;
+  _setters = @{}.mutableCopy;
   _methodCalls = @[].mutableCopy;
   _tags = @{}.mutableCopy;
 
@@ -104,8 +90,8 @@
   _arguments = arguments.mutableCopy;
 }
 
-- (void)setProperties:(NSDictionary *)properties {
-  _properties = properties.mutableCopy;
+- (void)setSetters:(NSDictionary *)setters {
+  _setters = setters.mutableCopy;
 }
 
 - (void)setMethodCalls:(NSArray *)methodCalls {
@@ -166,7 +152,7 @@
 # pragma mark - Depreciation methods
 
 - (void)setDepreciated:(BOOL)status forReason:(NSString *)reason {
-  _deprecated = status;
+  _depreciated = status;
   _depreciationMessage = reason.copy;
 }
 

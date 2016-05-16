@@ -88,8 +88,8 @@ class ContainerDefinitionParser
       lines.push('[' + variable + ' setArguments:' + serviceResolver.resolveServices(definition['Arguments']) + '];')
     end
 
-    if definition['Properties']
-      lines.push('[' + variable + ' setProperties:' + serviceResolver.resolveServices(definition['Properties']) + '];')
+    if definition['Setters']
+      lines.push('[' + variable + ' setSetters:' + serviceResolver.resolveServices(definition['Setters']) + '];')
     end
 
     if definition['MethodCalls']

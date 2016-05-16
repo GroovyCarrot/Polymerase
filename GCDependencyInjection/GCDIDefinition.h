@@ -20,7 +20,7 @@
 @property (nonatomic, copy) NSString *pathToLibrary;
 
 @property (nonatomic, copy) NSMutableArray *arguments;
-@property (nonatomic, copy) NSMutableDictionary *properties;
+@property (nonatomic, copy) NSMutableDictionary *setters;
 @property (nonatomic, copy) NSMutableArray *methodCalls;
 @property (nonatomic, copy) NSMutableDictionary *tags;
 
@@ -45,7 +45,7 @@
 - (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments;
 
 - (void)setArguments:(NSArray *)arguments;
-- (void)setProperties:(NSDictionary *)properties;
+- (void)setSetters:(NSDictionary *)setters;
 - (void)setMethodCalls:(NSArray *)methodCalls;
 - (void)setTags:(NSDictionary *)tags;
 

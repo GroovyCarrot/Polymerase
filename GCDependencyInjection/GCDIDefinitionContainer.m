@@ -143,10 +143,10 @@
   }
 
   // Configure properties on the service using setters and values.
-  for (NSString *setter in definition.properties.allKeys) {
+  for (NSString *setter in definition.setters.allKeys) {
     invocation = [self buildInvocationForClass:[service class]
                                   withSelector:NSSelectorFromString(setter)
-                                  andArguments:@[definition.properties[setter]]];
+                                  andArguments:@[definition.setters[setter]]];
     if (!invocation) {
       [NSException raise:NSInvalidArgumentException
                   format:@"Could not apply setter \"%@\" to service \"%@\"", setter, serviceId];
