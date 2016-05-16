@@ -35,6 +35,7 @@
 @property (nonatomic, readonly, getter=isDepreciated) BOOL depreciated;
 @property (nonatomic, copy, readonly, getter=getDepreciationMessage) NSString *depreciationMessage;
 
++ (GCDIDefinition *)definitionForClass:(Class)klass;
 + (GCDIDefinition *)definitionForClass:(Class)klass withMethodCall:(GCDIMethodCall *)methodCall;
 + (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector;
 + (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments;

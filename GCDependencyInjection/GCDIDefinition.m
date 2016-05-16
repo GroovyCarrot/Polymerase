@@ -50,8 +50,14 @@
   return self;
 }
 
++ (GCDIDefinition *)definitionForClass:(Class)klass {
+  return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
+                                      withSelector:@selector(init)
+                                      andArguments:@[]];
+}
+
 + (GCDIDefinition *)definitionForClass:(Class)klass withMethodCall:(GCDIMethodCall *)methodCall {
-  return [[GCDIDefinition alloc] initForClassNamed:klass
+  return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
                                       withSelector:methodCall.pSelector
                                       andArguments:methodCall.arguments];
 }

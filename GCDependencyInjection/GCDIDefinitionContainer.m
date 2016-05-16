@@ -83,8 +83,7 @@
   return service;
 }
 
-- (id)createServiceNamed:(NSString *)serviceId
-          fromDefinition:(GCDIDefinition *)definition {
+- (id)createServiceNamed:(NSString *)serviceId fromDefinition:(GCDIDefinition *)definition {
   if ([definition isSynthetic]) {
     [NSException raise:GCDIRequestedSyntheticService
                 format:@"Cannot construct synthetic service \"%@\"", serviceId];
@@ -145,26 +144,31 @@
 
   // Configure properties on the service using setters and values.
   for (NSString *setter in definition.properties.allKeys) {
-    NSMethodSignature *setterSignature = [[service class] methodSignatureForSelector:NSSelectorFromString(setter)];
-    if (!setterSignature) {
+    invocation = [self buildInvocationForClass:[service class]
+                                  withSelector:NSSelectorFromString(setter)
+                                  andArguments:@[definition.properties[setter]]];
+    if (!invocation) {
       [NSException raise:NSInvalidArgumentException
                   format:@"Could not apply setter \"%@\" to service \"%@\"", setter, serviceId];
     }
 
-    id argument = [self resolveServices:definition.properties[setter]];
-    invocation = [NSInvocation invocationWithMethodSignature:setterSignature];
-    [invocation setArgument:&argument atIndex:2];
     [invocation invokeWithTarget:service];
   }
 
   // Invoke the configurator and pass the service as the argument.
   // @todo support configurator arguments.
   if (definition.configurator) {
-    invocation = [self buildInvocationForClass:[definition.configurator class]
+    id configurator = [self resolveServices:definition.configurator];
+    invocation = [self buildInvocationForClass:[configurator class]
                                   withSelector:definition.configuratorSelector
                                   andArguments:@[service]];
-    [invocation setArgument:&service atIndex:2];
-    [invocation invoke];
+
+    if (!invocation) {
+      [NSException raise:NSInvalidArgumentException
+                  format:@"Could not invoke configurator \"%@\" to service \"%@\"", definition.configurator, serviceId];
+    }
+
+    [invocation invokeWithTarget:service];
   }
 
   if ([definition isShared]) {
@@ -176,6 +180,15 @@
 
 - (NSInvocation *)buildInvocationForClass:(Class)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
   NSMethodSignature *methodSignature = [klass instanceMethodSignatureForSelector:pSelector];
+  if (!methodSignature) {
+    return nil;
+  }
+
+  if (arguments.count != methodSignature.numberOfArguments - 2) {
+    [NSException raise:NSInvalidArgumentException
+                format:@"Invalid amount of arguments (%d/%d) provided for method signature for selector \"%@\"", arguments.count, methodSignature.numberOfArguments - 2, NSStringFromSelector(pSelector)];
+  }
+
   NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
   [invocation setSelector:pSelector];
   [self addArguments:arguments toInvocation:invocation];

@@ -114,7 +114,7 @@
   }
 
   if (definitionDictionary[@"Properties"]) {
-    [serviceDefinition setProperties:definitionDictionary[@"Properties"]];
+    [serviceDefinition setProperties:[self resolveServices:definitionDictionary[@"Properties"]]];
   }
 
   if (definitionDictionary[@"MethodCalls"]) {
@@ -151,7 +151,16 @@
     for (id service in services) {
       resolvedServices[resolvedServices.count] = [self resolveServices:service];
     }
-    return resolvedServices;
+    return resolvedServices.copy;
+  }
+  if ([_services isKindOfClass:[NSDictionary class]]) {
+    NSDictionary *services = _services;
+
+    NSMutableDictionary *resolvedServices = @{}.mutableCopy;
+    for (NSString *key in services.allKeys) {
+      resolvedServices[key] = [self resolveServices:services[key]];
+    }
+    return resolvedServices.copy;
   }
   else if ([_services isKindOfClass:[NSString class]] && [_services rangeOfString:@"@"].location == 0) {
     NSString *service = _services;
