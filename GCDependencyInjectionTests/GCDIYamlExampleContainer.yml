@@ -1,3 +1,5 @@
+ContainerClass: 'GCDIYamlExampleContainer'
+
 Parameters:
   example.parameter: '@example.service'
 

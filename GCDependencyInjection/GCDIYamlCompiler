@@ -1,51 +1,81 @@
 #!/usr/bin/env ruby
 
 require 'yaml'
+require 'optparse'
 
 class ContainerYamlCompiler
   @@output
+  @@definitionParser
+  @@serviceResolver
 
-  def initialize(lines_stream)
-    @output = lines_stream
+  def initialize(definitionParser, serviceResolver)
+    @definitionParser = definitionParser
+    @serviceResolver = serviceResolver
+  end
 
+  def compile(klass, instruction)
+    implementation = []
+
+    if instruction['Parameters'].is_a?(Hash)
+      instruction['Parameters'].each do |parameter, value|
+        implementation.push('[self setParameter:@"' + parameter + '" value:' + @serviceResolver.resolveServices(value) + '];')
+      end
+    end
+
+    if instruction['Services'].is_a?(Hash)
+      var = 'serviceDefinition'
+      implementation.push('GCDIDefinition *' + var + ';')
+
+      instruction['Services'].each do |service, definition|
+        if definition.is_a?(String)
+          if definition[0, 1] == '@'
+            implementation.push('[self setAlias:@"' + service + '" to:@"' + definition[1, definition.length - 1] + '"];')
+          end
+        else
+          implementation.push(var + ' = [[GCDIDefinition alloc] init];')
+          implementation.push(*@definitionParser.parseServiceDefinition(var, definition, @serviceResolver))
+          implementation.push('[self setDefinition:' + var + ' forService:@"' + service + '"];')
+        end
+      end
+    end
+
+    self.writeImplementationStart(klass)
+    self.outputLinesWithIndentation(implementation, 2)
+    self.writeImplementationEnd()
+  end
+
+  def setOutput(output)
+    @output = output
     # Write file header.
     @output.puts '#import <GCDependencyInjection/GCDependencyInjection.h>'
     @output.puts ''
   end
 
-  def compile(klass, instruction)
-    self.writeImplementationStart(klass)
-
-    provision = []
-
-    if instruction['Parameters'].is_a?(Hash)
-      instruction['Parameters'].each do|parameter, value|
-        provision.push('[self setParameter:@"' + parameter + '" value:' + self.resolveServices(value) + '];')
-      end
-    end
-
-    if instruction['Services'].is_a?(Hash)
-      provision.push('GCDIDefinition *serviceDefinition;')
-
-      instruction['Services'].each do|service, definition|
-        if definition.is_a?(String)
-          if definition[0, 1] == '@'
-            provision.push('[self setAlias:@"' + service + '" to:@"' + definition[1, definition.length - 1] + '"];')
-          end
-        else
-          provision.push('serviceDefinition = [[GCDIDefinition alloc] init];')
-          self.parseServiceDefinition('serviceDefinition', definition, provision)
-          provision.push('[self setDefinition:serviceDefinition forService:@"' + service + '"];')
-        end
-      end
-    end
-
-    @output.puts (' ' * 2) + provision.join("\n" + (' ' * 2))
-
-    self.writeImplementationEnd()
+  def getOutput()
+    return @output
   end
 
-  def parseServiceDefinition(variable, definition, lines)
+  def outputLinesWithIndentation(lines, n)
+    @output.puts (' ' * n) + lines.join("\n" + (' ' * n))
+  end
+
+  def writeImplementationStart(klass)
+    @output.puts '@interface ' + klass + ' : GCDIDefinitionContainer'
+    @output.puts '@end'
+    @output.puts '@implementation ' + klass + ' (Yaml)'
+    @output.puts '- (void)yamlProvisionContainer {'
+  end
+
+  def writeImplementationEnd()
+    @output.puts '}'
+    @output.puts '@end'
+  end
+end
+
+class ContainerDefinitionParser
+  def parseServiceDefinition(variable, definition, serviceResolver)
+    lines = []
+
     if definition['Class']
       lines.push('[' + variable + ' setKlass:@"' + definition['Class'] + '"];')
     end
@@ -55,34 +85,38 @@ class ContainerYamlCompiler
     end
 
     if definition['Arguments']
-      lines.push('[' + variable + ' setArguments:' + self.resolveServices(definition['Arguments']) + '];')
+      lines.push('[' + variable + ' setArguments:' + serviceResolver.resolveServices(definition['Arguments']) + '];')
     end
 
     if definition['Properties']
-      lines.push('[' + variable + ' setProperties:' + self.resolveServices(definition['Properties']) + '];')
+      lines.push('[' + variable + ' setProperties:' + serviceResolver.resolveServices(definition['Properties']) + '];')
     end
 
     if definition['MethodCalls']
-      definition['MethodCalls'].each do|methodCall|
-        lines.push('[' + variable + ' addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall['Selector'] + ') andArguments:' + self.resolveServices(methodCall['Arguments']) + ']];')
+      definition['MethodCalls'].each do |methodCall|
+        lines.push('[' + variable + ' addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall['Selector'] + ') andArguments:' + serviceResolver.resolveServices(methodCall['Arguments']) + ']];')
       end
     end
 
     if definition['Tags']
-      lines.push('[' + variable + ' setTags:' + self.resolveServices(definition['Tags']) + '];')
+      lines.push('[' + variable + ' setTags:' + serviceResolver.resolveServices(definition['Tags']) + '];')
     end
-  end
 
+    return lines
+  end
+end
+
+class ServiceResolver
   def resolveServices(value)
     if value.is_a? Array
       resolved = []
-      value.each do|val|
+      value.each do |val|
         resolved.push(self.resolveServices(val))
       end
       return '@[' + resolved.join(', ') + ']'
     elsif value.is_a? Hash
       resolved = '@{'
-      value.each do|key, val|
+      value.each do |key, val|
         resolved += '@"' + key + '": ' + self.resolveServices(val) + ', '
       end
       return resolved[0, resolved.length - 2] + '}'
@@ -104,35 +138,58 @@ class ContainerYamlCompiler
     end
     return '@"' + value + '"'
   end
-
-  def writeImplementationStart(klass)
-    @output.puts '@interface ' + klass + ' : GCDIDefinitionContainer'
-    @output.puts '@end'
-    @output.puts '@implementation ' + klass + ' (Yaml)'
-    @output.puts '- (void)yamlProvisionContainer {'
-  end
-
-  def writeImplementationEnd()
-    @output.puts '}'
-    @output.puts '@end'
-  end
 end
 
-if !File.exists?(File.expand_path(ARGV[0])) || !ARGV[1]
-  puts 'Usage: GCDIYamlCompiler [input.yaml] [output.m]'
-  if ARGV[0]
-    puts '       File ' + ARGV[0] + ' not found.'
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: GCDIYamlCompiler <file> [<file>...] [options]"
+
+  opts.on("-o", "--output [file]", "Specify output file") do |o|
+    options[:output] = File.expand_path(o)
+    options[:outputIsDir] = File.directory?(o)
   end
-  if !ARGV[1]
-    puts '       Missing output file.'
-  end
-  exit
+end.parse!
+
+writer = ContainerYamlCompiler.new(ContainerDefinitionParser.new, ServiceResolver.new)
+
+if options[:output] && !options[:outputIsDir]
+  writer.setOutput(File.open(options[:output], 'w+'))
 end
 
-klass = File.basename(ARGV[0], '.*')
-instruction = YAML.load_file(ARGV[0])
-output = File.open(ARGV[1], 'w+');
+ARGV.each do |file|
+  file = File.expand_path(file)
 
-writer = ContainerYamlCompiler.new(output)
-writer.compile(klass, instruction)
-puts 'Output ' + klass + ' yaml provisioning implementation to ' + ARGV[1]
+  if !File.exists?(file)
+    puts 'File not found: ' + file + '. Skipping.'
+    continue
+  end
+
+  # Assume the filename is the name of the class that the implementation is for.
+  klass = File.basename(file, '.*')
+
+  instruction = YAML.load_file(file)
+
+  if !instruction
+    puts 'Unable to parse YAML file: ' + file + '. Skipping.'
+    continue
+  elsif instruction['ContainerClass'] && instruction['ContainerClass'].is_a?(String)
+    # Allow the YAML file to define the class of the container implementation to
+    # write to with ContainerClass key.
+    klass = instruction['ContainerClass']
+  end
+
+  if !options[:output]
+    # Write file to the source file directory.
+    writer.setOutput(File.open(File.dirname(file)) + '/' + klass + '.m', 'w+')
+  elsif options[:outputIsDir]
+    # Write the file to the specified output directory.
+    writer.setOutput(File.open(options[:output] + '/' + klass + '.m', 'w+'))
+  else
+    # Assume we're writing many implementations to the one file, add a space.
+    writer.getOutput().puts ''
+  end
+
+  writer.compile(klass, instruction)
+
+  puts 'Output ' + klass + ' (Yaml) implementation to ' + File.expand_path(writer.getOutput().path)
+end
