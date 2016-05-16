@@ -131,14 +131,9 @@
   [invocation invoke];
 
   for (GCDIMethodCall *methodCall in definition.methodCalls) {
-    NSMutableArray *arguments = @[].mutableCopy;
-    for (id argument in methodCall.arguments) {
-      arguments[arguments.count] = [self resolveServices:argument];
-    }
-
     NSInvocation *setupInvocation = [self buildInvocationForClass:[service class]
                                                      withSelector:methodCall.pSelector
-                                                     andArguments:arguments];
+                                                     andArguments:methodCall.arguments];
     [setupInvocation invokeWithTarget:service];
   }
 
