@@ -326,6 +326,29 @@
   _aliasDefinitions[alias] = serviceId;
 }
 
+- (void)addAliases:(NSDictionary *)aliases {
+  for (NSString *alias in aliases.allKeys) {
+    [self setAlias:alias to:aliases[alias]];
+  }
+}
+
+- (void)setAliases:(NSDictionary *)aliases {
+  _aliasDefinitions = @{}.mutableCopy;
+  [self addAliases:_aliases];
+}
+
+- (void)removeAlias:(NSString *)alias {
+  [_aliasDefinitions removeObjectForKey:[alias lowercaseString]];
+}
+
+- (BOOL)hasAlias:(NSString *)alias {
+  return (BOOL) _aliasDefinitions[[alias lowercaseString]];
+}
+
+- (GCDIAlias *)getAlias:(NSString *)alias {
+  return _aliasDefinitions[[alias lowercaseString]];
+}
+
 # pragma mark Tagging
 
 - (NSDictionary *)findServiceIdsForTag:(NSString *)name {
