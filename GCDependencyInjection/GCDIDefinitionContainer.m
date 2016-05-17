@@ -38,8 +38,7 @@
   return self;
 }
 
-- (id)getServiceNamed:(NSString *)serviceId
- withInvalidBehaviour:(GCDIInvalidBehaviourType)invalidBehaviourType {
+- (id)getServiceNamed:(NSString *)serviceId withInvalidBehaviour:(GCDIInvalidBehaviourType)invalidBehaviourType {
   serviceId = [serviceId lowercaseString];
 
   id service = [super getServiceNamed:serviceId

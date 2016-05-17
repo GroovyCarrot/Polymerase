@@ -1,7 +1,7 @@
 ContainerClass: 'GCDIYamlExampleContainer'
 
 Parameters:
-  example.parameter: '@example.service'
+  example.parameter: '@example.alias'
 
 Services:
   example.service:
@@ -10,7 +10,7 @@ Services:
     Tags:
       type: controller
 
-  example.alias: '@example.dependent_service'
+  example.alias: '@example.service'
 
   example.dependent_service:
     Class: GCDIDependentExampleService
