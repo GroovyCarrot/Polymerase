@@ -4,9 +4,12 @@ Parameters:
   example.parameter: '@example.alias'
 
 Services:
+  example.service.factory:
+    Class: GCDIExampleFactoryService
+
   example.service:
-    Class: GCDIExampleService
-    Selector: initService
+    Factory: '@example.service.factory'
+    Selector: newExampleService
     Tags:
       type: controller
 
