@@ -1,4 +1,13 @@
 #!/usr/bin/env ruby
+#
+# GCDependencyInjection
+#
+# Created by Jake Wise on 13/05/2016.
+# Copyright (c) 2016 GroovyCarrot Ltd. All rights reserved.
+#
+# You are permitted to use, modify, and distribute this file in accordance with
+# the terms of the license agreement accompanying it.
+#
 
 require 'yaml'
 require 'optparse'
@@ -80,8 +89,14 @@ class ContainerDefinitionParser
       lines.push('[' + variable + ' setKlass:@"' + definition['Class'] + '"];')
     end
 
+    if definition['Factory']
+      lines.push('[' + variable + ' setFactory:' + serviceResolver.resolveServices(definition['Factory']) + '];')
+    end
+
     if definition['Selector']
       lines.push('[' + variable + ' setSelector:@selector(' + definition['Selector'] + ')];')
+    elsif definition['Factory']
+      raise 'A selector must be specified with using a factory service.'
     end
 
     if definition['Arguments']
