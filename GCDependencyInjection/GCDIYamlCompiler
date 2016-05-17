@@ -96,7 +96,7 @@ class ContainerDefinitionParser
     if definition['Selector']
       lines.push('[' + variable + ' setSelector:@selector(' + definition['Selector'] + ')];')
     elsif definition['Factory']
-      raise 'A selector must be specified with using a factory service.'
+      raise 'A selector must be specified when using a factory service.'
     end
 
     if definition['Arguments']

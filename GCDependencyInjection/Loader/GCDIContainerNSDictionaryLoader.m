@@ -105,8 +105,16 @@
     [serviceDefinition setKlass:definitionDictionary[@"Class"]];
   }
 
+  if (definitionDictionary[@"Factory"]) {
+    [serviceDefinition setFactory:[self resolveServices:definitionDictionary[@"Factory"]]];
+  }
+
   if (definitionDictionary[@"Selector"]) {
     [serviceDefinition setSelector:NSSelectorFromString(definitionDictionary[@"Selector"])];
+  }
+  else if(definitionDictionary[@"Factory"]) {
+    [NSException raise:NSParseErrorException
+                format:@"A selector must be specified with using a factory service (parsing \"%@\").", serviceId];
   }
 
   if (definitionDictionary[@"Arguments"]) {
