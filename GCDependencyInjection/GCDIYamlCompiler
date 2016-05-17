@@ -180,7 +180,7 @@ ARGV.each do |file|
 
   if !File.exists?(file)
     puts 'File not found: ' + file + '. Skipping.'
-    continue
+    next
   end
 
   # Assume the filename is the name of the class that the implementation is for.
@@ -188,9 +188,8 @@ ARGV.each do |file|
 
   instruction = YAML.load_file(file)
 
-  if !instruction
-    puts 'Unable to parse YAML file: ' + file + '. Skipping.'
-    continue
+  if !instruction.is_a?(Hash)
+    instruction = {}
   elsif instruction['ContainerClass'] && instruction['ContainerClass'].is_a?(String)
     # Allow the YAML file to define the class of the container implementation to
     # write to with ContainerClass key.
