@@ -94,7 +94,11 @@ class ContainerDefinitionParser
 
     if definition['MethodCalls']
       definition['MethodCalls'].each do |methodCall|
-        lines.push('[' + variable + ' addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall['Selector'] + ') andArguments:' + serviceResolver.resolveServices(methodCall['Arguments']) + ']];')
+        if methodCall.is_a?(Hash)
+          lines.push('[' + variable + ' addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall['Selector'] + ') andArguments:' + serviceResolver.resolveServices(methodCall['Arguments']) + ']];')
+        else
+          lines.push('[' + variable + ' addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall[0] + ') andArguments:' + serviceResolver.resolveServices(methodCall[1]) + ']];')
+        end
       end
     end
 
