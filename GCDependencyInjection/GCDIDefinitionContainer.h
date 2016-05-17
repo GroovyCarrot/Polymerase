@@ -15,6 +15,7 @@
 @interface GCDIDefinitionContainer : GCDIContainer <GCDIDefinitionContainerProtocol> {
  @protected
   NSMutableDictionary *_definitions;
+  NSMutableDictionary *_aliasDefinitions;
 }
 
 - (void)registerService:(NSString *)serviceId forClass:(Class)klass andSelector:(SEL)pSelector;

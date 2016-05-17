@@ -53,8 +53,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
           withInvalidBehaviour:kExceptionOnInvalidReference];
 }
 
-- (id)getServiceNamed:(NSString *)serviceId
- withInvalidBehaviour:(GCDIInvalidBehaviourType)invalidBehaviourType {
+- (id)getServiceNamed:(NSString *)serviceId withInvalidBehaviour:(GCDIInvalidBehaviourType)invalidBehaviourType {
   id service;
 
   for (NSInteger i = 2;;) {

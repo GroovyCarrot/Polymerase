@@ -15,6 +15,7 @@
 #import "GCDIExceptions.h"
 #import "GCDIMethodCall.h"
 #import "GCDIDefinitionContainer+Yaml.h"
+#import "GCDIAlias.h"
 
 @implementation GCDIDefinitionContainer {
  @protected
@@ -30,6 +31,7 @@
   }
 
   _definitions = @{}.mutableCopy;
+  _aliasDefinitions = @{}.mutableCopy;
   _obsoleteDefinitions = @{}.mutableCopy;
 
   // Add the Yaml provision method to the default init method for overriding.
@@ -45,6 +47,11 @@
                  withInvalidBehaviour:kNilOnInvalidReference];
   if (service) {
     return service;
+  }
+
+  if (!_definitions[serviceId] && _aliasDefinitions[serviceId]) {
+    GCDIAlias *alias = _aliasDefinitions[serviceId];
+    return [self getServiceNamed:alias.aliasId withInvalidBehaviour:invalidBehaviourType];
   }
 
   // Attempt to load the service.
@@ -105,6 +112,7 @@
 
     // Invoke the required method on the factory object.
     [invocation setTarget:factory];
+    [invocation invoke];
 
     void *tempService;
     [invocation getReturnValue:&tempService];
@@ -124,10 +132,9 @@
 
     service = [klass alloc];
     [invocation setTarget:service];
+    // Invoke the method to get the service object.
+    [invocation invoke];
   }
-
-  // Invoke the method to get the service object.
-  [invocation invoke];
 
   for (GCDIMethodCall *methodCall in definition.methodCalls) {
     NSInvocation *setupInvocation = [self buildInvocationForClass:[service class]
@@ -293,6 +300,30 @@
 
 - (BOOL)hasDefinitionForService:(NSString *)serviceId {
   return (BOOL) _definitions[serviceId];
+}
+
+# pragma mark Aliases
+
+- (void)setAlias:(NSString *)alias to:(id)_serviceId {
+  alias = [alias lowercaseString];
+
+  if ([_serviceId isKindOfClass:[NSString class]]) {
+    _serviceId = [GCDIAlias aliasForId:_serviceId];
+  }
+  else if (![_serviceId isKindOfClass:[GCDIAlias class]]) {
+    [NSException raise:NSInvalidArgumentException
+                format:@"Alias must be of type NSString or GCDIAlias."];
+  }
+
+  GCDIAlias *serviceId = _serviceId;
+
+  if ([alias isEqualToString:serviceId.aliasId]) {
+    [NSException raise:GCDICircularReferenceException
+                format:@"Circular reference found on alias \"%@\"", alias];
+  }
+
+  [_definitions removeObjectForKey:alias];
+  _aliasDefinitions[alias] = serviceId;
 }
 
 # pragma mark Tagging
