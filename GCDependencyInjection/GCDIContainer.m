@@ -154,7 +154,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
 }
 
 - (BOOL)hasService:(NSString *)serviceId {
-  return _aliases[serviceId] || _services[serviceId];
+  return [self hasAlias:serviceId] || _services[serviceId];
 }
 
 - (BOOL)isServiceInitialised:(NSString*)serviceId {
