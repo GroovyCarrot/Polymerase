@@ -7,49 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CAD680EA91B0037177FAC758 /* GCDIAlternativeSuggesterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68151F33FD3DBEEC4FF50 /* GCDIAlternativeSuggesterTests.m */; };
 		CAD681586AB6480ACAA2A76A /* GCDIParameterBagProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68294DFB7F0E753AA27CF /* GCDIParameterBagProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CAD6817CD4B25D5E176B3F52 /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */; };
 		CAD681E841D6C94822C5963B /* GCDIMethodCall.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68E3F4EF35E9E580955AE /* GCDIMethodCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD681F80E09EF78090E837C /* GCDIParameterBag.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6849701A38CFD99E38C8D /* GCDIParameterBag.m */; };
 		CAD68321D28E38393E4ABDD9 /* GCDIAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68351E86C4501E306F357 /* GCDIReference.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68426A32F953C5C33E31A /* GCDIReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CAD683CA62A4613807326397 /* GCDIContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6834B4225BB79585BCBF6 /* GCDIContainerTests.m */; };
-		CAD68452E8A43F858BCC7AA2 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68D55D09D210FBD446080 /* GCDIContainerNSDictionaryLoaderTests.m */; };
 		CAD684D635FB4840BEC262C2 /* GCDIDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68A694AE7F2080CA2443F /* GCDIDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CAD684F2E9935C9874A2835C /* GCDIYamlExampleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD688F16213AD0673E1F584 /* GCDIYamlExampleContainer.m */; };
 		CAD6862C76D3F8A73CA47A96 /* GCDIAlternativeSuggesterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD6865101FB5F86F203DC4C /* GCDIDefinitionContainer+Yaml.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68BAC9639333F80F5A647 /* GCDIDefinitionContainer+Yaml.m */; };
-		CAD686746B4E785989B46DBF /* GCDIExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68BE609EDF89384B61BAA /* GCDIExampleService.m */; };
 		CAD686A620F29A07155A83C5 /* GCDIMethodCall.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD688BAE3C29AC6B35B8356 /* GCDIMethodCall.m */; };
 		CAD686B3F171CE8ECDF7E17B /* GCDIDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685878852F9FFBA8E9D56 /* GCDIDefinition.m */; };
 		CAD6872874FE91853B63A17E /* GCDIParameterBag.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD685132B449F1318D4B043 /* GCDIParameterBag.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD6876BB126A9C259486C8E /* GCDIDefinitionContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C4536C3B9C227D0F2EE /* GCDIDefinitionContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CAD687CB4A593349C258A9DA /* GCDIExampleFactoryService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68CEAC61DA290574B47F1 /* GCDIExampleFactoryService.m */; };
 		CAD6894073C3C2AF4A15DC02 /* GCDIDefinitionContainer+Yaml.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6814619AC5DD62B91D24E /* GCDIDefinitionContainer+Yaml.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		CAD689867969E15E65E8BFF7 /* GCDIExceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68A56A1230FE1DA24A523 /* GCDIExceptions.m */; };
 		CAD68A3BF0146F5AC476A55D /* GCDIAliasableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68A864948B6D78535A47B /* GCDIContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68B3AD562B7C44531ADAD /* GCDIAlternativeSuggester.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68DEA9B0A4257B2B30DE3 /* GCDIAlternativeSuggester.m */; };
-		CAD68B5A032D3D963DAAF91D /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */; };
 		CAD68C1BE2E9EA011D5CDE0F /* GCDIDefinitionContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68C5CEF0185CCB3404A8C /* GCDIAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68009CEF258A4DCFDBD82 /* GCDIAlias.m */; };
-		CAD68CE7BE42FD7C975BE02D /* GCDIInjectedExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68E32F5E5A6CCD0C00409 /* GCDIInjectedExampleService.m */; };
 		CAD68CF10CB8EDF4942C14F8 /* GCDIAlternativeSuggester.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6842113F30EEE8EBE9757 /* GCDIAlternativeSuggester.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68D5C178D03426C6C2CCD /* GCDIDefinitionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD687B14EB0738306C9B61D /* GCDIDefinitionContainer.m */; };
-		CAD68D786002027B631E5FB5 /* GCDIDependentExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD682193C37BA40D9F98187 /* GCDIDependentExampleService.m */; };
 		CAD68D9C8CED8F538C6CEE43 /* GCDIContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6815B4824F5D1AABD05C4 /* GCDIContainer.m */; };
 		CAD68DAC5CF31263AE4C86C2 /* GCDIReference.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6896C6E58D699026EB77A /* GCDIReference.m */; };
 		CAD68DD20377DCCA81DA4747 /* GCDIExceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B2F5949349CEEE90604 /* GCDIExceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68DEB816972317332E25A /* GCDIResettableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CAD68EDE2A758D178FABA9F4 /* GCDIYamlExampleContainer.yml in Resources */ = {isa = PBXBuildFile; fileRef = CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */; };
-		CAD68F756593B78D216ECBF6 /* GCDIYamlCompilerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68FEC169BD5574D0AFDB0 /* GCDIYamlCompilerTests.m */; };
 		CAD68FCCB56B61518C708CD5 /* GCDIContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F66978AB1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD687DAD9A648042C977B74 /* GCDIContainerNSDictionaryLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F66978AC1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD684367E8FFCBD523D49B8 /* GCDIContainerNSDictionaryLoader.m */; };
 		F689F97D1CAD5F8800F6C8ED /* GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F689F9891CAD5F8900F6C8ED /* GCDependencyInjectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */; };
-		F69258031CC66FAF00B6BA46 /* GCDIParameterBagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685C4194210045EB48980 /* GCDIParameterBagTests.m */; };
 		F6CA90161CEBA22B00924094 /* GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6CA90171CEBA22B00924094 /* GCDIContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6CA90181CEBA22B00924094 /* GCDIAliasableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,11 +65,47 @@
 		F6CA90301CEBA25100924094 /* GCDIAlternativeSuggester.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD6842113F30EEE8EBE9757 /* GCDIAlternativeSuggester.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6CA90311CEBA25100924094 /* GCDIAlternativeSuggester.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68DEA9B0A4257B2B30DE3 /* GCDIAlternativeSuggester.m */; };
 		F6CA90321CEBA25100924094 /* GCDIAlternativeSuggesterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6CA904E1CECB73C00924094 /* GCDependencyInjectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */; };
+		F6CA904F1CECB73C00924094 /* GCDIExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68BE609EDF89384B61BAA /* GCDIExampleService.m */; };
+		F6CA90501CECB73C00924094 /* GCDIDependentExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD682193C37BA40D9F98187 /* GCDIDependentExampleService.m */; };
+		F6CA90511CECB73C00924094 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68D55D09D210FBD446080 /* GCDIContainerNSDictionaryLoaderTests.m */; };
+		F6CA90521CECB73C00924094 /* GCDIYamlCompilerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68FEC169BD5574D0AFDB0 /* GCDIYamlCompilerTests.m */; };
+		F6CA90531CECB73C00924094 /* GCDIParameterBagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685C4194210045EB48980 /* GCDIParameterBagTests.m */; };
+		F6CA90541CECB73C00924094 /* GCDIContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6834B4225BB79585BCBF6 /* GCDIContainerTests.m */; };
+		F6CA90551CECB73C00924094 /* GCDIAlternativeSuggesterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68151F33FD3DBEEC4FF50 /* GCDIAlternativeSuggesterTests.m */; };
+		F6CA90561CECB73C00924094 /* GCDIInjectedExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68E32F5E5A6CCD0C00409 /* GCDIInjectedExampleService.m */; };
+		F6CA90571CECB73C00924094 /* GCDIYamlExampleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD688F16213AD0673E1F584 /* GCDIYamlExampleContainer.m */; };
+		F6CA90581CECB73C00924094 /* GCDIExampleFactoryService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68CEAC61DA290574B47F1 /* GCDIExampleFactoryService.m */; };
+		F6CA90631CECB73D00924094 /* GCDependencyInjectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */; };
+		F6CA90641CECB73D00924094 /* GCDIExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68BE609EDF89384B61BAA /* GCDIExampleService.m */; };
+		F6CA90651CECB73D00924094 /* GCDIDependentExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD682193C37BA40D9F98187 /* GCDIDependentExampleService.m */; };
+		F6CA90661CECB73D00924094 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68D55D09D210FBD446080 /* GCDIContainerNSDictionaryLoaderTests.m */; };
+		F6CA90671CECB73D00924094 /* GCDIYamlCompilerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68FEC169BD5574D0AFDB0 /* GCDIYamlCompilerTests.m */; };
+		F6CA90681CECB73D00924094 /* GCDIParameterBagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD685C4194210045EB48980 /* GCDIParameterBagTests.m */; };
+		F6CA90691CECB73D00924094 /* GCDIContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6834B4225BB79585BCBF6 /* GCDIContainerTests.m */; };
+		F6CA906A1CECB73D00924094 /* GCDIAlternativeSuggesterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68151F33FD3DBEEC4FF50 /* GCDIAlternativeSuggesterTests.m */; };
+		F6CA906B1CECB73D00924094 /* GCDIInjectedExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68E32F5E5A6CCD0C00409 /* GCDIInjectedExampleService.m */; };
+		F6CA906C1CECB73D00924094 /* GCDIYamlExampleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD688F16213AD0673E1F584 /* GCDIYamlExampleContainer.m */; };
+		F6CA906D1CECB73D00924094 /* GCDIExampleFactoryService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68CEAC61DA290574B47F1 /* GCDIExampleFactoryService.m */; };
+		F6CA90701CECB8D200924094 /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */; };
+		F6CA90711CECB8D900924094 /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */; };
+		F6CA90721CECC26800924094 /* GCDIYamlExampleContainer.yml in Sources */ = {isa = PBXBuildFile; fileRef = CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */; };
 		F6DF95AE1CE5ED030008FA16 /* GCDIYamlExampleContainer.yml in Sources */ = {isa = PBXBuildFile; fileRef = CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */; };
 		F6E3B4F61CE604DF000DCC05 /* GCDIYamlCompiler in Resources */ = {isa = PBXBuildFile; fileRef = CAD68108AC8889F396575881 /* GCDIYamlCompiler */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
+		F6CA906F1CECB7CD00924094 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.yml";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/$(INPUT_FILE_BASE).m",
+			);
+			script = "/Users/jakewise/iOSProjects/GCDependencyInjection/GCDependencyInjection/GCDIYamlCompiler\\\n  \"${INPUT_FILE_PATH}\"\\\n  -o\"${DERIVED_FILE_DIR}\"";
+		};
 		F6DF95AC1CE5E0F10008FA16 /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
@@ -104,6 +126,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = F689F9781CAD5F8800F6C8ED;
 			remoteInfo = GCDependencyInjection;
+		};
+		F6CA903D1CECB6CB00924094 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F689F9701CAD5F8800F6C8ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6CA900D1CEBA18700924094;
+			remoteInfo = "GCDependencyInjection OS X";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -161,6 +190,8 @@
 		F689F98A1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6CA90121CEBA18700924094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6CA90371CECB6CB00924094 /* GCDependencyInjectionOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectionOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6CA903B1CECB6CB00924094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,8 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAD68B5A032D3D963DAAF91D /* GCDependencyInjection.framework in Frameworks */,
-				CAD6817CD4B25D5E176B3F52 /* GCDependencyInjection.framework in Frameworks */,
+				F6CA90701CECB8D200924094 /* GCDependencyInjection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +214,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6CA90341CECB6CB00924094 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6CA90711CECB8D900924094 /* GCDependencyInjection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +298,8 @@
 			children = (
 				F689F97B1CAD5F8800F6C8ED /* GCDependencyInjection */,
 				F689F9871CAD5F8900F6C8ED /* GCDependencyInjectionTests */,
-				F6CA900F1CEBA18700924094 /* GCDependencyInjection OS X */,
+				F6CA900F1CEBA18700924094 /* GCDependencyInjectionOSX */,
+				F6CA90381CECB6CB00924094 /* GCDependencyInjectionOSXTests */,
 				F689F97A1CAD5F8800F6C8ED /* Products */,
 			);
 			sourceTree = "<group>";
@@ -271,6 +310,7 @@
 				F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */,
 				F689F9831CAD5F8900F6C8ED /* GCDependencyInjectionTests.xctest */,
 				F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */,
+				F6CA90371CECB6CB00924094 /* GCDependencyInjectionOSXTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -321,20 +361,29 @@
 				CAD68E32F5E5A6CCD0C00409 /* GCDIInjectedExampleService.m */,
 				CAD68ABD5B31D0D3A6A5D71F /* GCDIInjectedExampleService.h */,
 				CAD680C67E402A4E1B3C1643 /* GCDIYamlExampleContainer.h */,
-				CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */,
 				CAD688F16213AD0673E1F584 /* GCDIYamlExampleContainer.m */,
+				CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */,
 				CAD68CEAC61DA290574B47F1 /* GCDIExampleFactoryService.m */,
 				CAD685D0616C2311A26DC0A2 /* GCDIExampleFactoryService.h */,
 			);
 			path = GCDependencyInjectionTests;
 			sourceTree = "<group>";
 		};
-		F6CA900F1CEBA18700924094 /* GCDependencyInjection OS X */ = {
+		F6CA900F1CEBA18700924094 /* GCDependencyInjectionOSX */ = {
 			isa = PBXGroup;
 			children = (
 				F6CA90121CEBA18700924094 /* Info.plist */,
 			);
+			name = GCDependencyInjectionOSX;
 			path = "GCDependencyInjection OS X";
+			sourceTree = "<group>";
+		};
+		F6CA90381CECB6CB00924094 /* GCDependencyInjectionOSXTests */ = {
+			isa = PBXGroup;
+			children = (
+				F6CA903B1CECB6CB00924094 /* Info.plist */,
+			);
+			path = GCDependencyInjectionOSXTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,8 +397,8 @@
 				CAD68CF10CB8EDF4942C14F8 /* GCDIAlternativeSuggester.h in Headers */,
 				CAD6862C76D3F8A73CA47A96 /* GCDIAlternativeSuggesterProtocol.h in Headers */,
 				CAD68C1BE2E9EA011D5CDE0F /* GCDIDefinitionContainerProtocol.h in Headers */,
-				CAD68A864948B6D78535A47B /* GCDIContainerProtocol.h in Headers */,
 				CAD68321D28E38393E4ABDD9 /* GCDIAlias.h in Headers */,
+				CAD68A864948B6D78535A47B /* GCDIContainerProtocol.h in Headers */,
 				CAD684D635FB4840BEC262C2 /* GCDIDefinition.h in Headers */,
 				CAD68FCCB56B61518C708CD5 /* GCDIContainer.h in Headers */,
 				F66978AB1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.h in Headers */,
@@ -372,13 +421,13 @@
 				F6CA90291CEBA23600924094 /* GCDIParameterBagProtocol.h in Headers */,
 				F6CA901A1CEBA22B00924094 /* GCDIAlias.h in Headers */,
 				F6CA901C1CEBA22B00924094 /* GCDIDefinition.h in Headers */,
-				F6CA90171CEBA22B00924094 /* GCDIContainerProtocol.h in Headers */,
 				F6CA90201CEBA22B00924094 /* GCDIResettableContainerProtocol.h in Headers */,
 				F6CA902A1CEBA23F00924094 /* GCDIContainerNSDictionaryLoader.h in Headers */,
 				F6CA90301CEBA25100924094 /* GCDIAlternativeSuggester.h in Headers */,
 				F6CA90221CEBA22B00924094 /* GCDIDefinitionContainer.h in Headers */,
 				F6CA90191CEBA22B00924094 /* GCDIDefinitionContainerProtocol.h in Headers */,
 				F6CA90161CEBA22B00924094 /* GCDependencyInjection.h in Headers */,
+				F6CA90171CEBA22B00924094 /* GCDIContainerProtocol.h in Headers */,
 				F6CA90241CEBA22B00924094 /* GCDIReference.h in Headers */,
 				F6CA901E1CEBA22B00924094 /* GCDIContainer.h in Headers */,
 				F6CA90321CEBA25100924094 /* GCDIAlternativeSuggesterProtocol.h in Headers */,
@@ -430,9 +479,9 @@
 			productReference = F689F9831CAD5F8900F6C8ED /* GCDependencyInjectionTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F6CA900D1CEBA18700924094 /* GCDependencyInjection OS X */ = {
+		F6CA900D1CEBA18700924094 /* GCDependencyInjectionOSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F6CA90151CEBA18700924094 /* Build configuration list for PBXNativeTarget "GCDependencyInjection OS X" */;
+			buildConfigurationList = F6CA90151CEBA18700924094 /* Build configuration list for PBXNativeTarget "GCDependencyInjectionOSX" */;
 			buildPhases = (
 				F6CA90091CEBA18700924094 /* Sources */,
 				F6CA900A1CEBA18700924094 /* Frameworks */,
@@ -443,10 +492,29 @@
 			);
 			dependencies = (
 			);
-			name = "GCDependencyInjection OS X";
+			name = GCDependencyInjectionOSX;
 			productName = "GCDependencyInjection OS X";
 			productReference = F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		F6CA90361CECB6CB00924094 /* GCDependencyInjectionOSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6CA90411CECB6CB00924094 /* Build configuration list for PBXNativeTarget "GCDependencyInjectionOSXTests" */;
+			buildPhases = (
+				F6CA90331CECB6CB00924094 /* Sources */,
+				F6CA90341CECB6CB00924094 /* Frameworks */,
+				F6CA90351CECB6CB00924094 /* Resources */,
+			);
+			buildRules = (
+				F6CA906F1CECB7CD00924094 /* PBXBuildRule */,
+			);
+			dependencies = (
+				F6CA903E1CECB6CB00924094 /* PBXTargetDependency */,
+			);
+			name = GCDependencyInjectionOSXTests;
+			productName = GCDependencyInjectionOSXTests;
+			productReference = F6CA90371CECB6CB00924094 /* GCDependencyInjectionOSXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -469,6 +537,9 @@
 					F6CA900D1CEBA18700924094 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
+					F6CA90361CECB6CB00924094 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 				};
 			};
 			buildConfigurationList = F689F9731CAD5F8800F6C8ED /* Build configuration list for PBXProject "GCDependencyInjection" */;
@@ -484,8 +555,9 @@
 			projectRoot = "";
 			targets = (
 				F689F9781CAD5F8800F6C8ED /* GCDependencyInjection */,
-				F6CA900D1CEBA18700924094 /* GCDependencyInjection OS X */,
+				F6CA900D1CEBA18700924094 /* GCDependencyInjectionOSX */,
 				F689F9821CAD5F8900F6C8ED /* GCDependencyInjectionTests */,
+				F6CA90361CECB6CB00924094 /* GCDependencyInjectionOSXTests */,
 			);
 		};
 /* End PBXProject section */
@@ -503,11 +575,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAD68EDE2A758D178FABA9F4 /* GCDIYamlExampleContainer.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F6CA900C1CEBA18700924094 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6CA90351CECB6CB00924094 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -532,7 +610,6 @@
 				CAD68DAC5CF31263AE4C86C2 /* GCDIReference.m in Sources */,
 				CAD686A620F29A07155A83C5 /* GCDIMethodCall.m in Sources */,
 				CAD6865101FB5F86F203DC4C /* GCDIDefinitionContainer+Yaml.m in Sources */,
-				CAD684F2E9935C9874A2835C /* GCDIYamlExampleContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,17 +617,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F689F9891CAD5F8900F6C8ED /* GCDependencyInjectionTests.m in Sources */,
-				CAD686746B4E785989B46DBF /* GCDIExampleService.m in Sources */,
-				CAD68D786002027B631E5FB5 /* GCDIDependentExampleService.m in Sources */,
-				CAD68452E8A43F858BCC7AA2 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */,
-				F69258031CC66FAF00B6BA46 /* GCDIParameterBagTests.m in Sources */,
-				CAD683CA62A4613807326397 /* GCDIContainerTests.m in Sources */,
-				CAD680EA91B0037177FAC758 /* GCDIAlternativeSuggesterTests.m in Sources */,
-				CAD68CE7BE42FD7C975BE02D /* GCDIInjectedExampleService.m in Sources */,
+				F6CA90521CECB73C00924094 /* GCDIYamlCompilerTests.m in Sources */,
+				F6CA904F1CECB73C00924094 /* GCDIExampleService.m in Sources */,
+				F6CA90531CECB73C00924094 /* GCDIParameterBagTests.m in Sources */,
+				F6CA90571CECB73C00924094 /* GCDIYamlExampleContainer.m in Sources */,
+				F6CA904E1CECB73C00924094 /* GCDependencyInjectionTests.m in Sources */,
+				F6CA90541CECB73C00924094 /* GCDIContainerTests.m in Sources */,
 				F6DF95AE1CE5ED030008FA16 /* GCDIYamlExampleContainer.yml in Sources */,
-				CAD68F756593B78D216ECBF6 /* GCDIYamlCompilerTests.m in Sources */,
-				CAD687CB4A593349C258A9DA /* GCDIExampleFactoryService.m in Sources */,
+				F6CA90551CECB73C00924094 /* GCDIAlternativeSuggesterTests.m in Sources */,
+				F6CA90561CECB73C00924094 /* GCDIInjectedExampleService.m in Sources */,
+				F6CA90501CECB73C00924094 /* GCDIDependentExampleService.m in Sources */,
+				F6CA90581CECB73C00924094 /* GCDIExampleFactoryService.m in Sources */,
+				F6CA90511CECB73C00924094 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +650,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F6CA90331CECB6CB00924094 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6CA90721CECC26800924094 /* GCDIYamlExampleContainer.yml in Sources */,
+				F6CA90671CECB73D00924094 /* GCDIYamlCompilerTests.m in Sources */,
+				F6CA90641CECB73D00924094 /* GCDIExampleService.m in Sources */,
+				F6CA90681CECB73D00924094 /* GCDIParameterBagTests.m in Sources */,
+				F6CA906C1CECB73D00924094 /* GCDIYamlExampleContainer.m in Sources */,
+				F6CA90631CECB73D00924094 /* GCDependencyInjectionTests.m in Sources */,
+				F6CA90691CECB73D00924094 /* GCDIContainerTests.m in Sources */,
+				F6CA906A1CECB73D00924094 /* GCDIAlternativeSuggesterTests.m in Sources */,
+				F6CA906B1CECB73D00924094 /* GCDIInjectedExampleService.m in Sources */,
+				F6CA90651CECB73D00924094 /* GCDIDependentExampleService.m in Sources */,
+				F6CA906D1CECB73D00924094 /* GCDIExampleFactoryService.m in Sources */,
+				F6CA90661CECB73D00924094 /* GCDIContainerNSDictionaryLoaderTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -579,6 +676,11 @@
 			isa = PBXTargetDependency;
 			target = F689F9781CAD5F8800F6C8ED /* GCDependencyInjection */;
 			targetProxy = F689F9851CAD5F8900F6C8ED /* PBXContainerItemProxy */;
+		};
+		F6CA903E1CECB6CB00924094 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F6CA900D1CEBA18700924094 /* GCDependencyInjectionOSX */;
+			targetProxy = F6CA903D1CECB6CB00924094 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -685,6 +787,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -701,6 +804,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -712,7 +816,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -723,7 +827,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -741,7 +845,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.groovycarrot.GCDependencyInjection-OS-X";
+				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionOSX;
 				PRODUCT_NAME = GCDependencyInjection;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -762,10 +866,36 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.groovycarrot.GCDependencyInjection-OS-X";
+				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionOSX;
 				PRODUCT_NAME = GCDependencyInjection;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F6CA903F1CECB6CB00924094 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GCDependencyInjectionOSXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionOSXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F6CA90401CECB6CB00924094 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GCDependencyInjectionOSXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionOSXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -799,11 +929,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F6CA90151CEBA18700924094 /* Build configuration list for PBXNativeTarget "GCDependencyInjection OS X" */ = {
+		F6CA90151CEBA18700924094 /* Build configuration list for PBXNativeTarget "GCDependencyInjectionOSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F6CA90131CEBA18700924094 /* Debug */,
 				F6CA90141CEBA18700924094 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6CA90411CECB6CB00924094 /* Build configuration list for PBXNativeTarget "GCDependencyInjectionOSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6CA903F1CECB6CB00924094 /* Debug */,
+				F6CA90401CECB6CB00924094 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
