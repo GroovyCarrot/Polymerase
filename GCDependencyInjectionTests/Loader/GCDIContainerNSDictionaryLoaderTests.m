@@ -58,7 +58,7 @@
 
   [_loader loadIntoContainer:_container];
 
-  GCDIDependentExampleService *service = [_container getService:@"example.dependent_service"];
+  GCDIDependentExampleService *service = _container[@"example.dependent_service"];
   XCTAssertTrue([service isDependentServiceInitialised]);
 }
 
@@ -87,7 +87,7 @@
 
   [_loader loadIntoContainer:_container];
 
-  GCDIInjectedExampleService *service = [_container getService:@"example.injected_service"];
+  GCDIInjectedExampleService *service = _container[@"example.injected_service"];
   XCTAssertTrue([service.injectedService exampleServiceInitialised]);
 }
 

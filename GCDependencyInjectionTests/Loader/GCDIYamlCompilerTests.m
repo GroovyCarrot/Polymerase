@@ -32,10 +32,10 @@
 }
 
 - (void)testYamlContainer {
-  GCDIDependentExampleService *dependentExampleService = [_container getService:@"example.dependent_service"];
+  GCDIDependentExampleService *dependentExampleService = _container[@"example.dependent_service"];
   XCTAssertTrue([dependentExampleService isDependentServiceInitialised]);
 
-  GCDIInjectedExampleService *injectedExampleService = [_container getService:@"example.injected_service"];
+  GCDIInjectedExampleService *injectedExampleService = _container[@"example.injected_service"];
   XCTAssertTrue([injectedExampleService.injectedService exampleServiceInitialised]);
 
   NSDictionary *services = [_container findServiceIdsForTag:@"type"];

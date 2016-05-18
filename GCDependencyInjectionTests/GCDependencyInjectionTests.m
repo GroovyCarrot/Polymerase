@@ -42,7 +42,7 @@
 
   [_container setDefinition:definition forService:@"example.service"];
 
-  GCDIExampleService *exampleService = [_container getService:@"example.service"];
+  GCDIExampleService *exampleService = _container[@"example.service"];
   XCTAssertTrue([exampleService exampleServiceInitialised]);
 }
 
@@ -53,7 +53,7 @@
                      forClass:[GCDIExampleService class]
                   andSelector:@selector(initService)];
 
-  GCDIExampleService *exampleService = [_container getService:@"example.service"];
+  GCDIExampleService *exampleService = _container[@"example.service"];
   XCTAssertTrue([exampleService exampleServiceInitialised]);
 
   definition = [GCDIDefinition definitionForClass:[GCDIDependentExampleService class]
@@ -66,7 +66,7 @@
   NSArray *expectedServices = @[@"example.service", @"service_container", @"example.dependent_service"];
   XCTAssertEqualObjects(expectedServices, [_container getServiceIds]);
 
-  GCDIDependentExampleService *exampleDependentService = [_container getService:@"example.dependent_service"];
+  GCDIDependentExampleService *exampleDependentService = _container[@"example.dependent_service"];
   XCTAssertTrue([exampleDependentService isDependentServiceInitialised]);
 }
 
@@ -82,7 +82,7 @@
                                      andArguments:@[@"%example.parameter%"]];
   [_container setDefinition:definition forService:@"example.dependent_service"];
 
-  GCDIDependentExampleService *dependentExampleService = [_container getService:@"example.dependent_service"];
+  GCDIDependentExampleService *dependentExampleService = _container[@"example.dependent_service"];
   XCTAssertTrue([dependentExampleService isDependentServiceInitialised]);
 }
 
@@ -103,7 +103,7 @@
 
   [_container setDefinition:definition forService:@"example.injected_service"];
 
-  GCDIInjectedExampleService *service = [_container getService:@"example.injected_service"];
+  GCDIInjectedExampleService *service = _container[@"example.injected_service"];
   XCTAssertTrue([[service injectedService] exampleServiceInitialised]);
 }
 
@@ -120,7 +120,7 @@
   }];
   [_container setDefinition:definition forService:@"example.injected_service"];
 
-  GCDIInjectedExampleService *service = [_container getService:@"example.injected_service"];
+  GCDIInjectedExampleService *service = _container[@"example.injected_service"];
   XCTAssertTrue([[service injectedService] exampleServiceInitialised]);
 }
 

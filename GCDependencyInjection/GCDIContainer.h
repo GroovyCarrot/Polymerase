@@ -32,4 +32,7 @@
 - (id)init;
 - (id)initWithParameterBag:(id <GCDIParameterBagProtocol>)parameterBag;
 - (NSArray *)getServiceIds;
+
+- (id)objectForKeyedSubscript:(NSString*)key;
+- (void)setObject:(id)service forKeyedSubscript:(NSString*)serviceId;
 @end

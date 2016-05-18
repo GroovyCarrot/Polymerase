@@ -242,4 +242,14 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   return _parameterBag;
 }
 
+- (id)objectForKeyedSubscript:(NSString*)key {
+  return [self getService:key];
+}
+
+#pragma mark Setters
+
+- (void)setObject:(id)service forKeyedSubscript:(NSString*)serviceId {
+  [self setService:serviceId instance:service];
+}
+
 @end

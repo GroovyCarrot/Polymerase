@@ -39,10 +39,11 @@
   GCDIExampleService *exampleService = [[GCDIExampleService alloc] initService];
 
   // Test setting example service set, and is converted to lowercase.
-  [_container setService:@"Example" instance:exampleService];
-  XCTAssertEqual([_container getService:@"example"], exampleService);
-  XCTAssertEqual([_container getService:@"Example"], exampleService);
-  XCTAssertEqual([_container getService:@"EXAMPLE"], exampleService);
+  // Use shorthand setter.
+  _container[@"Example"] = exampleService;
+  XCTAssertEqual(_container[@"example"], exampleService);
+  XCTAssertEqual(_container[@"Example"], exampleService);
+  XCTAssertEqual(_container[@"EXAMPLE"], exampleService);
   XCTAssertTrue([_container isServiceInitialised:@"example"]);
 
   @try {
@@ -71,7 +72,7 @@
 
 - (void)testGetSetHasAliasedServices {
   GCDIExampleService *exampleService = [[GCDIExampleService alloc] initService];
-  [_container setService:@"example" instance:exampleService];
+  _container[@"example"] = exampleService;
 
   XCTAssertFalse([_container hasAlias:@"example"]);
   XCTAssertFalse([_container hasAlias:@"example.object"]);
@@ -80,12 +81,12 @@
   // Test setting
   [_container setAlias:@"example_alias.object" to:[GCDIAlias aliasForId:@"example"]];
   XCTAssert([_container hasAlias:@"example_alias.object"]);
-  XCTAssertEqual([_container getService:@"example_alias.object"], exampleService);
+  XCTAssertEqual(_container[@"example_alias.object"], exampleService);
 
   // Test setting an alias via a string.
   [_container setAlias:@"example_alias.string" to:@"example"];
   XCTAssert([_container hasAlias:@"example_alias.string"]);
-  XCTAssertEqual([_container getService:@"example_alias.string"], exampleService);
+  XCTAssertEqual(_container[@"example_alias.string"], exampleService);
 }
 
 @end
