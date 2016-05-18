@@ -26,7 +26,7 @@
   id <GCDIAlternativeSuggesterProtocol> _alternativeSuggester;
 }
 
-@property(nonatomic, strong, readonly) id <GCDIParameterBagProtocol> parameterBag;
+@property(nonatomic, strong, readonly, getter=getParameterBag) id <GCDIParameterBagProtocol> parameterBag;
 @property(nonatomic, strong) id <GCDIAlternativeSuggesterProtocol> alternativeSuggester;
 
 - (id)init;

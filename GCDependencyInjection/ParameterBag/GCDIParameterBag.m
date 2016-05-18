@@ -79,7 +79,7 @@
                                                      inPossibleOptions:_parameters.allKeys];
 
     [NSException raise:GCDIParameterNotFoundException
-                format:@"Parameter \"%@\" not found. Did you mean one of the following? %@", name, alternatives];
+                format:@"Parameter \"%@\" not found. Did you mean one of the following? %@", name, [alternatives componentsJoinedByString:@", "]];
   }
 
   return _parameters[name];

@@ -29,8 +29,6 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   _services = @{}.mutableCopy;
   _loading = @{}.mutableCopy;
   _aliases = @{}.mutableCopy;
-  _alternativeSuggester = [[GCDIAlternativeSuggester alloc] init];
-  _parameterBag = [[GCDIParameterBag alloc] init];
 
   return self;
 }
@@ -93,11 +91,11 @@ NSString * const kGCDIServiceContainerId = @"service_container";
                       format:@"Service \"%@\" not found", serviceId];
         }
 
-        NSArray *alternatives = [_alternativeSuggester alternativesForItem:serviceId
-                                                         inPossibleOptions:[self getServiceIds]];
+        NSArray *alternatives = [self.alternativeSuggester alternativesForItem:serviceId
+                                                             inPossibleOptions:[self getServiceIds]];
 
         [NSException raise:GCDIServiceNotFoundException
-                    format:@"Service \"%@\" not found, did you mean any of the following? %@", serviceId, alternatives];
+                    format:@"Service \"%@\" not found, did you mean any of the following? %@", serviceId, [alternatives componentsJoinedByString:@", "]];
       }
 
       return nil;
@@ -170,15 +168,15 @@ NSString * const kGCDIServiceContainerId = @"service_container";
 # pragma mark - Parameter methods
 
 - (id)getParameter:(NSString*)name {
-  return [_parameterBag getParameter:name];
+  return [self.parameterBag getParameter:name];
 }
 
 - (BOOL)hasParameter:(NSString*)name {
-  return [_parameterBag hasParameter:name];
+  return [self.parameterBag hasParameter:name];
 }
 
 - (void)setParameter:(NSString*)name value:(id)value {
-  [_parameterBag setParameter:name value:value];
+  [self.parameterBag setParameter:name value:value];
 }
 
 # pragma mark - Alias methods
@@ -226,6 +224,22 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   }
 
   return _aliases[alias];
+}
+
+#pragma mark Getters
+
+- (GCDIAlternativeSuggester *)getAlternativeSuggester {
+  if (!_alternativeSuggester) {
+    _alternativeSuggester = [[GCDIAlternativeSuggester alloc] init];
+  }
+  return _alternativeSuggester;
+}
+
+- (GCDIParameterBag *)getParameterBag {
+  if (!_parameterBag) {
+    _parameterBag = [[GCDIParameterBag alloc] init];
+  }
+  return _parameterBag;
 }
 
 @end
