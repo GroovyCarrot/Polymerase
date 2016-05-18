@@ -454,8 +454,9 @@
 		F689F9701CAD5F8800F6C8ED /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = GCDI;
 				LastUpgradeCheck = 0730;
-				ORGANIZATIONNAME = "Jake Wise";
+				ORGANIZATIONNAME = "GroovyCarrot Ltd";
 				TargetAttributes = {
 					F689F9781CAD5F8800F6C8ED = {
 						CreatedOnToolsVersion = 7.3;
