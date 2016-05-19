@@ -16,10 +16,54 @@
 #import "GCDIMethodCall.h"
 #import "GCDIDefinitionContainer+Yaml.h"
 #import "GCDIAlias.h"
+#import "GCDINSStringReferenceConverter.h"
+#import <objc/runtime.h>
+
+static NSMutableDictionary *registeredStoryboardContainers;
+
+@interface NSIBUserDefinedRuntimeAttributesConnector : NSObject
+- (void)establishConnection;
+- (void)setValues:(id)arg1;
+- (id)values;
+@end
 
 @implementation GCDIDefinitionContainer {
  @protected
   NSMutableDictionary *_obsoleteDefinitions;
+}
+
++ (void)load {
+  // Setup runtime to allow injection into storyboards.
+  registeredStoryboardContainers = @{}.mutableCopy;
+
+  Class klass = objc_getClass("NSIBUserDefinedRuntimeAttributesConnector");
+  SEL sel = @selector(establishConnection);
+  Method method = class_getInstanceMethod(klass, sel);
+
+  void (*NSIBUserDefinedRuntimeAttributesConnector$establishConnection)(id, SEL) = (void (*)(id, SEL)) method_getImplementation(method);
+  IMP adjustedImp = imp_implementationWithBlock(^void (NSIBUserDefinedRuntimeAttributesConnector *_self) {
+    // Resolve values before allowing attributes connector to connect them to
+    // the object.
+    GCDINSStringReferenceConverter *referenceConverter = [[GCDINSStringReferenceConverter alloc] init];
+    id values = [referenceConverter resolveReferencesToServices:[_self values]];
+    [_self setValues:[GCDIDefinitionContainer exposeValuesToRegisteredStoryboardContainers:values]];
+    NSIBUserDefinedRuntimeAttributesConnector$establishConnection(_self, sel);
+  });
+
+  class_replaceMethod(klass, sel, adjustedImp, method_getTypeEncoding(method));
+}
+
++ (id)exposeValuesToRegisteredStoryboardContainers:(id)values {
+  // @todo support unescaping parameter placeholders with multiple containers.
+  // @todo support multiple containers in general without needing to use @? to
+  // prevent the first container throwing exceptions for services that do not
+  // exist within that container.
+  for (NSString *key in registeredStoryboardContainers) {
+    GCDIDefinitionContainer *container = registeredStoryboardContainers[key];
+    values = [container.parameterBag resolveParameterPlaceholders:values];
+    values = [container resolveServices:values];
+  }
+  return values;
 }
 
 # pragma mark - Service methods
@@ -29,6 +73,8 @@
   if (!self) {
     return nil;
   }
+
+  _identifier = [NSUUID UUID].UUIDString;
 
   _definitions = @{}.mutableCopy;
   _aliasDefinitions = @{}.mutableCopy;
@@ -363,6 +409,17 @@
   }
 
   return services.copy;
+}
+
+# pragma mark Storyboard injection
+
+- (void)setContainerInjectsIntoStoryboards:(BOOL)injects {
+  if (injects) {
+    registeredStoryboardContainers[_identifier] = self;
+  }
+  else {
+    [registeredStoryboardContainers removeObjectForKey:_identifier];
+  }
 }
 
 @end

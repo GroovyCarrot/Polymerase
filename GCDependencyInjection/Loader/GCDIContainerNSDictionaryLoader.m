@@ -13,7 +13,7 @@
 #import "GCDIAliasableContainerProtocol.h"
 #import "GCDIDefinition.h"
 #import "GCDIMethodCall.h"
-#import "GCDIReference.h"
+#import "GCDINSStringReferenceConverter.h"
 
 @implementation GCDIContainerNSDictionaryLoader {
   NSDictionary *_dictionary;
@@ -54,7 +54,7 @@
 
   NSDictionary *parameters = _dictionary[@"Parameters"];
   for (NSString *key in parameters.allKeys) {
-    [container setParameter:key value:[self resolveServices:parameters[key]]];
+    [container setParameter:key value:[self.referenceConverter resolveReferencesToServices:parameters[key]]];
   }
 }
 
@@ -106,7 +106,7 @@
   }
 
   if (definitionDictionary[@"Factory"]) {
-    [serviceDefinition setFactory:[self resolveServices:definitionDictionary[@"Factory"]]];
+    [serviceDefinition setFactory:[self.referenceConverter resolveReferencesToServices:definitionDictionary[@"Factory"]]];
   }
 
   if (definitionDictionary[@"Selector"]) {
@@ -118,11 +118,11 @@
   }
 
   if (definitionDictionary[@"Arguments"]) {
-    [serviceDefinition setArguments:[self resolveServices:definitionDictionary[@"Arguments"]]];
+    [serviceDefinition setArguments:[self.referenceConverter resolveReferencesToServices:definitionDictionary[@"Arguments"]]];
   }
 
   if (definitionDictionary[@"Setters"]) {
-    [serviceDefinition setSetters:[self resolveServices:definitionDictionary[@"Setters"]]];
+    [serviceDefinition setSetters:[self.referenceConverter resolveReferencesToServices:definitionDictionary[@"Setters"]]];
   }
 
   if (definitionDictionary[@"MethodCalls"]) {
@@ -133,7 +133,7 @@
       else if ([methodCall isKindOfClass:[NSDictionary class]]) {
         if (methodCall[@"Selector"] && methodCall[@"Arguments"]) {
           GCDIMethodCall *method = [GCDIMethodCall methodCallForSelector:NSSelectorFromString(methodCall[@"Selector"])
-                                                            andArguments:[self resolveServices:methodCall[@"Arguments"]]];
+                                                            andArguments:[self.referenceConverter resolveReferencesToServices:methodCall[@"Arguments"]]];
           [serviceDefinition addMethodCall:method];
         }
         else {
@@ -151,50 +151,11 @@
   [container setDefinition:serviceDefinition forService:serviceId];
 }
 
-- (id)resolveServices:(id)_services {
-  if ([_services isKindOfClass:[NSArray class]]) {
-    NSArray *services = _services;
-
-    NSMutableArray *resolvedServices = @[].mutableCopy;
-    for (id service in services) {
-      resolvedServices[resolvedServices.count] = [self resolveServices:service];
-    }
-    return resolvedServices.copy;
+- (GCDINSStringReferenceConverter *)getReferenceConverter {
+  if (!_referenceConverter) {
+    _referenceConverter = [[GCDINSStringReferenceConverter alloc] init];
   }
-  if ([_services isKindOfClass:[NSDictionary class]]) {
-    NSDictionary *services = _services;
-
-    NSMutableDictionary *resolvedServices = @{}.mutableCopy;
-    for (NSString *key in services.allKeys) {
-      resolvedServices[key] = [self resolveServices:services[key]];
-    }
-    return resolvedServices.copy;
-  }
-  else if ([_services isKindOfClass:[NSString class]] && [_services rangeOfString:@"@"].location == 0) {
-    NSString *service = _services;
-    GCDIInvalidBehaviourType invalidBehaviourType = NULL;
-
-    if ([service rangeOfString:@"@@"].location == 0) {
-      service = [service substringFromIndex:1];
-    }
-    else if ([service rangeOfString:@"@?"].location == 0) {
-      service = [service substringFromIndex:2];
-      invalidBehaviourType = kNilOnInvalidReference;
-    }
-    else {
-      service = [service substringFromIndex:1];
-      invalidBehaviourType = kExceptionOnInvalidReference;
-    }
-
-    if (invalidBehaviourType != NULL) {
-      return [GCDIReference referenceForServiceNamed:service
-                                invalidBehaviourType:invalidBehaviourType];
-    }
-
-    return service;
-  }
-
-  return _services;
+  return _referenceConverter;
 }
 
 @end

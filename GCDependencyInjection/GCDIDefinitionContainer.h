@@ -17,6 +17,7 @@
   NSMutableDictionary *_definitions;
   NSMutableDictionary *_aliasDefinitions;
 }
-
+@property (nonatomic, copy) NSString *identifier;
 - (void)registerService:(NSString *)serviceId forClass:(Class)klass andSelector:(SEL)pSelector;
+- (void)setContainerInjectsIntoStoryboards:(BOOL)injects;
 @end
