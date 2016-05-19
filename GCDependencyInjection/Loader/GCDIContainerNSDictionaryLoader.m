@@ -110,7 +110,7 @@
   }
 
   if (definitionDictionary[@"Selector"]) {
-    [serviceDefinition setSelector:NSSelectorFromString(definitionDictionary[@"Selector"])];
+    [serviceDefinition setSelector:definitionDictionary[@"Selector"]];
   }
   else if(definitionDictionary[@"Factory"]) {
     [NSException raise:NSParseErrorException

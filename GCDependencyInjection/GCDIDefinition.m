@@ -38,7 +38,7 @@
 
 + (GCDIDefinition *)definitionForClass:(Class)klass {
   return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
-                                      withSelector:@selector(init)
+                                      withSelector:@"init"
                                       andArguments:@[]];
 }
 
@@ -50,35 +50,35 @@
 
 + (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector {
   return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
-                                      withSelector:pSelector
+                                      withSelector:NSStringFromSelector(pSelector)
                                       andArguments:@[]];
 }
 
 + (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
   return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
-                                      withSelector:pSelector
+                                      withSelector:NSStringFromSelector(pSelector)
                                       andArguments:arguments];
 }
 
 + (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector {
   return [[GCDIDefinition alloc] initForClassNamed:klass
-                                      withSelector:pSelector
+                                      withSelector:NSStringFromSelector(pSelector)
                                       andArguments:@[]];
 }
 
 + (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
   return [[GCDIDefinition alloc] initForClassNamed:klass
-                                      withSelector:pSelector
+                                      withSelector:NSStringFromSelector(pSelector)
                                       andArguments:arguments];
 }
 
-- (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
+- (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(NSString *)pSelector andArguments:(NSArray *)arguments {
   if (![self init]) {
     return nil;
   }
 
   _klass = klass.copy;
-  _pSelector = pSelector;
+  _pSelector = pSelector.copy;
   _arguments = arguments.mutableCopy;
 
   return self;

@@ -173,7 +173,7 @@ static NSMutableDictionary *registeredStoryboardContainers;
     }
 
     invocation = [self buildInvocationForClass:klass
-                                  withSelector:definition.pSelector ?: @selector(init)
+                                  withSelector:definition.pSelector ?: @"init"
                                   andArguments:definition.arguments];
 
     service = [klass alloc];
@@ -188,7 +188,7 @@ static NSMutableDictionary *registeredStoryboardContainers;
                                                      andArguments:methodCall.arguments];
     if (!invocation) {
       [NSException raise:NSInvalidArgumentException
-                  format:@"Could not invoke method call \"%@\" on service \"%@\"", NSStringFromSelector(methodCall.pSelector), serviceId];
+                  format:@"Could not invoke method call \"%@\" on service \"%@\"", methodCall.pSelector, serviceId];
     }
 
     [setupInvocation invokeWithTarget:service];
@@ -197,7 +197,7 @@ static NSMutableDictionary *registeredStoryboardContainers;
   // Configure properties on the service using setters and values.
   for (NSString *setter in definition.setters.allKeys) {
     invocation = [self buildInvocationForClass:[service class]
-                                  withSelector:NSSelectorFromString(setter)
+                                  withSelector:setter
                                   andArguments:@[definition.setters[setter]]];
     if (!invocation) {
       [NSException raise:NSInvalidArgumentException
@@ -229,19 +229,24 @@ static NSMutableDictionary *registeredStoryboardContainers;
   return service;
 }
 
-- (NSInvocation *)buildInvocationForClass:(Class)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
-  NSMethodSignature *methodSignature = [klass instanceMethodSignatureForSelector:pSelector];
+- (NSInvocation *)buildInvocationForClass:(Class)klass withSelector:(NSString *)pSelector andArguments:(NSArray *)arguments {
+  // Resolve selector name, if necessary.
+  pSelector = [self.parameterBag resolveParameterPlaceholders:pSelector];
+  pSelector = [self.parameterBag escapeParameterPlaceholders:pSelector];
+  SEL sel = NSSelectorFromString(pSelector);
+
+  NSMethodSignature *methodSignature = [klass instanceMethodSignatureForSelector:sel];
   if (!methodSignature) {
     return nil;
   }
 
   if (arguments.count != methodSignature.numberOfArguments - 2) {
     [NSException raise:NSInvalidArgumentException
-                format:@"Invalid amount of arguments (%d/%d) provided for method signature for selector \"%@\"", arguments.count, methodSignature.numberOfArguments - 2, NSStringFromSelector(pSelector)];
+                format:@"Invalid amount of arguments (%d/%d) provided for method signature for selector \"%@\"", arguments.count, methodSignature.numberOfArguments - 2, pSelector];
   }
 
   NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-  [invocation setSelector:pSelector];
+  [invocation setSelector:sel];
   [self addArguments:arguments toInvocation:invocation];
   return invocation;
 }
@@ -323,10 +328,10 @@ static NSMutableDictionary *registeredStoryboardContainers;
   return _definitions.copy;
 }
 
-- (void)setDefinition:(GCDIDefinition *)definition forService:(NSString *)serviceId {
-  if (![definition isKindOfClass:[GCDIDefinition class]]) {
+- (void)setDefinition:(id)definition forService:(NSString *)serviceId {
+  if (![definition isKindOfClass:objc_getClass("NSBlock")] && ![definition isKindOfClass:[GCDIDefinition class]]) {
     [NSException raise:NSInvalidArgumentException
-                format:@"Definition must be an instance of GCDIDefinition."];
+                format:@"Definition object must be an instance of GCDIDefinition, or block of signature GCDIDefinitionBlock."];
   }
 
   serviceId = [serviceId lowercaseString];
@@ -339,6 +344,13 @@ static NSMutableDictionary *registeredStoryboardContainers;
   if (!_definitions[serviceId]) {
     [NSException raise:GCDIServiceNotFoundException
                 format:@"Service \"%@\" not found", serviceId];
+  }
+  else if ([_definitions[serviceId] isKindOfClass:objc_getClass("NSBlock")]) {
+    // Support Obj-C blocks that build definitions JIT.
+    GCDIDefinitionBlock setupDefinition = _definitions[serviceId];
+    GCDIDefinition *definition = [[GCDIDefinition alloc] init];
+    setupDefinition(definition);
+    return definition;
   }
 
   return _definitions[serviceId];

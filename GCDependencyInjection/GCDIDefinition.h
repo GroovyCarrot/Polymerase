@@ -16,7 +16,7 @@
 
 @property (nonatomic, copy) NSString *klass;
 @property (nonatomic, strong) id factory;
-@property (nonatomic, getter=getSelector, setter=setSelector:) SEL pSelector;
+@property (nonatomic, copy, getter=getSelector, setter=setSelector:) NSString *pSelector;
 @property (nonatomic, copy) NSString *pathToLibrary;
 
 @property (nonatomic, copy) NSMutableArray *arguments;
@@ -25,7 +25,7 @@
 @property (nonatomic, copy) NSMutableDictionary *tags;
 
 @property (nonatomic, strong) id configurator;
-@property (nonatomic) SEL configuratorSelector;
+@property (nonatomic, copy) NSString *configuratorSelector;
 
 @property (nonatomic, getter=isShared) BOOL shared;
 @property (nonatomic, getter=isPublic) BOOL isPublic;
@@ -42,7 +42,7 @@
 + (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector;
 + (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments;
 
-- (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments;
+- (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(NSString *)pSelector andArguments:(NSArray *)arguments;
 
 - (void)setArguments:(NSArray *)arguments;
 - (void)setSetters:(NSDictionary *)setters;
@@ -65,3 +65,5 @@
 // @todo autowiring?
 
 @end
+
+typedef void (^GCDIDefinitionBlock)(GCDIDefinition *);
