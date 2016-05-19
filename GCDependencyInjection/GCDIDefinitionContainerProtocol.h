@@ -13,7 +13,7 @@
 @class GCDIDefinition;
 
 @protocol GCDIDefinitionContainerProtocol <GCDIContainerProtocol>
-- (void)setDefinition:(id)definition forService:(NSString *)serviceId;
+- (void)setService:(NSString *)serviceId definition:(id)definition;
 - (void)addDefinitions:(NSDictionary *)definitions;
 - (void)setDefinitions:(NSDictionary *)definitions;
 - (NSDictionary *)getDefinitions;

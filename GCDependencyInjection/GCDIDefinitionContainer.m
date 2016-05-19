@@ -306,16 +306,17 @@ static NSMutableDictionary *registeredStoryboardContainers;
 }
 
 - (void)registerService:(NSString *)serviceId forClass:(Class)klass andSelector:(SEL)pSelector {
-  [self setDefinition:[GCDIDefinition definitionForClass:klass
-                                            withSelector:pSelector]
-           forService:serviceId];
+  [self setService:serviceId definition:^(GCDIDefinition *definition) {
+    [definition setClass:klass];
+    [definition setSEL:pSelector];
+  }];
 }
 
 # pragma mark - Definition methods
 
 - (void)addDefinitions:(NSDictionary *)definitions {
   for (NSString *serviceId in definitions) {
-    [self setDefinition:definitions[serviceId] forService:serviceId];
+    [self setService:serviceId definition:definitions[serviceId]];
   }
 }
 
@@ -328,7 +329,8 @@ static NSMutableDictionary *registeredStoryboardContainers;
   return _definitions.copy;
 }
 
-- (void)setDefinition:(id)definition forService:(NSString *)serviceId {
+- (void)setService:(NSString *)serviceId definition:(id)definition {
+  // @todo retire ability to pass in pre-configured definition object.
   if (![definition isKindOfClass:objc_getClass("NSBlock")] && ![definition isKindOfClass:[GCDIDefinition class]]) {
     [NSException raise:NSInvalidArgumentException
                 format:@"Definition object must be an instance of GCDIDefinition, or block of signature GCDIDefinitionBlock."];
@@ -414,7 +416,9 @@ static NSMutableDictionary *registeredStoryboardContainers;
 
   id tag;
   for (NSString *id in _definitions.allKeys) {
-    GCDIDefinition *definition = _definitions[id];
+    // @todo improve efficiency of tag searching, this operation becomes more
+    // expensive without storing all definitions all of the time.
+    GCDIDefinition *definition = [self getDefinitionForService:id];
     if ((tag = [definition getTag:name])) {
       services[id] = tag;
     }

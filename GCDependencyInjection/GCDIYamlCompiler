@@ -33,7 +33,7 @@ class ContainerYamlCompiler
 
     if instruction['Services'].is_a?(Hash)
       var = 'serviceDefinition'
-      implementation.push('GCDIDefinition *' + var + ';')
+      implementation.push('GCDIDefinitionBlock ' + var + ';')
 
       instruction['Services'].each do |service, definition|
         if definition.is_a?(String)
@@ -41,9 +41,8 @@ class ContainerYamlCompiler
             implementation.push('[self setAlias:@"' + service + '" to:@"' + definition[1, definition.length - 1] + '"];')
           end
         else
-          implementation.push(var + ' = [[GCDIDefinition alloc] init];')
           implementation.push(*@definitionParser.parseServiceDefinition(var, definition, @serviceResolver))
-          implementation.push('[self setDefinition:' + var + ' forService:@"' + service + '"];')
+          implementation.push('[self setService:@"' + service + '" definition:' + var + '];')
         end
       end
     end
@@ -85,41 +84,45 @@ class ContainerDefinitionParser
   def parseServiceDefinition(variable, definition, serviceResolver)
     lines = []
 
+    lines.push(variable + ' = ^(GCDIDefinition *def) {')
+
     if definition['Class']
-      lines.push('[' + variable + ' setKlass:@"' + definition['Class'] + '"];')
+      lines.push('[def setKlass:@"' + definition['Class'] + '"];')
     end
 
     if definition['Factory']
-      lines.push('[' + variable + ' setFactory:' + serviceResolver.resolveServices(definition['Factory']) + '];')
+      lines.push('[def setFactory:' + serviceResolver.resolveServices(definition['Factory']) + '];')
     end
 
     if definition['Selector']
-      lines.push('[' + variable + ' setSelector:@"' + definition['Selector'] + '"];')
+      lines.push('[def setSelector:@"' + definition['Selector'] + '"];')
     elsif definition['Factory']
       raise 'A selector must be specified when using a factory service.'
     end
 
     if definition['Arguments']
-      lines.push('[' + variable + ' setArguments:' + serviceResolver.resolveServices(definition['Arguments']) + '];')
+      lines.push('[def setArguments:' + serviceResolver.resolveServices(definition['Arguments']) + '];')
     end
 
     if definition['Setters']
-      lines.push('[' + variable + ' setSetters:' + serviceResolver.resolveServices(definition['Setters']) + '];')
+      lines.push('[def setSetters:' + serviceResolver.resolveServices(definition['Setters']) + '];')
     end
 
     if definition['MethodCalls']
       definition['MethodCalls'].each do |methodCall|
         if methodCall.is_a?(Hash)
-          lines.push('[' + variable + ' addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall['Selector'] + ') andArguments:' + serviceResolver.resolveServices(methodCall['Arguments']) + ']];')
+          lines.push('[def addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall['Selector'] + ') andArguments:' + serviceResolver.resolveServices(methodCall['Arguments']) + ']];')
         else
-          lines.push('[' + variable + ' addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall[0] + ') andArguments:' + serviceResolver.resolveServices(methodCall[1]) + ']];')
+          lines.push('[def addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall[0] + ') andArguments:' + serviceResolver.resolveServices(methodCall[1]) + ']];')
         end
       end
     end
 
     if definition['Tags']
-      lines.push('[' + variable + ' setTags:' + serviceResolver.resolveServices(definition['Tags']) + '];')
+      lines.push('[def setTags:' + serviceResolver.resolveServices(definition['Tags']) + '];')
     end
+
+    lines.push('};')
 
     return lines
   end

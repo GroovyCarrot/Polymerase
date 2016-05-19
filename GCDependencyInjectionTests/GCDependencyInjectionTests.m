@@ -37,18 +37,16 @@
 }
 
 - (void)testExampleService {
-  GCDIDefinition *definition = [GCDIDefinition definitionForClass:[GCDIExampleService class]
-                                                     withSelector:@selector(initService)];
-
-  [_container setDefinition:definition forService:@"example.service"];
+  [_container setService:@"example.service" definition:^(GCDIDefinition *definition) {
+    [definition setClass:[GCDIExampleService class]];
+    [definition setSEL:@selector(initService)];
+  }];
 
   GCDIExampleService *exampleService = _container[@"example.service"];
   XCTAssertTrue([exampleService exampleServiceInitialised]);
 }
 
 - (void)testDependentExampleService {
-  GCDIDefinition *definition;
-
   [_container registerService:@"example.service"
                      forClass:[GCDIExampleService class]
                   andSelector:@selector(initService)];
@@ -56,12 +54,13 @@
   GCDIExampleService *exampleService = _container[@"example.service"];
   XCTAssertTrue([exampleService exampleServiceInitialised]);
 
-  definition = [GCDIDefinition definitionForClass:[GCDIDependentExampleService class]
-                                     withSelector:@selector(initWithDependentService:)
-                                     andArguments:@[
-                                       [GCDIReference referenceForServiceNamed:@"example.service"]
-                                     ]];
-  [_container setDefinition:definition forService:@"example.dependent_service"];
+  [_container setService:@"example.dependent_service" definition:^(GCDIDefinition *definition) {
+    [definition setClass:[GCDIDependentExampleService class]];
+    [definition setSEL:@selector(initWithDependentService:)];
+    [definition setArguments:@[
+      [GCDIReference referenceForServiceNamed:@"example.service"]
+    ]];
+  }];
 
   NSArray *expectedServices = @[@"example.service", @"service_container", @"example.dependent_service"];
   XCTAssertEqualObjects(expectedServices, [_container getServiceIds]);
@@ -71,37 +70,31 @@
 }
 
 - (void)testContainerParameters {
-  GCDIDefinition *definition;
-
   [_container registerService:@"example.service"
                      forClass:[GCDIExampleService class]
                   andSelector:@selector(initService)];
 
-  definition = [GCDIDefinition definitionForClass:[GCDIDependentExampleService class]
-                                     withSelector:@selector(initWithDependentService:)
-                                     andArguments:@[@"%example.parameter%"]];
-  [_container setDefinition:definition forService:@"example.dependent_service"];
+  [_container setService:@"example.dependent_service" definition:^(GCDIDefinition *definition) {
+    [definition setClass:[GCDIDependentExampleService class]];
+    [definition setSEL:@selector(initWithDependentService:)];
+    [definition setArguments:@[@"%example.parameter%"]];
+  }];
 
   GCDIDependentExampleService *dependentExampleService = _container[@"example.dependent_service"];
   XCTAssertTrue([dependentExampleService isDependentServiceInitialised]);
 }
 
 - (void)testDefinitionMethodCalls {
-  GCDIDefinition *definition;
-
   [_container registerService:@"example.service"
                      forClass:[GCDIExampleService class]
                   andSelector:@selector(initService)];
 
-  definition = [GCDIDefinition definitionForClass:[GCDIInjectedExampleService class]];
-
-  GCDIMethodCall *injector = [GCDIMethodCall methodCallForSelector:@selector(setInjectedService:)
-                                                      andArguments:@[
-                                                        [GCDIReference referenceForServiceNamed:@"example.service"]
-                                                      ]];
-  [definition addMethodCall:injector];
-
-  [_container setDefinition:definition forService:@"example.injected_service"];
+  [_container setService:@"example.injected_service" definition:^(GCDIDefinition *definition) {
+    [definition setClass:[GCDIInjectedExampleService class]];
+    [definition addMethodCall:
+      [GCDIMethodCall methodCallForSelector:@selector(setInjectedService:)
+                               andArguments:@[[GCDIReference referenceForServiceNamed:@"example.service"]]]];
+  }];
 
   GCDIInjectedExampleService *service = _container[@"example.injected_service"];
   XCTAssertTrue([[service injectedService] exampleServiceInitialised]);
@@ -112,13 +105,12 @@
                      forClass:[GCDIExampleService class]
                   andSelector:@selector(initService)];
 
-  GCDIDefinitionBlock definitionBlock = ^(GCDIDefinition *definition) {
-    [definition setKlass: NSStringFromClass([GCDIInjectedExampleService class])];
+  [_container setService:@"example.injected_service" definition:^(GCDIDefinition *definition) {
+    [definition setClass:[GCDIInjectedExampleService class]];
     [definition setSetters:@{
       @"setInjectedService:" : [GCDIReference referenceForServiceNamed:@"example.service"],
     }];
-  };
-  [_container setDefinition:definitionBlock forService:@"example.injected_service"];
+  }];
 
   GCDIInjectedExampleService *service = _container[@"example.injected_service"];
   XCTAssertTrue([[service injectedService] exampleServiceInitialised]);

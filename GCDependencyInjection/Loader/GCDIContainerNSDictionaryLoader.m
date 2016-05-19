@@ -148,7 +148,7 @@
     [serviceDefinition setTags:definitionDictionary[@"Tags"]];
   }
 
-  [container setDefinition:serviceDefinition forService:serviceId];
+  [container setService:serviceId definition:serviceDefinition];
 }
 
 - (GCDINSStringReferenceConverter *)getReferenceConverter {

@@ -36,42 +36,6 @@
   return self;
 }
 
-+ (GCDIDefinition *)definitionForClass:(Class)klass {
-  return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
-                                      withSelector:@"init"
-                                      andArguments:@[]];
-}
-
-+ (GCDIDefinition *)definitionForClass:(Class)klass withMethodCall:(GCDIMethodCall *)methodCall {
-  return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
-                                      withSelector:methodCall.pSelector
-                                      andArguments:methodCall.arguments];
-}
-
-+ (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector {
-  return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
-                                      withSelector:NSStringFromSelector(pSelector)
-                                      andArguments:@[]];
-}
-
-+ (GCDIDefinition *)definitionForClass:(Class)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
-  return [[GCDIDefinition alloc] initForClassNamed:NSStringFromClass(klass)
-                                      withSelector:NSStringFromSelector(pSelector)
-                                      andArguments:arguments];
-}
-
-+ (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector {
-  return [[GCDIDefinition alloc] initForClassNamed:klass
-                                      withSelector:NSStringFromSelector(pSelector)
-                                      andArguments:@[]];
-}
-
-+ (GCDIDefinition *)definitionForClassNamed:(NSString *)klass withSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
-  return [[GCDIDefinition alloc] initForClassNamed:klass
-                                      withSelector:NSStringFromSelector(pSelector)
-                                      andArguments:arguments];
-}
-
 - (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(NSString *)pSelector andArguments:(NSArray *)arguments {
   if (![self init]) {
     return nil;
@@ -85,6 +49,14 @@
 }
 
 # pragma mark - Setters
+
+- (void)setClass:(Class)klass {
+  _klass = NSStringFromClass(klass).copy;
+}
+
+- (void)setSEL:(SEL)pSelector {
+  _pSelector = NSStringFromSelector(pSelector).copy;
+}
 
 - (void)setArguments:(NSArray *)arguments {
   _arguments = arguments.mutableCopy;
