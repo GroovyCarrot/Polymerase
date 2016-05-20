@@ -27,6 +27,15 @@ static NSMutableDictionary *registeredStoryboardContainers;
 - (id)values;
 @end
 
+@interface UINibKeyValuePair : NSObject {
+  id value;
+}
+@property (nonatomic, readonly, copy, getter=keyPath) NSString *keyPath;
+@property (nonatomic, readonly, getter=object) id object;
+@property (nonatomic, readonly, getter=value) id value;
+- (id)initWithCoder:(id)arg1;
+@end
+
 @implementation GCDIDefinitionContainer {
  @protected
   NSMutableDictionary *_obsoleteDefinitions;
@@ -36,6 +45,15 @@ static NSMutableDictionary *registeredStoryboardContainers;
   // Setup runtime to allow injection into storyboards.
   registeredStoryboardContainers = @{}.mutableCopy;
 
+  if (objc_getClass("NSIBUserDefinedRuntimeAttributesConnector")) {
+    [self injectIntoOSXStoryboardAttributesConnector];
+  }
+  if (objc_getClass("UINibKeyValuePair")) {
+    [self injectIntoiOSStoryboardKeyValuePairObjects];
+  }
+}
+
++ (void)injectIntoOSXStoryboardAttributesConnector {
   Class klass = objc_getClass("NSIBUserDefinedRuntimeAttributesConnector");
   SEL sel = @selector(establishConnection);
   Method method = class_getInstanceMethod(klass, sel);
@@ -44,16 +62,39 @@ static NSMutableDictionary *registeredStoryboardContainers;
   IMP adjustedImp = imp_implementationWithBlock(^void (NSIBUserDefinedRuntimeAttributesConnector *_self) {
     // Resolve values before allowing attributes connector to connect them to
     // the object.
-    GCDINSStringReferenceConverter *referenceConverter = [[GCDINSStringReferenceConverter alloc] init];
-    id values = [referenceConverter resolveReferencesToServices:[_self values]];
-    [_self setValues:[GCDIDefinitionContainer exposeValuesToRegisteredStoryboardContainers:values]];
+    [_self setValues:[GCDIDefinitionContainer exposeValuesToRegisteredStoryboardContainers:[_self values]]];
     NSIBUserDefinedRuntimeAttributesConnector$establishConnection(_self, sel);
   });
 
   class_replaceMethod(klass, sel, adjustedImp, method_getTypeEncoding(method));
 }
 
++ (void)injectIntoiOSStoryboardKeyValuePairObjects {
+  Class klass = objc_getClass("UINibKeyValuePair");
+  SEL sel = @selector(initWithCoder:);
+  Method method = class_getInstanceMethod(klass, sel);
+
+  id (*UINibKeyValuePair_initWithCoder$)(id, SEL, id) = (id (*)(id, SEL, id)) method_getImplementation(method);
+  IMP adjustedImp = imp_implementationWithBlock(^id (UINibKeyValuePair *_self, id coder) {
+    UINibKeyValuePair *obj = UINibKeyValuePair_initWithCoder$(_self, sel, coder);
+
+    // Class has been designed with no setters, and hooking getter does not
+    // appear to work - need to utilise runtime to manipulate the value.
+
+    Ivar iValues = class_getInstanceVariable(klass, "value");
+    id value = object_getIvar(obj, iValues);
+    object_setIvar(obj, iValues, [GCDIDefinitionContainer exposeValuesToRegisteredStoryboardContainers:value]);
+
+    return obj;
+  });
+
+  class_replaceMethod(klass, sel, adjustedImp, method_getTypeEncoding(method));
+}
+
 + (id)exposeValuesToRegisteredStoryboardContainers:(id)values {
+  GCDINSStringReferenceConverter *referenceConverter = [[GCDINSStringReferenceConverter alloc] init];
+  values = [referenceConverter resolveReferencesToServices:values];
+
   // @todo support unescaping parameter placeholders with multiple containers.
   // @todo support multiple containers in general without needing to use @? to
   // prevent the first container throwing exceptions for services that do not
