@@ -66,8 +66,6 @@ static NSMutableDictionary *registeredStoryboardContainers;
   return values;
 }
 
-# pragma mark - Service methods
-
 - (id)init {
   self = [super init];
   if (!self) {
@@ -85,6 +83,8 @@ static NSMutableDictionary *registeredStoryboardContainers;
 
   return self;
 }
+
+# pragma mark - Service methods
 
 - (id)getServiceNamed:(NSString *)serviceId withInvalidBehaviour:(GCDIInvalidBehaviourType)invalidBehaviourType {
   serviceId = [serviceId lowercaseString];
