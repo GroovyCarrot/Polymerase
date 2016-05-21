@@ -156,7 +156,7 @@ class ServiceResolver
         invalidBehaviour = 'kExceptionOnInvalidReference'
       end
 
-      return '[GCDIReference referenceForServiceNamed:@"' + service + '" invalidBehaviourType:' + invalidBehaviour + ']'
+      return '[GCDIReference referenceForServiceId:@"' + service + '" invalidBehaviourType:' + invalidBehaviour + ']'
     end
     return '@"' + value + '"'
   end

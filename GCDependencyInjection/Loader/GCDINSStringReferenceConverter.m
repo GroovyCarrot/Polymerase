@@ -49,8 +49,8 @@
     }
 
     if (invalidBehaviourType != NULL) {
-      return [GCDIReference referenceForServiceNamed:service
-                                invalidBehaviourType:invalidBehaviourType];
+      return [GCDIReference referenceForServiceId:service
+                             invalidBehaviourType:invalidBehaviourType];
     }
 
     return service;

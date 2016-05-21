@@ -26,7 +26,7 @@
   [super setUp];
 
   GCDIParameterBag *parameterBag = [[GCDIParameterBag alloc] initWithParameters:@{
-    @"example.parameter": [GCDIReference referenceForServiceNamed:@"example.service"]
+    @"example.parameter": [GCDIReference referenceForServiceId:@"example.service"]
   }];
 
   _container = [[GCDIDefinitionContainer alloc] initWithParameterBag:parameterBag];
@@ -58,7 +58,7 @@
     [definition setClass:[GCDIDependentExampleService class]];
     [definition setInitializerSelector:@selector(initWithDependentService:)];
     [definition setArguments:@[
-      [GCDIReference referenceForServiceNamed:@"example.service"]
+      [GCDIReference referenceForServiceId:@"example.service"]
     ]];
   }];
 
@@ -93,7 +93,7 @@
     [definition setClass:[GCDIInjectedExampleService class]];
     [definition addMethodCall:
       [GCDIMethodCall methodCallForSelector:@selector(setInjectedService:)
-                               andArguments:@[[GCDIReference referenceForServiceNamed:@"example.service"]]]];
+                               andArguments:@[[GCDIReference referenceForServiceId:@"example.service"]]]];
   }];
 
   GCDIInjectedExampleService *service = _container[@"example.injected_service"];
@@ -108,7 +108,7 @@
   [_container setService:@"example.injected_service" definition:^(GCDIDefinition *definition) {
     [definition setClass:[GCDIInjectedExampleService class]];
     [definition setSetters:@{
-      @"setInjectedService:" : [GCDIReference referenceForServiceNamed:@"example.service"],
+      @"setInjectedService:" : [GCDIReference referenceForServiceId:@"example.service"],
     }];
   }];
 

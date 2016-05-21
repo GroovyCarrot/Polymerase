@@ -15,19 +15,19 @@
 @synthesize serviceId = _serviceId,
             invalidBehaviourType = _invalidBehaviourType;
 
-+ (GCDIReference *)referenceForServiceNamed:(NSString *)serviceId {
-  return [[GCDIReference alloc] initForServiceNamed:serviceId
-                               invalidBehaviourType:kExceptionOnInvalidReference];
++ (GCDIReference *)referenceForServiceId:(NSString *)serviceId {
+  return [[GCDIReference alloc] initForServiceId:serviceId
+                            invalidBehaviourType:kExceptionOnInvalidReference];
 }
 
-+ (GCDIReference *)referenceForServiceNamed:(NSString *)serviceId
-                       invalidBehaviourType:(GCDIInvalidBehaviourType)invalidBehaviourType {
-  return [[GCDIReference alloc] initForServiceNamed:serviceId
-                               invalidBehaviourType:invalidBehaviourType];
++ (GCDIReference *)referenceForServiceId:(NSString *)serviceId
+                    invalidBehaviourType:(GCDIInvalidBehaviourType)invalidBehaviourType {
+  return [[GCDIReference alloc] initForServiceId:serviceId
+                            invalidBehaviourType:invalidBehaviourType];
 }
 
-- (GCDIReference *)initForServiceNamed:(NSString *)serviceId
-                       invalidBehaviourType:(GCDIInvalidBehaviourType)invalidBehaviourType {
+- (GCDIReference *)initForServiceId:(NSString *)serviceId
+               invalidBehaviourType:(GCDIInvalidBehaviourType)invalidBehaviourType {
   self = [super init];
   if (!self) {
     return nil;
