@@ -9,7 +9,7 @@ Services:
 
   example.service:
     Factory: '@example.service.factory'
-    Selector: newExampleService
+    Initializer: newExampleService
     Tags:
       type: controller
 
@@ -17,7 +17,7 @@ Services:
 
   example.dependent_service:
     Class: GCDIDependentExampleService
-    Selector: 'initWithDependentService:'
+    Initializer: 'initWithDependentService:'
     Arguments:
       - '%example.parameter%'
 

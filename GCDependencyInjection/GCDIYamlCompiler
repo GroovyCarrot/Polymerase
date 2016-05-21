@@ -94,8 +94,8 @@ class ContainerDefinitionParser
       lines.push('[def setFactory:' + serviceResolver.resolveServices(definition['Factory']) + '];')
     end
 
-    if definition['Selector']
-      lines.push('[def setInitializer:@"' + definition['Selector'] + '"];')
+    if definition['Initializer']
+      lines.push('[def setInitializer:@"' + definition['Initializer'] + '"];')
     elsif definition['Factory']
       raise 'A selector must be specified when using a factory service.'
     end
