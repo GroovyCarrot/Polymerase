@@ -7,17 +7,15 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		F6329B5E1CF03CBD00D6CFA3 /* GCDependencyInjection */ = {
+		F6329B5E1CF03CBD00D6CFA3 /* GCDependencyInjectioniOS+Simulator */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = F6329B5F1CF03CBD00D6CFA3 /* Build configuration list for PBXAggregateTarget "GCDependencyInjection" */;
+			buildConfigurationList = F6329B5F1CF03CBD00D6CFA3 /* Build configuration list for PBXAggregateTarget "GCDependencyInjectioniOS+Simulator" */;
 			buildPhases = (
 				F6329B621CF03D0200D6CFA3 /* Merge framework binaries */,
 			);
 			dependencies = (
-				F6329B641CF03F0B00D6CFA3 /* PBXTargetDependency */,
-				F6329B661CF03F0D00D6CFA3 /* PBXTargetDependency */,
 			);
-			name = GCDependencyInjection;
+			name = "GCDependencyInjectioniOS+Simulator";
 			productName = GCDependencyInjection;
 		};
 /* End PBXAggregateTarget section */
@@ -51,9 +49,10 @@
 		CAD68DAC5CF31263AE4C86C2 /* GCDIReference.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6896C6E58D699026EB77A /* GCDIReference.m */; };
 		CAD68DD20377DCCA81DA4747 /* GCDIExceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68B2F5949349CEEE90604 /* GCDIExceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD68DEB816972317332E25A /* GCDIResettableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CAD68EE07BF1F1C60826BD82 /* GCDIYamlCompiler in Resources */ = {isa = PBXBuildFile; fileRef = CAD68108AC8889F396575881 /* GCDIYamlCompiler */; };
 		CAD68FA291647177C6DA7F5F /* GCDINSStringReferenceConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD6835B904778B3F9C268EC /* GCDINSStringReferenceConverter.m */; };
 		CAD68FCCB56B61518C708CD5 /* GCDIContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68163C9FB4CE2EC36D144 /* GCDIContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6329B701CF09A3C00D6CFA3 /* GCDIYamlCompiler in Resources */ = {isa = PBXBuildFile; fileRef = CAD68108AC8889F396575881 /* GCDIYamlCompiler */; };
+		F6329B711CF09A6800D6CFA3 /* GCDIYamlCompiler in Resources */ = {isa = PBXBuildFile; fileRef = CAD68108AC8889F396575881 /* GCDIYamlCompiler */; };
 		F66978AB1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD687DAD9A648042C977B74 /* GCDIContainerNSDictionaryLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F66978AC1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD684367E8FFCBD523D49B8 /* GCDIContainerNSDictionaryLoader.m */; };
 		F689F97D1CAD5F8800F6C8ED /* GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -108,11 +107,8 @@
 		F6CA906B1CECB73D00924094 /* GCDIInjectedExampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68E32F5E5A6CCD0C00409 /* GCDIInjectedExampleService.m */; };
 		F6CA906C1CECB73D00924094 /* GCDIYamlExampleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD688F16213AD0673E1F584 /* GCDIYamlExampleContainer.m */; };
 		F6CA906D1CECB73D00924094 /* GCDIExampleFactoryService.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD68CEAC61DA290574B47F1 /* GCDIExampleFactoryService.m */; };
-		F6CA90701CECB8D200924094 /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */; };
-		F6CA90711CECB8D900924094 /* GCDependencyInjection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */; };
 		F6CA90721CECC26800924094 /* GCDIYamlExampleContainer.yml in Sources */ = {isa = PBXBuildFile; fileRef = CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */; };
 		F6DF95AE1CE5ED030008FA16 /* GCDIYamlExampleContainer.yml in Sources */ = {isa = PBXBuildFile; fileRef = CAD6810FB605EA6EBA288F24 /* GCDIYamlExampleContainer.yml */; };
-		F6E3B4F61CE604DF000DCC05 /* GCDIYamlCompiler in Resources */ = {isa = PBXBuildFile; fileRef = CAD68108AC8889F396575881 /* GCDIYamlCompiler */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -141,20 +137,6 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
-		F6329B631CF03F0B00D6CFA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F689F9701CAD5F8800F6C8ED /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F689F9781CAD5F8800F6C8ED;
-			remoteInfo = GCDependencyInjectioniOS;
-		};
-		F6329B651CF03F0D00D6CFA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F689F9701CAD5F8800F6C8ED /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F6CA900D1CEBA18700924094;
-			remoteInfo = GCDependencyInjectionOSX;
-		};
 		F689F9851CAD5F8900F6C8ED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F689F9701CAD5F8800F6C8ED /* Project object */;
@@ -197,6 +179,7 @@
 		CAD686B2A5B448069D6A5437 /* GCDIAlternativeSuggesterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIAlternativeSuggesterProtocol.h; sourceTree = "<group>"; };
 		CAD687B14EB0738306C9B61D /* GCDIDefinitionContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIDefinitionContainer.m; sourceTree = "<group>"; };
 		CAD687DAD9A648042C977B74 /* GCDIContainerNSDictionaryLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIContainerNSDictionaryLoader.h; sourceTree = "<group>"; };
+		CAD6884B93949B637DAF8B0E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CAD688BAE3C29AC6B35B8356 /* GCDIMethodCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIMethodCall.m; sourceTree = "<group>"; };
 		CAD688BD6C9B9DEF6E53219E /* GCDINSStringReferenceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDINSStringReferenceConverter.h; sourceTree = "<group>"; };
 		CAD688F16213AD0673E1F584 /* GCDIYamlExampleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIYamlExampleContainer.m; sourceTree = "<group>"; };
@@ -219,13 +202,13 @@
 		CAD68F30E744EAD2D8048F77 /* GCDIDependentExampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDependentExampleService.h; sourceTree = "<group>"; };
 		CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIResettableContainerProtocol.h; sourceTree = "<group>"; };
 		CAD68FEC169BD5574D0AFDB0 /* GCDIYamlCompilerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIYamlCompilerTests.m; sourceTree = "<group>"; };
-		F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GCDependencyInjection.framework; path = GCDependencyInjectioniOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDependencyInjection.h; sourceTree = "<group>"; };
 		F689F97E1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F689F9831CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectioniOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDependencyInjectionTests.m; sourceTree = "<group>"; };
 		F689F98A1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GCDependencyInjection.framework; path = GCDependencyInjectionOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6CA90121CEBA18700924094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6CA90371CECB6CB00924094 /* GCDependencyInjectionOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectionOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6CA903B1CECB6CB00924094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -243,7 +226,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6CA90701CECB8D200924094 /* GCDependencyInjection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +240,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6CA90711CECB8D900924094 /* GCDependencyInjection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +321,7 @@
 				F6CA900F1CEBA18700924094 /* GCDependencyInjectionOSX */,
 				F6CA90381CECB6CB00924094 /* GCDependencyInjectionOSXTests */,
 				F689F97A1CAD5F8800F6C8ED /* Products */,
+				CAD6884B93949B637DAF8B0E /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -602,7 +584,7 @@
 				F6CA900D1CEBA18700924094 /* GCDependencyInjectionOSX */,
 				F689F9821CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests */,
 				F6CA90361CECB6CB00924094 /* GCDependencyInjectionOSXTests */,
-				F6329B5E1CF03CBD00D6CFA3 /* GCDependencyInjection */,
+				F6329B5E1CF03CBD00D6CFA3 /* GCDependencyInjectioniOS+Simulator */,
 			);
 		};
 /* End PBXProject section */
@@ -612,7 +594,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6E3B4F61CE604DF000DCC05 /* GCDIYamlCompiler in Resources */,
+				F6329B701CF09A3C00D6CFA3 /* GCDIYamlCompiler in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,7 +609,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAD68EE07BF1F1C60826BD82 /* GCDIYamlCompiler in Resources */,
+				F6329B711CF09A6800D6CFA3 /* GCDIYamlCompiler in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,7 +635,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -d \"${SYMROOT}/${TARGETNAME}.framework\" ]; then\n  rm -rf \"${SYMROOT}/${TARGETNAME}.framework\"\nfi\n\ncp -r \"${SYMROOT}/Release/${TARGETNAME}.framework\" \"${SYMROOT}/${TARGETNAME}.framework\"\n\nset -e\n\nlipo -create -output \"${SYMROOT}/${TARGETNAME}.framework/${TARGETNAME}\" \"${SYMROOT}/Release/${TARGETNAME}.framework/${TARGETNAME}\" \"${SYMROOT}/Release-iphoneos/${TARGETNAME}.framework/${TARGETNAME}\"\n\n#cp -r \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/\" \"${HOME}/Desktop/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule\"\n";
+			shellScript = "mkdir \"${SYMROOT}/Release-iphoneos+simulator\"\n\ncp -r \"${SYMROOT}/Release-iphoneos/${PROJECT_NAME}.framework\" \"${SYMROOT}/Release-iphoneos+simulator/${PROJECT_NAME}.framework\"\n\nset -e\n\nlipo -create -output \"${SYMROOT}/Release-iphoneos+simulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${SYMROOT}/Release-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${SYMROOT}/Release-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -737,16 +719,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F6329B641CF03F0B00D6CFA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F689F9781CAD5F8800F6C8ED /* GCDependencyInjectioniOS */;
-			targetProxy = F6329B631CF03F0B00D6CFA3 /* PBXContainerItemProxy */;
-		};
-		F6329B661CF03F0D00D6CFA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F6CA900D1CEBA18700924094 /* GCDependencyInjectionOSX */;
-			targetProxy = F6329B651CF03F0D00D6CFA3 /* PBXContainerItemProxy */;
-		};
 		F689F9861CAD5F8900F6C8ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F689F9781CAD5F8800F6C8ED /* GCDependencyInjectioniOS */;
@@ -876,7 +848,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
-				PRODUCT_NAME = GCDependencyInjection;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -899,7 +872,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
-				PRODUCT_NAME = GCDependencyInjection;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -942,7 +916,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionOSX;
-				PRODUCT_NAME = GCDependencyInjection;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -963,7 +937,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionOSX;
-				PRODUCT_NAME = GCDependencyInjection;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -998,13 +972,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F6329B5F1CF03CBD00D6CFA3 /* Build configuration list for PBXAggregateTarget "GCDependencyInjection" */ = {
+		F6329B5F1CF03CBD00D6CFA3 /* Build configuration list for PBXAggregateTarget "GCDependencyInjectioniOS+Simulator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F6329B601CF03CBD00D6CFA3 /* Debug */,
 				F6329B611CF03CBD00D6CFA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F689F9731CAD5F8800F6C8ED /* Build configuration list for PBXProject "GCDependencyInjection" */ = {
 			isa = XCConfigurationList;
