@@ -13,7 +13,7 @@
 #import "GCDIExampleService.h"
 
 @interface GCDIContainer (Tests)
-- (SEL)getSelectorForServiceNamed:(NSString *)serviceId;
+- (SEL)getInitializerSelectorForService:(NSString *)serviceId;
 @end
 
 
@@ -58,13 +58,13 @@
 - (void)testGetSelectorForService {
   NSString *testSelector;
 
-  testSelector = NSStringFromSelector([_container getSelectorForServiceNamed:@"example"]);
+  testSelector = NSStringFromSelector([_container getInitializerSelectorForService:@"example"]);
   XCTAssert([testSelector isEqualToString:@"getExampleService"]);
 
-  testSelector = NSStringFromSelector([_container getSelectorForServiceNamed:@"another_example"]);
+  testSelector = NSStringFromSelector([_container getInitializerSelectorForService:@"another_example"]);
   XCTAssert([testSelector isEqualToString:@"getAnotherExampleService"]);
 
-  testSelector = NSStringFromSelector([_container getSelectorForServiceNamed:@"yet.another_example"]);
+  testSelector = NSStringFromSelector([_container getInitializerSelectorForService:@"yet.another_example"]);
   XCTAssert([testSelector isEqualToString:@"getYet_AnotherExampleService"]);
 }
 

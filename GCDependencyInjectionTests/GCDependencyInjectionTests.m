@@ -39,7 +39,7 @@
 - (void)testExampleService {
   [_container setService:@"example.service" definition:^(GCDIDefinition *definition) {
     [definition setClass:[GCDIExampleService class]];
-    [definition setSEL:@selector(initService)];
+    [definition setInitializerSelector:@selector(initService)];
   }];
 
   GCDIExampleService *exampleService = _container[@"example.service"];
@@ -56,7 +56,7 @@
 
   [_container setService:@"example.dependent_service" definition:^(GCDIDefinition *definition) {
     [definition setClass:[GCDIDependentExampleService class]];
-    [definition setSEL:@selector(initWithDependentService:)];
+    [definition setInitializerSelector:@selector(initWithDependentService:)];
     [definition setArguments:@[
       [GCDIReference referenceForServiceNamed:@"example.service"]
     ]];
@@ -76,7 +76,7 @@
 
   [_container setService:@"example.dependent_service" definition:^(GCDIDefinition *definition) {
     [definition setClass:[GCDIDependentExampleService class]];
-    [definition setSEL:@selector(initWithDependentService:)];
+    [definition setInitializerSelector:@selector(initWithDependentService:)];
     [definition setArguments:@[@"%example.parameter%"]];
   }];
 

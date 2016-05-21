@@ -14,9 +14,9 @@
 
 @interface GCDIDefinition : NSObject
 
-@property (nonatomic, copy) NSString *klass;
+@property (nonatomic, copy, setter=setClassName:) NSString *klass;
 @property (nonatomic, strong) id factory;
-@property (nonatomic, copy, getter=getSelector, setter=setSelector:) NSString *pSelector;
+@property (nonatomic, copy, getter=getInitializer, setter=setInitializer:) NSString *initializer;
 @property (nonatomic, copy) NSString *pathToLibrary;
 
 @property (nonatomic, copy) NSMutableArray *arguments;
@@ -38,7 +38,7 @@
 - (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(NSString *)pSelector andArguments:(NSArray *)arguments;
 
 - (void)setClass:(Class)klass;
-- (void)setSEL:(SEL)pSelector;
+- (void)setInitializerSelector:(SEL)pSelector;
 - (void)setArguments:(NSArray *)arguments;
 - (void)setSetters:(NSDictionary *)setters;
 - (void)setMethodCalls:(NSArray *)methodCalls;

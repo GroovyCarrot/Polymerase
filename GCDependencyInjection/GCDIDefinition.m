@@ -42,7 +42,7 @@
   }
 
   _klass = klass.copy;
-  _pSelector = pSelector.copy;
+  _initializer = pSelector.copy;
   _arguments = arguments.mutableCopy;
 
   return self;
@@ -54,8 +54,8 @@
   _klass = NSStringFromClass(klass).copy;
 }
 
-- (void)setSEL:(SEL)pSelector {
-  _pSelector = NSStringFromSelector(pSelector).copy;
+- (void)setInitializerSelector:(SEL)pSelector {
+  _initializer = NSStringFromSelector(pSelector).copy;
 }
 
 - (void)setArguments:(NSArray *)arguments {

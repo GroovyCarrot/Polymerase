@@ -87,7 +87,7 @@ class ContainerDefinitionParser
     lines.push(variable + ' = ^(GCDIDefinition *def) {')
 
     if definition['Class']
-      lines.push('[def setKlass:@"' + definition['Class'] + '"];')
+      lines.push('[def setClassName:@"' + definition['Class'] + '"];')
     end
 
     if definition['Factory']
@@ -95,7 +95,7 @@ class ContainerDefinitionParser
     end
 
     if definition['Selector']
-      lines.push('[def setSelector:@"' + definition['Selector'] + '"];')
+      lines.push('[def setInitializer:@"' + definition['Selector'] + '"];')
     elsif definition['Factory']
       raise 'A selector must be specified when using a factory service.'
     end

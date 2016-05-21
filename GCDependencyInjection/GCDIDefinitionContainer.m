@@ -194,7 +194,7 @@ static NSMutableDictionary *registeredStoryboardContainers;
   if (definition.factory) {
     id factory = [self resolveServices:definition.factory];
     invocation = [self buildInvocationForClass:[factory class]
-                                  withSelector:definition.pSelector
+                                  withSelector:definition.initializer
                                   andArguments:definition.arguments];
 
     // Invoke the required method on the factory object.
@@ -214,7 +214,7 @@ static NSMutableDictionary *registeredStoryboardContainers;
     }
 
     invocation = [self buildInvocationForClass:klass
-                                  withSelector:definition.pSelector ?: @"init"
+                                  withSelector:definition.initializer ?: @"init"
                                   andArguments:definition.arguments];
 
     service = [klass alloc];
@@ -359,7 +359,7 @@ static NSMutableDictionary *registeredStoryboardContainers;
 - (void)registerService:(NSString *)serviceId forClass:(Class)klass andSelector:(SEL)pSelector {
   [self setService:serviceId definition:^(GCDIDefinition *definition) {
     [definition setClass:klass];
-    [definition setSEL:pSelector];
+    [definition setInitializerSelector:pSelector];
   }];
 }
 

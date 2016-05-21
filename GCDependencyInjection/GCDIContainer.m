@@ -73,7 +73,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
                   format:@"Circular reference detected for service \"%@\", previously loaded: %@", serviceId, _loading.allKeys];
     }
 
-    SEL method = [self getSelectorForServiceNamed:serviceId];
+    SEL method = [self getInitializerSelectorForService:serviceId];
     if (_methodMap[serviceId]) {
       method = NSSelectorFromString(_methodMap[serviceId]);
     }
@@ -123,7 +123,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   }
 }
 
-- (SEL)getSelectorForServiceNamed:(NSString *)serviceId {
+- (SEL)getInitializerSelectorForService:(NSString *)serviceId {
   serviceId = [serviceId capitalizedString];
   serviceId = [serviceId stringByReplacingOccurrencesOfString:@"_" withString:@""];
   serviceId = [serviceId stringByReplacingOccurrencesOfString:@"." withString:@"_"];
