@@ -99,7 +99,7 @@
 }
 
 - (BOOL)hasMethodCall:(GCDIMethodCall *)methodCall {
-  for (NSInvocation *method in _methodCalls) {
+  for (GCDIMethodCall *method in _methodCalls) {
     if ([methodCall isEqualToMethodCall:method]) {
       return TRUE;
     }

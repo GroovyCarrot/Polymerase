@@ -6,6 +6,22 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		F6329B5E1CF03CBD00D6CFA3 /* GCDependencyInjection */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F6329B5F1CF03CBD00D6CFA3 /* Build configuration list for PBXAggregateTarget "GCDependencyInjection" */;
+			buildPhases = (
+				F6329B621CF03D0200D6CFA3 /* Merge framework binaries */,
+			);
+			dependencies = (
+				F6329B641CF03F0B00D6CFA3 /* PBXTargetDependency */,
+				F6329B661CF03F0D00D6CFA3 /* PBXTargetDependency */,
+			);
+			name = GCDependencyInjection;
+			productName = GCDependencyInjection;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		CAD681586AB6480ACAA2A76A /* GCDIParameterBagProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68294DFB7F0E753AA27CF /* GCDIParameterBagProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD681E841D6C94822C5963B /* GCDIMethodCall.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68E3F4EF35E9E580955AE /* GCDIMethodCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -109,7 +125,7 @@
 			outputFiles = (
 				"$(DERIVED_FILE_DIR)/$(INPUT_FILE_BASE).m",
 			);
-			script = "/Users/jakewise/iOSProjects/GCDependencyInjection/GCDependencyInjection/GCDIYamlCompiler\\\n  \"${INPUT_FILE_PATH}\"\\\n  -o\"${DERIVED_FILE_DIR}\"";
+			script = "/Users/jakewise/iOSProjects/GCDependencyInjection/GCDependencyInjection/GCDIYamlCompiler\\\n  \"${INPUT_FILE_PATH}\"\\\n  -o \"${DERIVED_FILE_DIR}\"";
 		};
 		F6DF95AC1CE5E0F10008FA16 /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
@@ -120,11 +136,25 @@
 			outputFiles = (
 				"$(DERIVED_FILE_DIR)/${INPUT_FILE_BASE}.m",
 			);
-			script = "/Users/jakewise/iOSProjects/GCDependencyInjection/GCDependencyInjection/GCDIYamlCompiler\\\n  \"${INPUT_FILE_PATH}\"\\\n  -o\"${DERIVED_FILE_DIR}\"";
+			script = "/Users/jakewise/iOSProjects/GCDependencyInjection/GCDependencyInjection/GCDIYamlCompiler\\\n  \"${INPUT_FILE_PATH}\"\\\n  -o \"${DERIVED_FILE_DIR}\"";
 		};
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
+		F6329B631CF03F0B00D6CFA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F689F9701CAD5F8800F6C8ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F689F9781CAD5F8800F6C8ED;
+			remoteInfo = GCDependencyInjectioniOS;
+		};
+		F6329B651CF03F0D00D6CFA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F689F9701CAD5F8800F6C8ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6CA900D1CEBA18700924094;
+			remoteInfo = GCDependencyInjectionOSX;
+		};
 		F689F9851CAD5F8900F6C8ED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F689F9701CAD5F8800F6C8ED /* Project object */;
@@ -192,7 +222,7 @@
 		F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDependencyInjection.h; sourceTree = "<group>"; };
 		F689F97E1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F689F9831CAD5F8900F6C8ED /* GCDependencyInjectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F689F9831CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectioniOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDependencyInjectionTests.m; sourceTree = "<group>"; };
 		F689F98A1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -317,7 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */,
-				F689F9831CAD5F8900F6C8ED /* GCDependencyInjectionTests.xctest */,
+				F689F9831CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests.xctest */,
 				F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */,
 				F6CA90371CECB6CB00924094 /* GCDependencyInjectionOSXTests.xctest */,
 			);
@@ -453,9 +483,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		F689F9781CAD5F8800F6C8ED /* GCDependencyInjection */ = {
+		F689F9781CAD5F8800F6C8ED /* GCDependencyInjectioniOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F689F98D1CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjection" */;
+			buildConfigurationList = F689F98D1CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjectioniOS" */;
 			buildPhases = (
 				F689F9741CAD5F8800F6C8ED /* Sources */,
 				F689F9751CAD5F8800F6C8ED /* Frameworks */,
@@ -466,14 +496,14 @@
 			);
 			dependencies = (
 			);
-			name = GCDependencyInjection;
+			name = GCDependencyInjectioniOS;
 			productName = GCDependencyInjection;
 			productReference = F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		F689F9821CAD5F8900F6C8ED /* GCDependencyInjectionTests */ = {
+		F689F9821CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F689F9901CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjectionTests" */;
+			buildConfigurationList = F689F9901CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjectioniOSTests" */;
 			buildPhases = (
 				F689F97F1CAD5F8900F6C8ED /* Sources */,
 				F689F9801CAD5F8900F6C8ED /* Frameworks */,
@@ -485,9 +515,9 @@
 			dependencies = (
 				F689F9861CAD5F8900F6C8ED /* PBXTargetDependency */,
 			);
-			name = GCDependencyInjectionTests;
+			name = GCDependencyInjectioniOSTests;
 			productName = GCDependencyInjectionTests;
-			productReference = F689F9831CAD5F8900F6C8ED /* GCDependencyInjectionTests.xctest */;
+			productReference = F689F9831CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		F6CA900D1CEBA18700924094 /* GCDependencyInjectionOSX */ = {
@@ -537,6 +567,9 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "GroovyCarrot Ltd";
 				TargetAttributes = {
+					F6329B5E1CF03CBD00D6CFA3 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					F689F9781CAD5F8800F6C8ED = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 5E9ZEMQJ2D;
@@ -565,10 +598,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F689F9781CAD5F8800F6C8ED /* GCDependencyInjection */,
+				F689F9781CAD5F8800F6C8ED /* GCDependencyInjectioniOS */,
 				F6CA900D1CEBA18700924094 /* GCDependencyInjectionOSX */,
-				F689F9821CAD5F8900F6C8ED /* GCDependencyInjectionTests */,
+				F689F9821CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests */,
 				F6CA90361CECB6CB00924094 /* GCDependencyInjectionOSXTests */,
+				F6329B5E1CF03CBD00D6CFA3 /* GCDependencyInjection */,
 			);
 		};
 /* End PBXProject section */
@@ -605,6 +639,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F6329B621CF03D0200D6CFA3 /* Merge framework binaries */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Merge framework binaries";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -d \"${SYMROOT}/${TARGETNAME}.framework\" ]; then\n  rm -rf \"${SYMROOT}/${TARGETNAME}.framework\"\nfi\n\ncp -r \"${SYMROOT}/Release/${TARGETNAME}.framework\" \"${SYMROOT}/${TARGETNAME}.framework\"\n\nset -e\n\nlipo -create -output \"${SYMROOT}/${TARGETNAME}.framework/${TARGETNAME}\" \"${SYMROOT}/Release/${TARGETNAME}.framework/${TARGETNAME}\" \"${SYMROOT}/Release-iphoneos/${TARGETNAME}.framework/${TARGETNAME}\"\n\n#cp -r \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/\" \"${HOME}/Desktop/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F689F9741CAD5F8800F6C8ED /* Sources */ = {
@@ -686,9 +737,19 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F6329B641CF03F0B00D6CFA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F689F9781CAD5F8800F6C8ED /* GCDependencyInjectioniOS */;
+			targetProxy = F6329B631CF03F0B00D6CFA3 /* PBXContainerItemProxy */;
+		};
+		F6329B661CF03F0D00D6CFA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F6CA900D1CEBA18700924094 /* GCDependencyInjectionOSX */;
+			targetProxy = F6329B651CF03F0D00D6CFA3 /* PBXContainerItemProxy */;
+		};
 		F689F9861CAD5F8900F6C8ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F689F9781CAD5F8800F6C8ED /* GCDependencyInjection */;
+			target = F689F9781CAD5F8800F6C8ED /* GCDependencyInjectioniOS */;
 			targetProxy = F689F9851CAD5F8900F6C8ED /* PBXContainerItemProxy */;
 		};
 		F6CA903E1CECB6CB00924094 /* PBXTargetDependency */ = {
@@ -699,6 +760,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		F6329B601CF03CBD00D6CFA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F6329B611CF03CBD00D6CFA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F689F98B1CAD5F8900F6C8ED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -798,9 +873,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = GCDependencyInjection/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GCDependencyInjection;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -809,15 +885,21 @@
 		F689F98F1CAD5F8900F6C8ED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7,
+					armv7s,
+					arm64,
+				);
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = GCDependencyInjection/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GCDependencyInjection;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -916,6 +998,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F6329B5F1CF03CBD00D6CFA3 /* Build configuration list for PBXAggregateTarget "GCDependencyInjection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6329B601CF03CBD00D6CFA3 /* Debug */,
+				F6329B611CF03CBD00D6CFA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		F689F9731CAD5F8800F6C8ED /* Build configuration list for PBXProject "GCDependencyInjection" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -925,7 +1015,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F689F98D1CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjection" */ = {
+		F689F98D1CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjectioniOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F689F98E1CAD5F8900F6C8ED /* Debug */,
@@ -934,7 +1024,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F689F9901CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjectionTests" */ = {
+		F689F9901CAD5F8900F6C8ED /* Build configuration list for PBXNativeTarget "GCDependencyInjectioniOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F689F9911CAD5F8900F6C8ED /* Debug */,
@@ -959,6 +1049,7 @@
 				F6CA90401CECB6CB00924094 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

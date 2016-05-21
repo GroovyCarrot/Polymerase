@@ -12,9 +12,6 @@
 
 @implementation GCDIAlias
 
-@synthesize aliasId = _aliasId,
-            isPublic = _isPublic;
-
 + (id)aliasForId:(NSString *)aliasId {
   return [[GCDIAlias alloc] initForAliasId:aliasId];
 }
