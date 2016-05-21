@@ -20,4 +20,5 @@
 @property (nonatomic, copy, readonly) NSString *identifier;
 - (void)registerService:(NSString *)serviceId forClass:(Class)klass andSelector:(SEL)pSelector;
 - (void)setContainerInjectsIntoStoryboards:(BOOL)injects;
+- (id)objectForKeyedSubscript:(id)key;
 @end

@@ -314,6 +314,16 @@ static NSMutableDictionary *registeredStoryboardContainers;
 
     return resolvedServices.copy;
   }
+  else if ([_resolveServices isKindOfClass:[NSDictionary class]]) {
+    NSDictionary *resolveServices = _resolveServices;
+    NSMutableDictionary *resolvedServices = @{}.mutableCopy;
+
+    for (NSString *key in resolveServices) {
+      resolvedServices[key] = [self resolveServices:resolveServices[key]];
+    }
+
+    return resolvedServices.copy;
+  }
   else if ([_resolveServices isKindOfClass:[GCDIReference class]]) {
     GCDIReference *reference = _resolveServices;
     return [self getServiceNamed:reference.serviceId
@@ -466,6 +476,19 @@ static NSMutableDictionary *registeredStoryboardContainers;
   }
 
   return services.copy;
+}
+
+- (id)objectForKeyedSubscript:(id)key {
+  key = [self.parameterBag resolveParameterPlaceholders:key];
+  key = [self.parameterBag unescapeParameterPlaceholders:key];
+
+  if ([key isKindOfClass:[NSString class]] && ![[key substringToIndex:1] isEqualToString:@"@"]) {
+    return [super objectForKeyedSubscript:key];
+  }
+
+  GCDINSStringReferenceConverter *converter = [[GCDINSStringReferenceConverter alloc] init];
+  key = [converter resolveReferencesToServices:key];
+  return [self resolveServices:key];
 }
 
 # pragma mark Storyboard injection
