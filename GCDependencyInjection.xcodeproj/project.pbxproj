@@ -202,13 +202,13 @@
 		CAD68F30E744EAD2D8048F77 /* GCDIDependentExampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDependentExampleService.h; sourceTree = "<group>"; };
 		CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIResettableContainerProtocol.h; sourceTree = "<group>"; };
 		CAD68FEC169BD5574D0AFDB0 /* GCDIYamlCompilerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIYamlCompilerTests.m; sourceTree = "<group>"; };
-		F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GCDependencyInjection.framework; path = GCDependencyInjectioniOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDependencyInjection.h; sourceTree = "<group>"; };
 		F689F97E1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F689F9831CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectioniOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDependencyInjectionTests.m; sourceTree = "<group>"; };
 		F689F98A1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GCDependencyInjection.framework; path = GCDependencyInjectionOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6CA90121CEBA18700924094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6CA90371CECB6CB00924094 /* GCDependencyInjectionOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectionOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6CA903B1CECB6CB00924094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -635,7 +635,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir \"${SYMROOT}/Release-iphoneos+simulator\"\n\ncp -r \"${SYMROOT}/Release-iphoneos/${PROJECT_NAME}.framework\" \"${SYMROOT}/Release-iphoneos+simulator/${PROJECT_NAME}.framework\"\n\nset -e\n\nlipo -create -output \"${SYMROOT}/Release-iphoneos+simulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${SYMROOT}/Release-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${SYMROOT}/Release-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n";
+			shellScript = "rm -r \"${SYMROOT}/Release-iphoneos+simulator\"\nmkdir \"${SYMROOT}/Release-iphoneos+simulator\"\n\ncp -r \"${SYMROOT}/Release-iphoneos/${PROJECT_NAME}.framework\" \"${SYMROOT}/Release-iphoneos+simulator/${PROJECT_NAME}.framework\"\n\nset -e\n\nlipo -create -output \"${SYMROOT}/Release-iphoneos+simulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${SYMROOT}/Release-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${SYMROOT}/Release-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

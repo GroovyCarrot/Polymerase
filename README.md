@@ -170,6 +170,10 @@ available in the YAML file are valid, such as passing parameters with esclosing
 #import <GCDependencyInjection/GCDependencyInjection.h>
 ```
 
+##### Libraries for embedding
+
+[Download 1.0.0-alpha1 frameworks for iOS and OSX](https://github.com/GroovyCarrot/GCDependencyInjection/releases/download/1.0.0-alpha1/GCDependencyInjection-1.0.0-alpha1.zip)
+
 ***
 
 Documentation is currently in the process of being put together, there are a
