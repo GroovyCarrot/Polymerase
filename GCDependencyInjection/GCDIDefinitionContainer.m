@@ -19,7 +19,7 @@
 #import "GCDINSStringReferenceConverter.h"
 #import <objc/runtime.h>
 
-static NSMutableDictionary *registeredStoryboardContainers;
+static NSMapTable *registeredStoryboardContainers;
 
 @interface NSIBUserDefinedRuntimeAttributesConnector : NSObject
 - (void)establishConnection;
@@ -43,7 +43,7 @@ static NSMutableDictionary *registeredStoryboardContainers;
 
 + (void)load {
   // Setup runtime to allow injection into storyboards.
-  registeredStoryboardContainers = @{}.mutableCopy;
+  registeredStoryboardContainers = [NSMapTable strongToWeakObjectsMapTable];
 
   if (objc_getClass("NSIBUserDefinedRuntimeAttributesConnector")) {
     [self injectIntoOSXStoryboardAttributesConnector];
@@ -99,8 +99,7 @@ static NSMutableDictionary *registeredStoryboardContainers;
   // @todo support multiple containers in general without needing to use @? to
   // prevent the first container throwing exceptions for services that do not
   // exist within that container.
-  for (NSString *key in registeredStoryboardContainers) {
-    GCDIDefinitionContainer *container = registeredStoryboardContainers[key];
+  for (GCDIDefinitionContainer *container in registeredStoryboardContainers.keyEnumerator.allObjects) {
     values = [container.parameterBag resolveParameterPlaceholders:values];
     values = [container resolveServices:values];
   }
@@ -495,11 +494,15 @@ static NSMutableDictionary *registeredStoryboardContainers;
 
 - (void)setContainerInjectsIntoStoryboards:(BOOL)injects {
   if (injects) {
-    registeredStoryboardContainers[_identifier] = self;
+    [registeredStoryboardContainers setObject:_identifier forKey:self];
   }
   else {
     [registeredStoryboardContainers removeObjectForKey:_identifier];
   }
+}
+
+- (void)dealloc {
+  [self setContainerInjectsIntoStoryboards:FALSE];
 }
 
 @end
