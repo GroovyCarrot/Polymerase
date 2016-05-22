@@ -57,29 +57,33 @@ ContainerClass: MyContainerClass
 
 # Define parameters that are to be added to the container.
 Parameters:
-  example.service.class: GCDIExampleService
+  car_factory.class: CarFactory
+  spark_plug_factory: '@a_spark_plug_factory'
 
 # Service definitions are listed here.
 Services:
-  example_service:
-    Class: '%example.service.class%' # Reference the above parameter.
-    Initializer: initService
+  car_factory:
+    Class: '%car_factory.class%' # Reference a parameter.
 
-  example_injected_service:
-    Class: GCDIInjectedExampleService
-    Setters:
-      'setInjectedService:': '@example_service' # Reference another service.
+  a_spark_plug_factory:
+    Class: EngineSparkPlugFactory
+
+  engine_factory:
+    Class: EngineFactory
+    Initializer: 'initWithSparkPlugFactory:' # Will use 'init' by default.
+    Arguments:
+      - '%spark_plug_factory%'
+
 ```
 
 #### Parameters
 
-Parameters are references by using strings enclosed in `%`'s. For example,
-`'%example.service.class%'` will resolve to `'GCDIExampleService'` here.
-Parameters do not have to be strings, however you are able to substitute string 
-parameters within strings (`'I want to %foo%'`).
+Parameters are referenced by using strings enclosed in `%`'s. For example,
+`'%car_factory.class%'` will resolve to `'CarFactory'` here. Parameters do not
+have to be strings, however you are able to substitute string parameters within
+strings (`'I want to %foo%'`).
 
-Dynamic parameters can be added at runtime. For example:
-
+Dynamic parameters can be added at runtime:
 ```objective-c
 [_container setParameter:@"NSBundle.mainBundle" value:[NSBundle mainBundle]];
 ```
@@ -95,17 +99,55 @@ followed by the name of the service that is being referenced. You can use `@?`
 to just pass in `nil`, if the service definition does not exist when the
 container is constructing the service; rather than throwing a service not found
 exception. You can also escape creating a service reference with `@@` - this 
-will just give you a string starting with @.
+will just give you a string starting with @. Service reference strings can be
+nested within arrays and dictionaries.
+
+YAML arrays and hashes will also be converted to `NSArray` and `NSDictionary`
+data types, numbers will be converted into `NSNumber`. For example:
+
+```objective-c
+ingenium:
+  Factory: '@engine_factory'
+  Initializer: 'engineWithBrand:andCylinders:'
+  Arguments:
+    - 'INGENIUM'
+    - 4
+  Shared: false
+
+jaguar:
+  Factory: '@car_factory'
+  Initializer: 'carWithConfig:andEngine:'
+  Arguments:
+    - { Brand: 'Jaguar', Wheels: 4 }
+    - '@ingenium'
+  Shared: false
+```
+
+The `jaguar` configuration will invoke the selector `carWithConfig:andEngine:`
+on the `car_factory` service, with the dictionary `@{ @"Brand": @"Jaguar",
+@"Wheels": @4 }`, and fetch an `ingenium` engine from the above service
+definition. By stating that a service is not `Shared`, the container will not
+create a shared singleton instance; therefore whenever a `jaguar` or `ingenium`
+engine is requested from the container, a new instance will be created.
+
+#### Compiling the Yaml implementation for your container class
+
+You need to add a build rule for YAML files that uses the YAML compiler in this
+framework, and add the output implementation file to the build. This only
+generates the Yaml category implementation (`@implementation (Yaml)`), so you
+will still need to have both an `@interface` and `@implementation` for your
+class.
+
+![Compiler for Yaml implementation](http://groovycarrot.co.uk/sites/gc/files/gcdependencyinjection-xcode-yaml.png)
 
 ## Storyboard integration.
 
 Storyboard integration is easily achieved, and all you have to do is tell the
-container to inject into storyboards, after initialising it. One important
-factor here, is that the container is initialised before the storyboard has been
-constructed. Otherwise, the container will not be able to inject dependencies
-into your view controllers. The best place to do this is in your AppDelegate's
-`- (id)init` method; and assign it to a strong/retained property on your
-AppDelegate.
+container to inject into storyboards. One important factor here, is that the
+container is initialised before the storyboard has been constructed. Otherwise,
+the container will not be able to inject dependencies into your view
+controllers. The best place to do this is in your AppDelegate's `- (id)init`
+method; and assign it to a strong/retained property on your AppDelegate.
 
 ```objective-c
 _container = [[MyContainerClass alloc] init];
@@ -122,11 +164,18 @@ available in the YAML file are valid, such as passing parameters with esclosing
 
 ![Storyboard integration](http://groovycarrot.co.uk/sites/gc/files/gcdepedencyinjection-storyboard-integration.png)
 
+## Include framework
+
+```
+#import <GCDependencyInjection/GCDependencyInjection.h>
+```
+
 ***
 
-*Documentation is currently in the process of being put together.*
+Documentation is currently in the process of being put together, there are a
+series of todo's, however feel free to raise any feature requests.
 
-#### Bugs and feature requests
+##### Bugs and feature requests
 Please use the [GitHub issues](https://github.com/GroovyCarrot/GCDependencyInjection/issues)
 page to raise these.
 
@@ -136,4 +185,5 @@ This framework has been largely modelled after the [Symfony dependency injection
 component](http://symfony.com/doc/current/components/dependency_injection/introduction.html),
 for PHP.
 
+[Jake Wise](http://twitter.com/GroovyCarrot)<br />
 © 2016 [GroovyCarrot](http://groovycarrot.co.uk)
