@@ -122,6 +122,14 @@ class ContainerDefinitionParser
       lines.push('[def setTags:' + serviceResolver.resolveServices(definition['Tags']) + '];')
     end
 
+    if definition['Shared']
+      lines.push('[def setShared:' + serviceResolver.resolveServices(definition['Shared']) + '];')
+    end
+
+    if definition['Synthetic']
+      lines.push('[def setSynthetic:' + serviceResolver.resolveServices(definition['Synthetic']) + '];')
+    end
+
     lines.push('};')
 
     return lines
@@ -130,18 +138,22 @@ end
 
 class ServiceResolver
   def resolveServices(value)
-    if value.is_a? Array
+    if value.is_a?(Array)
       resolved = []
       value.each do |val|
         resolved.push(self.resolveServices(val))
       end
       return '@[' + resolved.join(', ') + ']'
-    elsif value.is_a? Hash
+    elsif value.is_a?(Hash)
       resolved = '@{'
       value.each do |key, val|
         resolved += '@"' + key + '": ' + self.resolveServices(val) + ', '
       end
       return resolved[0, resolved.length - 2] + '}'
+    elsif value.is_a?(Numeric)
+      return "@#{value}"
+    elsif [true, false].include?(value)
+      return value == true ? 'TRUE' : 'FALSE'
     elsif value.is_a?(String) && value[0, 1] == '@'
       service = nil
       invalidBehaviour = nil
@@ -201,7 +213,7 @@ ARGV.each do |file|
 
   if !options[:output]
     # Write file to the source file directory.
-    writer.setOutput(File.open(File.dirname(file)) + '/' + klass + '.m', 'w+')
+    writer.setOutput(File.open(File.dirname(file) + '/' + klass + '.m', 'w+'))
   elsif options[:outputIsDir]
     # Write the file to the specified output directory.
     writer.setOutput(File.open(options[:output] + '/' + klass + '.m', 'w+'))
