@@ -17,6 +17,7 @@
 #import "GCDIDefinitionContainer+Yaml.h"
 #import "GCDIAlias.h"
 #import "GCDINSStringReferenceConverter.h"
+#import "GCDIDefinitionContainer+Swift.h"
 #import <objc/runtime.h>
 
 static NSMapTable *registeredStoryboardContainers;
@@ -206,10 +207,15 @@ static NSMapTable *registeredStoryboardContainers;
   }
   else {
     // Invoke the required initialisation on the service.
-    Class klass = NSClassFromString([_parameterBag resolveParameterPlaceholders:definition.klass]);
+    Class klass = NSClassFromString([self.parameterBag resolveParameterPlaceholders:definition.klass]);
     if (!klass) {
-      [NSException raise:GCDIServiceNotFoundException
-                  format:@"Service with Class \"%@\" not found. %@", klass, definition];
+      // Try swift.
+      klass = [self swiftClassFromString:definition.klass];
+
+      if (!klass) {
+        [NSException raise:GCDIServiceNotFoundException
+                    format:@"Service with Class \"%@\" not found.", definition.klass];
+      }
     }
 
     invocation = [self buildInvocationForClass:klass
@@ -292,8 +298,8 @@ static NSMapTable *registeredStoryboardContainers;
 }
 
 - (void)addArguments:(NSArray *)arguments toInvocation:(NSInvocation *)invocation {
-  arguments = [_parameterBag resolveParameterPlaceholders:arguments];
-  arguments = [_parameterBag unescapeParameterPlaceholders:arguments];
+  arguments = [self.parameterBag resolveParameterPlaceholders:arguments];
+  arguments = [self.parameterBag unescapeParameterPlaceholders:arguments];
   arguments = [self resolveServices:arguments];
 
   NSInteger i = 2;
@@ -379,13 +385,13 @@ static NSMapTable *registeredStoryboardContainers;
   return _definitions.copy;
 }
 
-- (void)setService:(NSString *)serviceId definition:(id)definition {
-  // @todo retire ability to pass in pre-configured definition object.
-  if (![definition isKindOfClass:objc_getClass("NSBlock")] && ![definition isKindOfClass:[GCDIDefinition class]]) {
-    [NSException raise:NSInvalidArgumentException
-                format:@"Definition object must be an instance of GCDIDefinition, or block of signature GCDIDefinitionBlock."];
-  }
+- (void)setService:(NSString *)serviceId definition:(GCDIDefinitionBlock)definition {
+  serviceId = [serviceId lowercaseString];
+  [_aliases removeObjectForKey:serviceId];
+  _definitions[serviceId] = definition;
+}
 
+- (void)setService:(NSString *)serviceId definitionObject:(GCDIDefinition *)definition {
   serviceId = [serviceId lowercaseString];
   [_aliases removeObjectForKey:serviceId];
   _definitions[serviceId] = definition;
