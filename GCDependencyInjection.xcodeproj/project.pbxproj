@@ -149,7 +149,7 @@
 			containerPortal = F689F9701CAD5F8800F6C8ED /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F6CA900D1CEBA18700924094;
-			remoteInfo = "GCDependencyInjection OS X";
+			remoteInfo = "GCDependencyInjectionOSX";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -395,9 +395,8 @@
 			children = (
 				F6CA90121CEBA18700924094 /* Info.plist */,
 			);
-			name = GCDependencyInjectionOSX;
-			path = "GCDependencyInjection OS X";
-			sourceTree = "<group>";
+			path = GCDependencyInjectionOSX;
+			sourceTree = SOURCE_ROOT;
 		};
 		F6CA90381CECB6CB00924094 /* GCDependencyInjectionOSXTests */ = {
 			isa = PBXGroup;
@@ -516,7 +515,7 @@
 			dependencies = (
 			);
 			name = GCDependencyInjectionOSX;
-			productName = "GCDependencyInjection OS X";
+			productName = "GCDependencyInjectionOSX";
 			productReference = F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -911,7 +910,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "GCDependencyInjection OS X/Info.plist";
+				INFOPLIST_FILE = GCDependencyInjectionOSX/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -932,7 +931,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "GCDependencyInjection OS X/Info.plist";
+				INFOPLIST_FILE = GCDependencyInjectionOSX/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
