@@ -15,11 +15,11 @@ require 'optparse'
 class ContainerYamlCompiler
   @@output
   @@definitionParser
-  @@serviceResolver
+  @@parser
 
-  def initialize(definitionParser, serviceResolver)
+  def initialize(definitionParser, parser)
     @definitionParser = definitionParser
-    @serviceResolver = serviceResolver
+    @parser = parser
   end
 
   def compile(klass, instruction)
@@ -27,7 +27,7 @@ class ContainerYamlCompiler
 
     if instruction['Parameters'].is_a?(Hash)
       instruction['Parameters'].each do |parameter, value|
-        implementation.push('[self setParameter:@"' + parameter + '" value:' + @serviceResolver.resolveServices(value) + '];')
+        implementation.push(@parser.setParameter(parameter, value))
       end
     end
 
@@ -38,18 +38,18 @@ class ContainerYamlCompiler
       instruction['Services'].each do |service, definition|
         if definition.is_a?(String)
           if definition[0, 1] == '@'
-            implementation.push('[self setAlias:@"' + service + '" to:@"' + definition[1, definition.length - 1] + '"];')
+            implementation.push(@parser.setAlias(service, definition))
           end
         else
-          implementation.push(*@definitionParser.parseServiceDefinition(var, definition, @serviceResolver))
-          implementation.push('[self setService:@"' + service + '" definition:' + var + '];')
+          implementation.push(*@definitionParser.parseServiceDefinition(var, definition, @parser))
+          implementation.push(@parser.setService(service, var))
         end
       end
     end
 
-    self.writeImplementationStart(klass)
+    @parser.writeImplementationStart(@output, klass)
     self.outputLinesWithIndentation(implementation, 2)
-    self.writeImplementationEnd()
+    @parser.writeImplementationEnd(@output)
   end
 
   def setOutput(output)
@@ -66,88 +66,80 @@ class ContainerYamlCompiler
   def outputLinesWithIndentation(lines, n)
     @output.puts (' ' * n) + lines.join("\n" + (' ' * n))
   end
-
-  def writeImplementationStart(klass)
-    @output.puts '@interface ' + klass + ' : GCDIDefinitionContainer'
-    @output.puts '@end'
-    @output.puts '@implementation ' + klass + ' (Yaml)'
-    @output.puts '- (void)yamlProvisionContainer {'
-  end
-
-  def writeImplementationEnd()
-    @output.puts '}'
-    @output.puts '@end'
-  end
 end
 
 class ContainerDefinitionParser
-  def parseServiceDefinition(variable, definition, serviceResolver)
-    lines = []
+  @@lines
+  @@parser
 
-    lines.push(variable + ' = ^(GCDIDefinition *def) {')
+  def parseServiceDefinition(variable, definition, parser)
+    @lines = []
+    @parser = parser
+
+    @lines.push(variable + ' = ^(GCDIDefinition *definition) {')
 
     if definition['Class']
-      lines.push('[def setClassName:@"' + definition['Class'] + '"];')
+      @lines.push(@parser.callSetterMethod('definition', 'setClassName', definition['Class']))
     end
 
     if definition['Factory']
-      lines.push('[def setFactory:' + serviceResolver.resolveServices(definition['Factory']) + '];')
+      @lines.push(@parser.callSetterMethod('definition', 'setFactory', definition['Factory']))
     end
 
     if definition['Initializer']
-      lines.push('[def setInitializer:@"' + definition['Initializer'] + '"];')
+      @lines.push(@parser.callSetterMethod('definition', 'setInitializer', definition['Initializer']))
     elsif definition['Factory']
       raise 'A selector must be specified when using a factory service.'
     end
 
     if definition['Arguments']
-      lines.push('[def setArguments:' + serviceResolver.resolveServices(definition['Arguments']) + '];')
+      @lines.push(@parser.callSetterMethod('definition', 'setArguments', definition['Arguments']))
     end
 
     if definition['Setters']
-      lines.push('[def setSetters:' + serviceResolver.resolveServices(definition['Setters']) + '];')
+      @lines.push(@parser.callSetterMethod('definition', 'setSetters', definition['Setters']))
     end
 
     if definition['MethodCalls']
       definition['MethodCalls'].each do |methodCall|
         if methodCall.is_a?(Hash)
-          lines.push('[def addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall['Selector'] + ') andArguments:' + serviceResolver.resolveServices(methodCall['Arguments']) + ']];')
+          @lines.push(@parser.callSetterMethod('definition', 'addMethodCall', @parser.createMethodCall(methodCall['Selector'], methodCall['Arguments']), true))
         else
-          lines.push('[def addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(' + methodCall[0] + ') andArguments:' + serviceResolver.resolveServices(methodCall[1]) + ']];')
+          @lines.push(@parser.callSetterMethod('definition', 'addMethodCall', @parser.createMethodCall(methodCall[0], methodCall[1]), true))
         end
       end
     end
 
     if definition['Tags']
-      lines.push('[def setTags:' + serviceResolver.resolveServices(definition['Tags']) + '];')
+      @lines.push(@parser.callSetterMethod('definition', 'setTags', definition['Tags']))
     end
 
     if definition['Shared']
-      lines.push('[def setShared:' + serviceResolver.resolveServices(definition['Shared']) + '];')
+      @lines.push(@parser.callSetterMethod('definition', 'setShared', definition['Shared']))
     end
 
     if definition['Synthetic']
-      lines.push('[def setSynthetic:' + serviceResolver.resolveServices(definition['Synthetic']) + '];')
+      @lines.push(@parser.callSetterMethod('definition', 'setSynthetic', definition['Synthetic']))
     end
 
-    lines.push('};')
+    @lines.push('};')
 
-    return lines
+    return @lines
   end
 end
 
-class ServiceResolver
-  def resolveServices(value)
+class CodeTranslator
+  def parse(value)
     if value.is_a?(Array)
       resolved = []
       value.each do |val|
-        resolved.push(self.resolveServices(val))
+        resolved.push(self.parse(val))
       end
       return '@[' + resolved.join(', ') + ']'
     elsif value.is_a?(Hash)
       resolved = '@{'
       value.each do |key, val|
-        resolved += '@"' + key + '": ' + self.resolveServices(val) + ', '
+        resolved += self.parse(key) + ': ' + self.parse(val) + ', '
       end
       return resolved[0, resolved.length - 2] + '}'
     elsif value.is_a?(Numeric)
@@ -168,9 +160,45 @@ class ServiceResolver
         invalidBehaviour = 'kExceptionOnInvalidReference'
       end
 
-      return '[GCDIReference referenceForServiceId:@"' + service + '" invalidBehaviourType:' + invalidBehaviour + ']'
+      return self.createServiceReference(service, invalidBehaviour)
     end
     return '@"' + value + '"'
+  end
+
+  def setParameter(parameter, value)
+    return '[self setParameter:' + self.parse(parameter) + ' value:' + self.parse(value) + '];'
+  end
+
+  def setAlias(service, definition)
+    return '[self setAlias:' + self.parse(service) + ' to:' + self.parse(definition[1, definition.length - 1]) + '];'
+  end
+
+  def setService(service, var)
+    return '[self setService:' + self.parse(service) + ' definition:' + var + '];'
+  end
+
+  def callSetterMethod(variable, method, argument, parsed = false)
+    return '[' + variable + ' ' + method + ':' + (parsed ? argument : self.parse(argument)) + '];'
+  end
+
+  def createMethodCall(selector, arguments)
+    return '[GCDIMethodCall methodCallForSelector:@selector(' + selector + ') andArguments:' + self.parse(arguments) + ']'
+  end
+
+  def createServiceReference(service, invalidBehaviour)
+    return '[GCDIReference referenceForServiceId:@"' + service + '" invalidBehaviourType:' + invalidBehaviour + ']'
+  end
+
+  def writeImplementationStart(output, klass)
+    output.puts '@interface ' + klass + ' : GCDIDefinitionContainer'
+    output.puts '@end'
+    output.puts '@implementation ' + klass + ' (Yaml)'
+    output.puts '- (void)yamlProvisionContainer {'
+  end
+
+  def writeImplementationEnd(output)
+    output.puts '}'
+    output.puts '@end'
   end
 end
 
@@ -184,7 +212,7 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-writer = ContainerYamlCompiler.new(ContainerDefinitionParser.new, ServiceResolver.new)
+writer = ContainerYamlCompiler.new(ContainerDefinitionParser.new, CodeTranslator.new)
 
 if options[:output] && !options[:outputIsDir]
   writer.setOutput(File.open(options[:output], 'w+'))
