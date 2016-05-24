@@ -192,7 +192,7 @@ static NSMapTable *registeredStoryboardContainers;
   // of the service class.
   NSInvocation *invocation;
   if (definition.factory) {
-    id factory = [self resolveServices:definition.factory];
+    id factory = [self resolveServices:[self.parameterBag resolveParameterPlaceholders:definition.factory]];
     invocation = [self buildInvocationForClass:[factory class]
                                   withSelector:definition.initializer
                                   andArguments:definition.arguments];
