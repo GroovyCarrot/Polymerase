@@ -31,7 +31,7 @@
 }
 
 + (NSString *)getSwiftClass:(NSString *)className forBundle:(NSString *)application {
-  return [NSString stringWithFormat:@"_TtC%zd%@%zd%@", application.length, application, className.length, className];
+  return [NSString stringWithFormat:@"_TtC%tu%@%tu%@", application.length, application, className.length, className];
 }
 
 @end
