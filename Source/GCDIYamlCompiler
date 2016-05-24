@@ -32,8 +32,6 @@ class ContainerYamlCompiler
     end
 
     if instruction['Services'].is_a?(Hash)
-      var = 'serviceDefinition'
-      implementation.push('GCDIDefinitionBlock ' + var + ';')
 
       instruction['Services'].each do |service, definition|
         if definition.is_a?(String)
@@ -41,30 +39,21 @@ class ContainerYamlCompiler
             implementation.push(@parser.setAlias(service, definition))
           end
         else
-          implementation.push(*@definitionParser.parseServiceDefinition(var, definition, @parser))
-          implementation.push(@parser.setService(service, var))
+          implementation.push(@parser.setService(service, @definitionParser.parseServiceDefinition(definition, @parser)))
         end
       end
     end
 
-    @parser.writeImplementationStart(@output, klass)
-    self.outputLinesWithIndentation(implementation, 2)
-    @parser.writeImplementationEnd(@output)
+    @output.puts @parser.writeImplementation(klass, implementation.join("\n"))
   end
 
   def setOutput(output)
     @output = output
-    # Write file header.
-    @output.puts '#import <GCDependencyInjection/GCDependencyInjection.h>'
-    @output.puts ''
+    @output.puts @parser.startFile()
   end
 
   def getOutput()
     return @output
-  end
-
-  def outputLinesWithIndentation(lines, n)
-    @output.puts (' ' * n) + lines.join("\n" + (' ' * n))
   end
 end
 
@@ -72,32 +61,33 @@ class ContainerDefinitionParser
   @@lines
   @@parser
 
-  def parseServiceDefinition(variable, definition, parser)
+  def parseServiceDefinition(definition, parser)
     @lines = []
     @parser = parser
 
-    @lines.push(variable + ' = ^(GCDIDefinition *definition) {')
-
     if definition['Class']
-      @lines.push(@parser.callSetterMethod('definition', 'setClassName', definition['Class']))
+      @lines.push(@parser.setProperty('definition', 'klass', definition['Class']))
     end
 
     if definition['Factory']
-      @lines.push(@parser.callSetterMethod('definition', 'setFactory', definition['Factory']))
+      @lines.push(@parser.setProperty('definition', 'factory', definition['Factory']))
     end
 
     if definition['Initializer']
-      @lines.push(@parser.callSetterMethod('definition', 'setInitializer', definition['Initializer']))
+      # @todo check is string.
+      @lines.push(@parser.setProperty('definition', 'initializer', @parser.wrapSelector(definition['Initializer']), true))
     elsif definition['Factory']
       raise 'A selector must be specified when using a factory service.'
     end
 
     if definition['Arguments']
-      @lines.push(@parser.callSetterMethod('definition', 'setArguments', definition['Arguments']))
+      # @todo check is array.
+      @lines.push(@parser.setProperty('definition', 'arguments', definition['Arguments']))
     end
 
     if definition['Setters']
-      @lines.push(@parser.callSetterMethod('definition', 'setSetters', definition['Setters']))
+      # @todo check is hash.
+      @lines.push(@parser.setProperty('definition', 'setters', definition['Setters']))
     end
 
     if definition['MethodCalls']
@@ -111,47 +101,64 @@ class ContainerDefinitionParser
     end
 
     if definition['Tags']
-      @lines.push(@parser.callSetterMethod('definition', 'setTags', definition['Tags']))
+      @lines.push(@parser.setProperty('definition', 'tags', definition['Tags']))
     end
 
     if definition['Shared']
-      @lines.push(@parser.callSetterMethod('definition', 'setShared', definition['Shared']))
+      @lines.push(@parser.setProperty('definition', 'shared', definition['Shared']))
     end
 
     if definition['Synthetic']
-      @lines.push(@parser.callSetterMethod('definition', 'setSynthetic', definition['Synthetic']))
+      @lines.push(@parser.setProperty('definition', 'synthetic', definition['Synthetic']))
     end
 
-    @lines.push('};')
-
-    return @lines
+    return @parser.createDefinitionBlockFromImplementation(@lines.join("\n"))
   end
 end
 
 class CodeTranslator
+  @@language
+
+  def setLanguage(language = 'objc')
+    @language = language
+  end
+
+  def getLanguage()
+    return @language
+  end
+
+  def getExtension()
+    case @language
+    when 'swift'
+      return '.swift'
+    else
+      return '.m'
+    end
+  end
+
   def parse(value)
     if value.is_a?(Array)
       resolved = []
       value.each do |val|
         resolved.push(self.parse(val))
       end
-      return '@[' + resolved.join(', ') + ']'
+      return self.wrapArray(resolved)
     elsif value.is_a?(Hash)
-      resolved = '@{'
+      resolved = []
       value.each do |key, val|
-        resolved += self.parse(key) + ': ' + self.parse(val) + ', '
+        resolved.push(self.parse(key) + ': ' + self.parse(val))
       end
-      return resolved[0, resolved.length - 2] + '}'
+      return self.wrapDictionary(resolved)
     elsif value.is_a?(Numeric)
-      return "@#{value}"
+      return self.wrapNumber(value)
     elsif [true, false].include?(value)
-      return value == true ? 'TRUE' : 'FALSE'
+      return wrapBool(value)
     elsif value.is_a?(String) && value[0, 1] == '@'
       service = nil
       invalidBehaviour = nil
 
       if value[0, 2] == '@@'
-        return '@"' + value[1, value.length - 1] + '"'
+        return self.wrapString(value[1, value.length - 1])
       elsif value[0, 2] == '@?'
         service = value[2, value.length - 2]
         invalidBehaviour = 'kNilOnInvalidReference'
@@ -162,47 +169,184 @@ class CodeTranslator
 
       return self.createServiceReference(service, invalidBehaviour)
     end
-    return '@"' + value + '"'
+    return self.wrapString(value)
   end
 
   def setParameter(parameter, value)
-    return '[self setParameter:' + self.parse(parameter) + ' value:' + self.parse(value) + '];'
+    case @language
+    when 'swift'
+      return 'self.setParameter(' + self.parse(parameter) + ', value:' + self.parse(value) + ')'
+    else
+      return '[self setParameter:' + self.parse(parameter) + ' value:' + self.parse(value) + '];'
+    end
   end
 
   def setAlias(service, definition)
-    return '[self setAlias:' + self.parse(service) + ' to:' + self.parse(definition[1, definition.length - 1]) + '];'
+    case @language
+    when 'swift'
+      return 'self.setAlias(' + self.parse(service) + ', to:' + self.parse(definition[1, definition.length - 1]) + ')'
+    else
+      return '[self setAlias:' + self.parse(service) + ' to:' + self.parse(definition[1, definition.length - 1]) + '];'
+    end
   end
 
-  def setService(service, var)
-    return '[self setService:' + self.parse(service) + ' definition:' + var + '];'
+  def setService(service, implementation)
+    case @language
+    when 'swift'
+      return 'self.setService(' + self.parse(service) + ') ' + implementation
+    else
+      return '[self setService:' + self.parse(service) + " definition:" + implementation + "];"
+    end
+  end
+
+  def setProperty(variable, property, value, parsed = false)
+    case @language
+    when 'swift'
+      return variable + '.' + property + ' = ' + (parsed ? value : self.parse(value))
+    else
+      return variable + '.' + property + ' = ' + (parsed ? value : self.parse(value)) + ';'
+    end
   end
 
   def callSetterMethod(variable, method, argument, parsed = false)
-    return '[' + variable + ' ' + method + ':' + (parsed ? argument : self.parse(argument)) + '];'
+    case @language
+    when 'swift'
+      return variable + '.' + method + '(' + (parsed ? argument : self.parse(argument)) + ')'
+    else
+      return '[' + variable + ' ' + method + ':' + (parsed ? argument : self.parse(argument)) + '];'
+    end
   end
 
   def createMethodCall(selector, arguments)
-    return '[GCDIMethodCall methodCallForSelector:@selector(' + selector + ') andArguments:' + self.parse(arguments) + ']'
+    case @language
+    when 'swift'
+      return 'GCDIMethodCall(selector:' + self.wrapSelector(selector) + ', andArguments:' + self.parse(arguments) + ')'
+    else
+      return '[GCDIMethodCall methodCallForSelectorNamed:' + self.wrapSelector(selector) + ' andArguments:' + self.parse(arguments) + ']'
+    end
   end
 
   def createServiceReference(service, invalidBehaviour)
-    return '[GCDIReference referenceForServiceId:@"' + service + '" invalidBehaviourType:' + invalidBehaviour + ']'
+    case @language
+    when 'swift'
+      return 'GCDIReference(forServiceId:' + service + ', invalidBehaviourType:' + invalidBehaviour + ')'
+    else
+      return '[GCDIReference referenceForServiceId:@"' + service + '" invalidBehaviourType:' + invalidBehaviour + ']'
+    end
   end
 
-  def writeImplementationStart(output, klass)
-    output.puts '@interface ' + klass + ' : GCDIDefinitionContainer'
-    output.puts '@end'
-    output.puts '@implementation ' + klass + ' (Yaml)'
-    output.puts '- (void)yamlProvisionContainer {'
+  def wrapString(value)
+    case @language
+    when 'swift'
+      return '"' + value + '"'
+    else
+      return '@"' + value + '"'
+    end
   end
 
-  def writeImplementationEnd(output)
-    output.puts '}'
-    output.puts '@end'
+  def wrapArray(values)
+    case @language
+    when 'swift'
+      return '[' + values.join(', ') + ']'
+    else
+      return '@[' + values.join(', ') + ']'
+    end
+  end
+
+  def wrapDictionary(values)
+    case @language
+    when 'swift'
+      return '[' + values.join(', ') + ']'
+    else
+      return '@{ ' + values.join(', ') + ' }'
+    end
+  end
+
+  def wrapNumber(value)
+    case @language
+    when 'swift'
+      return "#{value}"
+    else
+      return "@#{value}"
+    end
+  end
+
+  def wrapBool(value)
+    case @language
+    when 'swift'
+      return value == true ? 'true' : 'false'
+    else
+      return value == true ? 'TRUE' : 'FALSE'
+    end
+  end
+
+  def wrapSelector(selector)
+    case @language
+    when 'swift'
+      # Generate objc from init() selector.
+      selector.gsub!(/init\(([a-zA-Z])([a-zA-Z:]+)\)/) { "initWith#{$1.upcase}#{$2}" }
+      selector.gsub!(/\(_:([a-zA-Z:]+)?\)/) { ":#{$1}" }
+      selector.sub!('()', '')
+      return '"' + selector + '"'
+    else
+      return '@"' + selector + '"'
+    end
+  end
+
+  def startFile()
+    # Write file header.
+    output = []
+    case @language
+    when 'swift'
+      output.push('Import Foundation')
+      output.push('Import GCDependencyInjection')
+      output.push('')
+    else
+      output.push('#import <GCDependencyInjection/GCDependencyInjection.h>')
+      output.push('')
+    end
+    return output
+  end
+
+  def writeImplementation(klass, implementation)
+    output = []
+    case @language
+    when 'swift'
+      output.push('extension ' + klass + ' {')
+      output.push('  func yamlProvisionContainer() {')
+      output.push(self.outputCodeWithIndentation(implementation, 4))
+      output.push('  }')
+      output.push('}')
+    else
+      output.push('@interface ' + klass + ' : GCDIDefinitionContainer')
+      output.push('@end')
+      output.push('@implementation ' + klass + ' (Yaml)')
+      output.push('- (void)yamlProvisionContainer {')
+      output.push(self.outputCodeWithIndentation(implementation, 2))
+      output.push('}')
+      output.push('@end')
+    end
+    return output
+  end
+
+  def createDefinitionBlockFromImplementation(implementation)
+    case @language
+    when 'swift'
+      return "{ definition in\n" + self.outputCodeWithIndentation(implementation, 2) + "\n}"
+    else
+      return "^(GCDIDefinition *definition) {\n" + self.outputCodeWithIndentation(implementation, 2) + "\n}"
+    end
+  end
+
+  def outputCodeWithIndentation(code, n)
+    return (' ' * n) + code.split("\n").join("\n" + (' ' * n))
   end
 end
 
-options = {}
+options = {
+  language: 'objc',
+}
+
 OptionParser.new do |opts|
   opts.banner = "Usage: GCDIYamlCompiler <file> [<file>...] [options]"
 
@@ -210,9 +354,17 @@ OptionParser.new do |opts|
     options[:output] = File.expand_path(o)
     options[:outputIsDir] = File.directory?(o)
   end
+
+  opts.on("-l", "--language (objc|swift)", "Specify a language") do |language|
+    if (['objc', 'swift'].include?(language))
+      options[:language] = language
+    end
+  end
 end.parse!
 
-writer = ContainerYamlCompiler.new(ContainerDefinitionParser.new, CodeTranslator.new)
+code_writter = CodeTranslator.new()
+code_writter.setLanguage(options[:language])
+writer = ContainerYamlCompiler.new(ContainerDefinitionParser.new, code_writter)
 
 if options[:output] && !options[:outputIsDir]
   writer.setOutput(File.open(options[:output], 'w+'))
@@ -230,6 +382,9 @@ ARGV.each do |file|
   klass = File.basename(file, '.*')
 
   instruction = YAML.load_file(file)
+  if (['objc', 'swift'].include?(instruction['Language'].downcase))
+    code_writter.setLanguage(instruction['Language'].downcase)
+  end
 
   if !instruction.is_a?(Hash)
     instruction = {}
@@ -241,10 +396,10 @@ ARGV.each do |file|
 
   if !options[:output]
     # Write file to the source file directory.
-    writer.setOutput(File.open(File.dirname(file) + '/' + klass + '.m', 'w+'))
+    writer.setOutput(File.open(File.dirname(file) + '/' + klass + code_writter.getExtension(), 'w+'))
   elsif options[:outputIsDir]
     # Write the file to the specified output directory.
-    writer.setOutput(File.open(options[:output] + '/' + klass + '.m', 'w+'))
+    writer.setOutput(File.open(options[:output] + '/' + klass + code_writter.getExtension(), 'w+'))
   else
     # Assume we're writing many implementations to the one file, add a space.
     writer.getOutput().puts ''
@@ -252,5 +407,5 @@ ARGV.each do |file|
 
   writer.compile(klass, instruction)
 
-  puts 'Output ' + klass + ' (Yaml) implementation to ' + File.expand_path(writer.getOutput().path)
+  puts 'Output ' + klass + ' (Yaml) implementation in ' + code_writter.getLanguage() + ' to ' + File.expand_path(writer.getOutput().path)
 end
