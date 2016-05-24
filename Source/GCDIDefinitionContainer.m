@@ -207,14 +207,15 @@ static NSMapTable *registeredStoryboardContainers;
   }
   else {
     // Invoke the required initialisation on the service.
-    Class klass = NSClassFromString([self.parameterBag resolveParameterPlaceholders:definition.klass]);
+    NSString *className = [self.parameterBag resolveParameterPlaceholders:definition.klass];
+    Class klass = NSClassFromString(className);
     if (!klass) {
       // Try swift.
-      klass = [self swiftClassFromString:definition.klass];
+      klass = [self swiftClassFromString:className];
 
       if (!klass) {
         [NSException raise:GCDIServiceNotFoundException
-                    format:@"Service with Class \"%@\" not found.", definition.klass];
+                    format:@"Service with Class \"%@\" not found.", className];
       }
     }
 

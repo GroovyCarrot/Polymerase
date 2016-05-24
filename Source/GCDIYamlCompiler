@@ -229,9 +229,9 @@ class CodeTranslator
   def createServiceReference(service, invalidBehaviour)
     case @language
     when 'swift'
-      return 'GCDIReference(forServiceId:' + service + ', invalidBehaviourType:' + invalidBehaviour + ')'
+      return 'GCDIReference(forServiceId:' + self.parse(service) + ', invalidBehaviourType:' + invalidBehaviour + ')'
     else
-      return '[GCDIReference referenceForServiceId:@"' + service + '" invalidBehaviourType:' + invalidBehaviour + ']'
+      return '[GCDIReference referenceForServiceId:' + self.parse(service) + ' invalidBehaviourType:' + invalidBehaviour + ']'
     end
   end
 
@@ -298,8 +298,8 @@ class CodeTranslator
     output = []
     case @language
     when 'swift'
-      output.push('Import Foundation')
-      output.push('Import GCDependencyInjection')
+      output.push('import Foundation')
+      output.push('import GCDependencyInjection')
       output.push('')
     else
       output.push('#import <GCDependencyInjection/GCDependencyInjection.h>')
@@ -396,10 +396,10 @@ ARGV.each do |file|
 
   if !options[:output]
     # Write file to the source file directory.
-    writer.setOutput(File.open(File.dirname(file) + '/' + klass + code_writter.getExtension(), 'w+'))
+    writer.setOutput(File.open(File.dirname(file) + '/' + File.basename(file, ".*") + code_writter.getExtension(), 'w+'))
   elsif options[:outputIsDir]
     # Write the file to the specified output directory.
-    writer.setOutput(File.open(options[:output] + '/' + klass + code_writter.getExtension(), 'w+'))
+    writer.setOutput(File.open(options[:output] + '/' + File.basename(file, ".*") + code_writter.getExtension(), 'w+'))
   else
     # Assume we're writing many implementations to the one file, add a space.
     writer.getOutput().puts ''
