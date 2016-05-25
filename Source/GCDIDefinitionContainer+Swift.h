@@ -13,4 +13,5 @@
 
 @interface GCDIDefinitionContainer (Swift)
 - (Class)swiftClassFromString:(NSString *)className;
+- (SEL)swiftSelectorFromString:(NSString *)selName;
 @end

@@ -284,7 +284,12 @@ static NSMapTable *registeredStoryboardContainers;
 
   NSMethodSignature *methodSignature = [klass instanceMethodSignatureForSelector:sel];
   if (!methodSignature) {
-    return nil;
+    // Try swift.
+    sel = [self swiftSelectorFromString:pSelector];
+    methodSignature = [klass instanceMethodSignatureForSelector:sel];
+    if (!methodSignature) {
+      return nil;
+    }
   }
 
   if (arguments.count != methodSignature.numberOfArguments - 2) {

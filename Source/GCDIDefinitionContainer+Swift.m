@@ -34,4 +34,33 @@
   return [NSString stringWithFormat:@"_TtC%tu%@%tu%@", application.length, application, className.length, className];
 }
 
+- (SEL)swiftSelectorFromString:(NSString *)selName {
+  NSRegularExpression *regex;
+  NSArray *matches;
+
+  // Handle init selectors.
+  regex = [NSRegularExpression regularExpressionWithPattern:@"init\\(([a-zA-Z])([a-zA-Z:]+)\\)"
+                                                    options:0
+                                                      error:nil];
+  matches = [regex matchesInString:selName options:0 range:NSMakeRange(0, selName.length)];
+  for (NSTextCheckingResult *result in matches) {
+    NSString *firstLetter = [selName substringWithRange:[result rangeAtIndex:1]];
+    NSString *theRest = [selName substringWithRange:[result rangeAtIndex:2]];
+    selName = [NSString stringWithFormat:@"initWith%@%@", firstLetter.uppercaseString, theRest];
+  }
+
+  // Handle regular func selectors.
+  regex = [NSRegularExpression regularExpressionWithPattern:@"\\(_:([a-zA-Z:]+)?\\)"
+                                                    options:0
+                                                      error:nil];
+  selName = [regex stringByReplacingMatchesInString:selName
+                                            options:0
+                                              range:NSMakeRange(0, selName.length)
+                                       withTemplate:@":$1"];
+
+  selName = [selName stringByReplacingOccurrencesOfString:@"()" withString:@""];
+
+  return NSSelectorFromString(selName);
+}
+
 @end

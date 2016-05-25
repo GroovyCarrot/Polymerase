@@ -281,16 +281,7 @@ class CodeTranslator
   end
 
   def wrapSelector(selector)
-    case @language
-    when 'swift'
-      # Generate objc from init() selector.
-      selector.gsub!(/init\(([a-zA-Z])([a-zA-Z:]+)\)/) { "initWith#{$1.upcase}#{$2}" }
-      selector.gsub!(/\(_:([a-zA-Z:]+)?\)/) { ":#{$1}" }
-      selector.sub!('()', '')
-      return '"' + selector + '"'
-    else
-      return '@"' + selector + '"'
-    end
+    return self.wrapString(selector)
   end
 
   def startFile()
@@ -382,7 +373,7 @@ ARGV.each do |file|
   klass = File.basename(file, '.*')
 
   instruction = YAML.load_file(file)
-  if (['objc', 'swift'].include?(instruction['Language'].downcase))
+  if (instruction['Language'] && ['objc', 'swift'].include?(instruction['Language'].downcase))
     code_writter.setLanguage(instruction['Language'].downcase)
   end
 
