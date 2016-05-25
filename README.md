@@ -105,7 +105,7 @@ nested within arrays and dictionaries.
 YAML arrays and hashes will also be converted to `NSArray` and `NSDictionary`
 data types, numbers will be converted into `NSNumber`. For example:
 
-```objective-c
+```yaml
 ingenium:
   Factory: '@engine_factory'
   Initializer: 'engineWithBrand:andCylinders:'
