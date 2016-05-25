@@ -74,19 +74,25 @@ class ContainerDefinitionParser
     end
 
     if definition['Initializer']
-      # @todo check is string.
+      if (!definition['Initializer'].is_a?(String))
+        raise "Initializer must be a string defining the init, or factory method to call."
+      end
       @lines.push(@parser.setProperty('definition', 'initializer', @parser.wrapSelector(definition['Initializer']), true))
     elsif definition['Factory']
       raise 'A selector must be specified when using a factory service.'
     end
 
     if definition['Arguments']
-      # @todo check is array.
+      if (!definition['Arguments'].is_a?(Array))
+        raise "Arguments must be an array, and have only the required number as defined by the initializer."
+      end
       @lines.push(@parser.setProperty('definition', 'arguments', definition['Arguments']))
     end
 
     if definition['Setters']
-      # @todo check is hash.
+      if (!definition['Setters'].is_a?(Hash))
+        raise "Setters must be keyed: 'setProperty:': 'value'."
+      end
       @lines.push(@parser.setProperty('definition', 'setters', definition['Setters']))
     end
 
