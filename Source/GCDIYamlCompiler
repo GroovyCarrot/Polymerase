@@ -278,7 +278,7 @@ class CodeTranslator
     else
       _YES = 'TRUE'
       _NO = 'FALSE'
-      value = true ? _YES : _NO
+      value = value == true ? _YES : _NO
       return convertToObjects ? '@' + value : value
     end
   end
