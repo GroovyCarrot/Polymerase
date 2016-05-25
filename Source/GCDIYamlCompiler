@@ -136,23 +136,23 @@ class CodeTranslator
     end
   end
 
-  def parse(value)
+  def parse(value, convertToObjects = false)
     if value.is_a?(Array)
       resolved = []
       value.each do |val|
-        resolved.push(self.parse(val))
+        resolved.push(self.parse(val, true))
       end
       return self.wrapArray(resolved)
     elsif value.is_a?(Hash)
       resolved = []
       value.each do |key, val|
-        resolved.push(self.parse(key) + ': ' + self.parse(val))
+        resolved.push(self.parse(key, true) + ': ' + self.parse(val, true))
       end
       return self.wrapDictionary(resolved)
     elsif value.is_a?(Numeric)
-      return self.wrapNumber(value)
+      return self.wrapNumber(value, convertToObjects)
     elsif [true, false].include?(value)
-      return wrapBool(value)
+      return wrapBool(value, convertToObjects)
     elsif value.is_a?(String) && value[0, 1] == '@'
       service = nil
       invalidBehaviour = nil
@@ -262,21 +262,24 @@ class CodeTranslator
     end
   end
 
-  def wrapNumber(value)
+  def wrapNumber(value, convertToObjects = false)
     case @language
     when 'swift'
       return "#{value}"
     else
-      return "@#{value}"
+      return convertToObjects ? "@#{value}" : "#{value}"
     end
   end
 
-  def wrapBool(value)
+  def wrapBool(value, convertToObjects = false)
     case @language
     when 'swift'
       return value == true ? 'true' : 'false'
     else
-      return value == true ? 'TRUE' : 'FALSE'
+      _YES = 'TRUE'
+      _NO = 'FALSE'
+      value = true ? _YES : _NO
+      return convertToObjects ? '@' + value : value
     end
   end
 

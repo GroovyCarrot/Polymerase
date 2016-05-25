@@ -294,7 +294,7 @@ static NSMapTable *registeredStoryboardContainers;
 
   if (arguments.count != methodSignature.numberOfArguments - 2) {
     [NSException raise:NSInvalidArgumentException
-                format:@"Invalid amount of arguments (%d/%d) provided for method signature for selector \"%@\"", arguments.count, methodSignature.numberOfArguments - 2, pSelector];
+                format:@"Invalid amount of arguments (%zd/%zd) provided for method signature for selector \"%@\"", arguments.count, methodSignature.numberOfArguments - 2, pSelector];
   }
 
   NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];

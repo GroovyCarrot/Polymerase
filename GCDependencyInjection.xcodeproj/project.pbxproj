@@ -216,6 +216,7 @@
 		F689F9831CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectioniOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDependencyInjectionTests.m; sourceTree = "<group>"; };
 		F689F98A1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../GCDependencyInjectioniOSTests/Info.plist; sourceTree = "<group>"; };
+		F69DF2B41CF652C70056729E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6CA90121CEBA18700924094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6CA90371CECB6CB00924094 /* GCDependencyInjectionOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectionOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -333,10 +334,11 @@
 			isa = PBXGroup;
 			children = (
 				F689F97B1CAD5F8800F6C8ED /* Source */,
-				F647A1A01CF3718100152CFA /* GCDependencyInjectioniOS */,
 				F689F9871CAD5F8900F6C8ED /* Tests */,
 				F6CA900F1CEBA18700924094 /* GCDependencyInjectionOSX */,
 				F6CA90381CECB6CB00924094 /* GCDependencyInjectionOSXTests */,
+				F647A1A01CF3718100152CFA /* GCDependencyInjectioniOS */,
+				F69DF2B31CF652C70056729E /* GCDependencyInjectioniOSTests */,
 				F689F97A1CAD5F8800F6C8ED /* Products */,
 				CAD6884B93949B637DAF8B0E /* README.md */,
 			);
@@ -406,6 +408,14 @@
 				CAD68F8780AAB36E94E5AD43 /* GCDIDefinitionContainerSwiftTests.m */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		F69DF2B31CF652C70056729E /* GCDependencyInjectioniOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				F69DF2B41CF652C70056729E /* Info.plist */,
+			);
+			path = GCDependencyInjectioniOSTests;
 			sourceTree = "<group>";
 		};
 		F6CA900F1CEBA18700924094 /* GCDependencyInjectionOSX */ = {
