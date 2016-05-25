@@ -98,7 +98,7 @@
 }
 
 - (BOOL)hasParameter:(NSString *)name {
-  return (BOOL) _parameters[[name lowercaseString]];
+  return _parameters[[name lowercaseString]] != nil;
 }
 
 - (void)checkIfBagIsInResolvedState {

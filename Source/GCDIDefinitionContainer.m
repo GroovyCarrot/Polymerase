@@ -358,7 +358,7 @@ static NSMapTable *registeredStoryboardContainers;
 }
 
 - (BOOL)hasService:(NSString *)serviceId {
-  return [super hasService:serviceId] || (bool) _definitions[serviceId];
+  return [super hasService:serviceId] || _definitions[serviceId] != nil;
 }
 
 - (NSArray *)getServiceIds {
@@ -421,7 +421,7 @@ static NSMapTable *registeredStoryboardContainers;
 }
 
 - (BOOL)hasDefinitionForService:(NSString *)serviceId {
-  return (BOOL) _definitions[serviceId];
+  return _definitions[serviceId] != nil;
 }
 
 # pragma mark Aliases
@@ -464,7 +464,7 @@ static NSMapTable *registeredStoryboardContainers;
 }
 
 - (BOOL)hasAlias:(NSString *)alias {
-  return (BOOL) _aliasDefinitions[[alias lowercaseString]];
+  return _aliasDefinitions[[alias lowercaseString]] != nil;
 }
 
 - (GCDIAlias *)getAlias:(NSString *)alias {

@@ -91,8 +91,8 @@
 }
 
 - (void)testHasParameter {
-  XCTAssert([_parameterBag hasParameter:@"foo"]);
-  XCTAssert([_parameterBag hasParameter:@"Foo"]);
+  XCTAssertTrue([_parameterBag hasParameter:@"foo"]);
+  XCTAssertTrue([_parameterBag hasParameter:@"Foo"]);
   XCTAssertFalse([_parameterBag hasParameter:@"foobar"]);
 }
 
