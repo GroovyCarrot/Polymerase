@@ -74,7 +74,7 @@ class ContainerDefinitionParser
     end
 
     if definition['Initializer']
-      if (!definition['Initializer'].is_a?(String))
+      if !definition['Initializer'].is_a?(String)
         raise "Initializer must be a string defining the init, or factory method to call."
       end
       @lines.push(@parser.setProperty('definition', 'initializer', @parser.wrapSelector(definition['Initializer']), true))
@@ -83,17 +83,30 @@ class ContainerDefinitionParser
     end
 
     if definition['Arguments']
-      if (!definition['Arguments'].is_a?(Array))
+      if !definition['Arguments'].is_a?(Array)
         raise "Arguments must be an array, and have only the required number as defined by the initializer."
       end
       @lines.push(@parser.setProperty('definition', 'arguments', definition['Arguments']))
     end
 
     if definition['Setters']
-      if (!definition['Setters'].is_a?(Hash))
-        raise "Setters must be keyed: 'setProperty:': 'value'."
+      setters = definition['Setters']
+      if !definition['Setters'].is_a?(Hash)
+        case @parser.getLanguage()
+        when 'swift'
+          raise "Setters must be keyed: 'propertyName': 'value'."
+        else
+          raise "Setters must be keyed: 'setProperty:': 'value'."
+        end
       end
-      @lines.push(@parser.setProperty('definition', 'setters', definition['Setters']))
+
+      objc_setters = {}
+      setters.each do |property, value|
+        objc_setters[@parser.convertPropertyToSetter(property)] = value
+      end
+      setters = objc_setters
+
+      @lines.push(@parser.setProperty('definition', 'setters', objc_setters))
     end
 
     if definition['MethodCalls']
@@ -212,6 +225,16 @@ class CodeTranslator
     else
       return variable + '.' + property + ' = ' + (parsed ? value : self.parse(value)) + ';'
     end
+  end
+
+  def convertPropertyToSetter(property)
+    if !property.include?(":")
+      property = "#{property}:"
+      if property[0, 3] != 'set'
+        property = "set" + property[0, 1].capitalize + property[1, property.length - 1]
+      end
+    end
+    return property
   end
 
   def callSetterMethod(variable, method, argument, parsed = false)
@@ -356,7 +379,7 @@ OptionParser.new do |opts|
   end
 
   opts.on("-l", "--language (objc|swift)", "Specify a language") do |language|
-    if (['objc', 'swift'].include?(language))
+    if ['objc', 'swift'].include?(language)
       options[:language] = language
     end
   end
@@ -382,7 +405,7 @@ ARGV.each do |file|
   klass = File.basename(file, '.*')
 
   instruction = YAML.load_file(file)
-  if (instruction['Language'] && ['objc', 'swift'].include?(instruction['Language'].downcase))
+  if instruction['Language'] && ['objc', 'swift'].include?(instruction['Language'].downcase)
     code_writter.setLanguage(instruction['Language'].downcase)
   end
 
