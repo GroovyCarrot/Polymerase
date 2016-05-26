@@ -22,6 +22,13 @@ following code.
   ]];
 }];
 ```
+```swift
+container.setService("example_service") { definition in
+  definition.klass = "MyExampleService" // Or with namespace: MyApplication.MyExampleService
+  definition.initializer = "init(dependency:)"
+  definition.arguments = [GCDIReference(forServiceId:"dependency_service")]
+}
+```
 
 It may seem strange to record a class name and a selector as a string;
 definitions do have methods that support passing `Class` and `SEL` types if you
@@ -54,6 +61,7 @@ already have all of your service definitions loaded into it, and be ready to go.
 # The compiler by default will use the basename of the YAML file, therefore 
 # without this line, you would need to call this file MyContainerClass.yml
 ContainerClass: MyContainerClass
+Language: ObjC # or 'Swift', defaults to ObjC.
 
 # Define parameters that are to be added to the container.
 Parameters:
@@ -70,10 +78,10 @@ Services:
 
   engine_factory:
     Class: EngineFactory
-    Initializer: 'initWithSparkPlugFactory:' # Will use 'init' by default.
+    Initializer: 'initWithSparkPlugFactory:' # 'init(sparkPlugFactory:)' in swift.
+                                             # Uses 'init' by default.
     Arguments:
       - '%spark_plug_factory%'
-
 ```
 
 #### Parameters
@@ -86,6 +94,9 @@ strings (`'I want to %foo%'`).
 Dynamic parameters can be added at runtime:
 ```objective-c
 [_container setParameter:@"NSBundle.mainBundle" value:[NSBundle mainBundle]];
+```
+```swift
+container.setParameter("NSBundle.mainBundle", value:NSBundle.mainBundle())
 ```
 
 The above can be called after (or during) initialising the container, however
@@ -166,8 +177,11 @@ available in the YAML file are valid, such as passing parameters with esclosing
 
 ## Include framework
 
-```
+```objective-c
 #import <GCDependencyInjection/GCDependencyInjection.h>
+```
+```swift
+import GCDependencyInjection
 ```
 
 ##### Libraries for embedding
