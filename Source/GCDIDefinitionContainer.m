@@ -310,7 +310,12 @@ static NSMapTable *registeredStoryboardContainers;
 
   NSInteger i = 2;
   for (id argument in arguments) {
-    [invocation setArgument:&argument atIndex:i];
+    id value = argument;
+    if (value == [NSNull null]) {
+      value = nil;
+    }
+
+    [invocation setArgument:&value atIndex:i];
   }
 }
 
