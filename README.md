@@ -119,7 +119,7 @@ data types, numbers will be converted into `NSNumber`. For example:
 ```yaml
 ingenium:
   Factory: '@engine_factory'
-  Initializer: 'engineWithBrand:andCylinders:'
+  Initializer: 'engineWithBrand:andCylinders:' # 'engineWithBrand:(_:andCylinders:)'
   Arguments:
     - 'INGENIUM'
     - 4
@@ -127,7 +127,7 @@ ingenium:
 
 jaguar:
   Factory: '@car_factory'
-  Initializer: 'carWithConfig:andEngine:'
+  Initializer: 'carWithConfig:andEngine:' # 'carWithConfig(_:andEngine:)'
   Arguments:
     - { Brand: 'Jaguar', Wheels: 4 }
     - '@ingenium'
@@ -186,7 +186,7 @@ import GCDependencyInjection
 
 ##### Libraries for embedding
 
-[Download 1.0.0-alpha1 frameworks for iOS and OSX](https://github.com/GroovyCarrot/GCDependencyInjection/releases/download/1.0.0-alpha1/GCDependencyInjection-1.0.0-alpha1.zip)
+[Download 1.0.0-alpha2 frameworks for iOS and OSX (Objective C and Swift)](https://github.com/GroovyCarrot/GCDependencyInjection/releases/download/1.0.0-alpha2/GCDependencyInjection-1.0.0-alpha2.zip)
 
 ***
 
