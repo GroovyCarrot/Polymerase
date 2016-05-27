@@ -24,7 +24,7 @@ following code.
 ```
 ```swift
 container.setService("example_service") { definition in
-  definition.klass = "MyExampleService" # Or with namespace: MyApplication.MyExampleService
+  definition.klass = "MyExampleService" // Or with namespace: MyApplication.MyExampleService
   definition.initializer = "init(dependency:)"
   definition.arguments = [GCDIReference(forServiceId:"dependency_service")]
 }
