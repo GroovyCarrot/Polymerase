@@ -24,7 +24,7 @@ following code.
 ```
 ```swift
 container.setService("example_service") { definition in
-  definition.klass = "MyExampleService" // Or with namespace: MyApplication.MyExampleService
+  definition.klass = "MyExampleService" # Or with namespace: MyApplication.MyExampleService
   definition.initializer = "init(dependency:)"
   definition.arguments = [GCDIReference(forServiceId:"dependency_service")]
 }
@@ -119,7 +119,7 @@ data types, numbers will be converted into `NSNumber`. For example:
 ```yaml
 ingenium:
   Factory: '@engine_factory'
-  Initializer: 'engineWithBrand:andCylinders:'
+  Initializer: 'engineWithBrand:andCylinders:' # 'engineWithBrand:(_:andCylinders:)'
   Arguments:
     - 'INGENIUM'
     - 4
@@ -127,7 +127,7 @@ ingenium:
 
 jaguar:
   Factory: '@car_factory'
-  Initializer: 'carWithConfig:andEngine:'
+  Initializer: 'carWithConfig:andEngine:' # 'carWithConfig(_:andEngine:)'
   Arguments:
     - { Brand: 'Jaguar', Wheels: 4 }
     - '@ingenium'
