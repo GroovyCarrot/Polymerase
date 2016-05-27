@@ -267,6 +267,7 @@ class CodeTranslator
   def wrapString(value)
     case value
     when 'nil'
+      case @language
       when 'swift'
         return 'NSNull()'
       else
