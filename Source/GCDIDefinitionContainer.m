@@ -63,7 +63,7 @@ static NSMapTable *registeredStoryboardContainers;
   IMP adjustedImp = imp_implementationWithBlock(^void (NSIBUserDefinedRuntimeAttributesConnector *_self) {
     // Resolve values before allowing attributes connector to connect them to
     // the object.
-    [_self setValues:[GCDIDefinitionContainer exposeValuesToRegisteredStoryboardContainers:[_self values]]];
+    [_self setValues:[self exposeValuesToRegisteredStoryboardContainers:[_self values]]];
     NSIBUserDefinedRuntimeAttributesConnector$establishConnection(_self, sel);
   });
 
@@ -84,7 +84,7 @@ static NSMapTable *registeredStoryboardContainers;
 
     Ivar iValues = class_getInstanceVariable(klass, "value");
     id value = object_getIvar(obj, iValues);
-    object_setIvar(obj, iValues, [GCDIDefinitionContainer exposeValuesToRegisteredStoryboardContainers:value]);
+    object_setIvar(obj, iValues, [self exposeValuesToRegisteredStoryboardContainers:value]);
 
     return obj;
   });

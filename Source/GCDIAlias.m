@@ -13,7 +13,7 @@
 @implementation GCDIAlias
 
 + (id)aliasForId:(NSString *)aliasId {
-  return [[GCDIAlias alloc] initForAliasId:aliasId];
+  return [[self alloc] initForAliasId:aliasId];
 }
 
 - (id)initForAliasId:(NSString *)aliasId {

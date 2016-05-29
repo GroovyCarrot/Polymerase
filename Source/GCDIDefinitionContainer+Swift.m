@@ -26,8 +26,8 @@
   }
 
   // Assume the swift class is part of the application.
-  return NSClassFromString([GCDIDefinitionContainer getSwiftClass:className
-                                                        forBundle:bundleName]);
+  return NSClassFromString([[self class] getSwiftClass:className
+                                             forBundle:bundleName]);
 }
 
 + (NSString *)getSwiftClass:(NSString *)className forBundle:(NSString *)application {

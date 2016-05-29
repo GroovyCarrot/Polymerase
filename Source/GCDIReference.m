@@ -16,13 +16,13 @@
             invalidBehaviourType = _invalidBehaviourType;
 
 + (GCDIReference *)referenceForServiceId:(NSString *)serviceId {
-  return [[GCDIReference alloc] initForServiceId:serviceId
-                            invalidBehaviourType:kExceptionOnInvalidReference];
+  return [[self alloc] initForServiceId:serviceId
+                   invalidBehaviourType:kExceptionOnInvalidReference];
 }
 
 + (GCDIReference *)referenceForServiceId:(NSString *)serviceId
                     invalidBehaviourType:(GCDIInvalidBehaviourType)invalidBehaviourType {
-  return [[GCDIReference alloc] initForServiceId:serviceId
+  return [[self alloc] initForServiceId:serviceId
                             invalidBehaviourType:invalidBehaviourType];
 }
 

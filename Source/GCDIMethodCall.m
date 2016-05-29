@@ -13,11 +13,11 @@
 @implementation GCDIMethodCall
 
 + (GCDIMethodCall *)methodCallForSelectorNamed:(NSString*)pSelector andArguments:(NSArray *)arguments {
-  return [[GCDIMethodCall alloc] initWithSelector:pSelector andArguments:arguments];
+  return [[self alloc] initWithSelector:pSelector andArguments:arguments];
 }
 
 + (GCDIMethodCall *)methodCallForSelector:(SEL)pSelector andArguments:(NSArray *)arguments {
-  return [[GCDIMethodCall alloc] initWithSelector:NSStringFromSelector(pSelector) andArguments:arguments];
+  return [[self alloc] initWithSelector:NSStringFromSelector(pSelector) andArguments:arguments];
 }
 
 - (GCDIMethodCall *)initWithSelector:(NSString *)pSelector andArguments:(NSArray *)arguments {
