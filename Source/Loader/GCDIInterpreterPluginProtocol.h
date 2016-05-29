@@ -14,5 +14,5 @@
 
 @protocol GCDIInterpreterPluginProtocol <NSObject>
 - (id)resolveValue:(GCDIReference *)reference forContainer:(GCDIDefinitionContainer *)container;
-- (id)interpretStringRepresentation:(NSString *)value;
+- (id)interpretStringValue:(NSString *)value;
 @end

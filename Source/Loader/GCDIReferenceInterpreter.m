@@ -16,31 +16,31 @@
 @implementation GCDIReferenceInterpreter
 
 + (void)load {
-  [GCDIInterpreter registerResolver:[[self alloc] init] forClass:[GCDIReference class]];
+  [GCDIInterpreter registerInterpreter:[[self alloc] init] forClass:[GCDIReference class]];
 }
 
-- (id)interpretStringRepresentation:(NSString *)service {
-  if ([service rangeOfString:@"@"].location == 0) {
-    GCDIInvalidBehaviourType invalidBehaviourType = NULL;
-
-    if ([service rangeOfString:@"@@"].location == 0) {
-      service = [service substringFromIndex:1];
-    }
-    else if ([service rangeOfString:@"@?"].location == 0) {
-      service = [service substringFromIndex:2];
-      invalidBehaviourType = kNilOnInvalidReference;
-    }
-    else {
-      service = [service substringFromIndex:1];
-      invalidBehaviourType = kExceptionOnInvalidReference;
-    }
-
-    if (invalidBehaviourType != NULL) {
-      return [GCDIReference referenceForServiceId:service
-                             invalidBehaviourType:invalidBehaviourType];
-    }
-
+- (id)interpretStringValue:(NSString *)service {
+  if ([service rangeOfString:@"@"].location != 0) {
     return service;
+  }
+
+  GCDIInvalidBehaviourType invalidBehaviourType = NULL;
+
+  if ([service rangeOfString:@"@@"].location == 0) {
+    service = [service substringFromIndex:1];
+  }
+  else if ([service rangeOfString:@"@?"].location == 0) {
+    service = [service substringFromIndex:2];
+    invalidBehaviourType = kNilOnInvalidReference;
+  }
+  else {
+    service = [service substringFromIndex:1];
+    invalidBehaviourType = kExceptionOnInvalidReference;
+  }
+
+  if (invalidBehaviourType != NULL) {
+    return [GCDIReference referenceForServiceId:service
+                           invalidBehaviourType:invalidBehaviourType];
   }
 
   return service;

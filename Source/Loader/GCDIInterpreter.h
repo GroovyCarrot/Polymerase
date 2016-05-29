@@ -14,7 +14,7 @@
 @class GCDIDefinitionContainer;
 
 @interface GCDIInterpreter : NSObject
-+ (void)registerResolver:(NSObject<GCDIInterpreterPluginProtocol> *)resolver forClass:(Class)klass;
++ (void)registerInterpreter:(NSObject <GCDIInterpreterPluginProtocol> *)resolver forClass:(Class)klass;
 - (id)interpretValue:(id)value;
 - (id)resolveValue:(id)_value forContainer:(GCDIDefinitionContainer *)container;
 - (BOOL)hasResolverForClass:(Class)klass;
