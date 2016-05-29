@@ -11,16 +11,10 @@
 #import "GCDIContainerNSDictionaryLoader.h"
 #import "GCDIDefinitionContainerProtocol.h"
 #import "GCDIAliasableContainerProtocol.h"
-#import "GCDIDefinition.h"
 #import "GCDIMethodCall.h"
-#import "GCDINSStringReferenceConverter.h"
+#import "GCDIInterpreter.h"
 
-@implementation GCDIContainerNSDictionaryLoader {
-  NSDictionary *_dictionary;
-  NSDictionary *_serviceDefinitions;
-}
-
-@synthesize dictionary = _dictionary;
+@implementation GCDIContainerNSDictionaryLoader
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
   self = [super init];
@@ -54,7 +48,7 @@
 
   NSDictionary *parameters = _dictionary[@"Parameters"];
   for (NSString *key in parameters.allKeys) {
-    [container setParameter:key value:[self.referenceConverter resolveReferencesToServices:parameters[key]]];
+    [container setParameter:key value:[self.interpreter interpretValue:parameters[key]]];
   }
 }
 
@@ -106,7 +100,7 @@
   }
 
   if (definitionDictionary[@"Factory"]) {
-    [serviceDefinition setFactory:[self.referenceConverter resolveReferencesToServices:definitionDictionary[@"Factory"]]];
+    [serviceDefinition setFactory:[self.interpreter interpretValue:definitionDictionary[@"Factory"]]];
   }
 
   if (definitionDictionary[@"Selector"]) {
@@ -118,11 +112,11 @@
   }
 
   if (definitionDictionary[@"Arguments"]) {
-    [serviceDefinition setArguments:[self.referenceConverter resolveReferencesToServices:definitionDictionary[@"Arguments"]]];
+    [serviceDefinition setArguments:[self.interpreter interpretValue:definitionDictionary[@"Arguments"]]];
   }
 
   if (definitionDictionary[@"Setters"]) {
-    [serviceDefinition setSetters:[self.referenceConverter resolveReferencesToServices:definitionDictionary[@"Setters"]]];
+    [serviceDefinition setSetters:[self.interpreter interpretValue:definitionDictionary[@"Setters"]]];
   }
 
   if (definitionDictionary[@"MethodCalls"]) {
@@ -133,7 +127,7 @@
       else if ([methodCall isKindOfClass:[NSDictionary class]]) {
         if (methodCall[@"Selector"] && methodCall[@"Arguments"]) {
           GCDIMethodCall *method = [GCDIMethodCall methodCallForSelector:NSSelectorFromString(methodCall[@"Selector"])
-                                                            andArguments:[self.referenceConverter resolveReferencesToServices:methodCall[@"Arguments"]]];
+                                                            andArguments:[self.interpreter interpretValue:methodCall[@"Arguments"]]];
           [serviceDefinition addMethodCall:method];
         }
         else {
@@ -151,11 +145,11 @@
   [container setService:serviceId definitionObject:serviceDefinition];
 }
 
-- (GCDINSStringReferenceConverter *)getReferenceConverter {
-  if (!_referenceConverter) {
-    _referenceConverter = [[GCDINSStringReferenceConverter alloc] init];
+- (GCDIInterpreter *)getInterpreter {
+  if (!_interpreter) {
+    _interpreter = [[GCDIInterpreter alloc] init];
   }
-  return _referenceConverter;
+  return _interpreter;
 }
 
 @end

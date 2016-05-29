@@ -9,7 +9,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GCDIInterpreterPluginProtocol.h"
 
-@interface GCDINSStringReferenceConverter : NSObject
-- (id)resolveReferencesToServices:(id)services;
+@interface GCDIReferenceInterpreter : NSObject<GCDIInterpreterPluginProtocol>
 @end

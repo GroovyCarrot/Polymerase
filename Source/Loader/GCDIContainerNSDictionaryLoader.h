@@ -10,12 +10,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class GCDINSStringReferenceConverter;
+@class GCDIInterpreter;
 @protocol GCDIDefinitionContainerProtocol;
 
 @interface GCDIContainerNSDictionaryLoader : NSObject
 @property (nonatomic, copy) NSDictionary *dictionary;
-@property (nonatomic, copy, getter=getReferenceConverter) GCDINSStringReferenceConverter *referenceConverter;
+@property (nonatomic, copy, getter=getInterpreter) GCDIInterpreter *interpreter;
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 - (void)loadIntoContainer:(id <GCDIDefinitionContainerProtocol>)container;
 @end

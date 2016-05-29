@@ -8,32 +8,19 @@
 // the terms of the license agreement accompanying it.
 //
 
-#import "GCDINSStringReferenceConverter.h"
+#import "GCDIReferenceInterpreter.h"
+#import "GCDIInterpreter.h"
 #import "GCDIReference.h"
+#import "GCDIDefinitionContainer.h"
 
-@implementation GCDINSStringReferenceConverter
+@implementation GCDIReferenceInterpreter
 
-- (id)resolveReferencesToServices:(id)_services {
-  if ([_services isKindOfClass:[NSArray class]]) {
-    NSArray *services = _services;
++ (void)load {
+  [GCDIInterpreter registerResolver:[[self alloc] init] forClass:[GCDIReference class]];
+}
 
-    NSMutableArray *resolvedServices = @[].mutableCopy;
-    for (id service in services) {
-      resolvedServices[resolvedServices.count] = [self resolveReferencesToServices:service];
-    }
-    return resolvedServices.copy;
-  }
-  if ([_services isKindOfClass:[NSDictionary class]]) {
-    NSDictionary *services = _services;
-
-    NSMutableDictionary *resolvedServices = @{}.mutableCopy;
-    for (NSString *key in services.allKeys) {
-      resolvedServices[key] = [self resolveReferencesToServices:services[key]];
-    }
-    return resolvedServices.copy;
-  }
-  else if ([_services isKindOfClass:[NSString class]] && [_services rangeOfString:@"@"].location == 0) {
-    NSString *service = _services;
+- (id)interpretStringRepresentation:(NSString *)service {
+  if ([service rangeOfString:@"@"].location == 0) {
     GCDIInvalidBehaviourType invalidBehaviourType = NULL;
 
     if ([service rangeOfString:@"@@"].location == 0) {
@@ -56,7 +43,12 @@
     return service;
   }
 
-  return _services;
+  return service;
+}
+
+- (id)resolveValue:(GCDIReference *)reference forContainer:(GCDIDefinitionContainer *)container {
+  return [container getServiceNamed:reference.serviceId
+               withInvalidBehaviour:reference.invalidBehaviourType];
 }
 
 @end

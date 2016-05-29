@@ -11,16 +11,17 @@
 #import "GCDIDefinitionContainer.h"
 #import "GCDIDefinition.h"
 #import "GCDIParameterBagProtocol.h"
-#import "GCDIReference.h"
 #import "GCDIExceptions.h"
 #import "GCDIMethodCall.h"
 #import "GCDIDefinitionContainer+Yaml.h"
 #import "GCDIAlias.h"
-#import "GCDINSStringReferenceConverter.h"
+#import "GCDIReferenceInterpreter.h"
 #import "GCDIDefinitionContainer+Swift.h"
+#import "GCDIInterpreter.h"
 #import <objc/runtime.h>
 
-static NSMapTable *registeredStoryboardContainers;
+static NSMapTable *$_registeredStoryboardContainers;
+static GCDIInterpreter *$_interpreter;
 
 @interface NSIBUserDefinedRuntimeAttributesConnector : NSObject
 - (void)establishConnection;
@@ -43,8 +44,11 @@ static NSMapTable *registeredStoryboardContainers;
 }
 
 + (void)load {
+  // Setup value interpreter.
+  $_interpreter = [[GCDIInterpreter alloc] init];
+
   // Setup runtime to allow injection into storyboards.
-  registeredStoryboardContainers = [NSMapTable strongToWeakObjectsMapTable];
+  $_registeredStoryboardContainers = [NSMapTable strongToWeakObjectsMapTable];
 
   if (objc_getClass("NSIBUserDefinedRuntimeAttributesConnector")) {
     [self injectIntoOSXStoryboardAttributesConnector];
@@ -93,14 +97,13 @@ static NSMapTable *registeredStoryboardContainers;
 }
 
 + (id)exposeValuesToRegisteredStoryboardContainers:(id)values {
-  GCDINSStringReferenceConverter *referenceConverter = [[GCDINSStringReferenceConverter alloc] init];
-  values = [referenceConverter resolveReferencesToServices:values];
+  values = [$_interpreter interpretValue:values];
 
   // @todo support unescaping parameter placeholders with multiple containers.
   // @todo support multiple containers in general without needing to use @? to
   // prevent the first container throwing exceptions for services that do not
   // exist within that container.
-  for (GCDIDefinitionContainer *container in registeredStoryboardContainers.keyEnumerator.allObjects) {
+  for (GCDIDefinitionContainer *container in $_registeredStoryboardContainers.keyEnumerator.allObjects) {
     values = [container.parameterBag resolveParameterPlaceholders:values];
     values = [container resolveServices:values];
   }
@@ -320,37 +323,7 @@ static NSMapTable *registeredStoryboardContainers;
 }
 
 - (id)resolveServices:(id)_resolveServices {
-  if ([_resolveServices isKindOfClass:[NSArray class]]) {
-    NSArray *resolveServices = _resolveServices;
-    NSMutableArray *resolvedServices = @[].mutableCopy;
-
-    for (NSUInteger i = 0; i < resolveServices.count; i++) {
-      resolvedServices[i] = [self resolveServices:resolveServices[i]];
-    }
-
-    return resolvedServices.copy;
-  }
-  else if ([_resolveServices isKindOfClass:[NSDictionary class]]) {
-    NSDictionary *resolveServices = _resolveServices;
-    NSMutableDictionary *resolvedServices = @{}.mutableCopy;
-
-    for (NSString *key in resolveServices) {
-      resolvedServices[key] = [self resolveServices:resolveServices[key]];
-    }
-
-    return resolvedServices.copy;
-  }
-  else if ([_resolveServices isKindOfClass:[GCDIReference class]]) {
-    GCDIReference *reference = _resolveServices;
-    return [self getServiceNamed:reference.serviceId
-            withInvalidBehaviour:reference.invalidBehaviourType];
-  }
-  else if ([_resolveServices isKindOfClass:[GCDIDefinition class]]) {
-    GCDIDefinition *definition = _resolveServices;
-    return [self createServiceNamed:nil fromDefinition:definition];
-  }
-
-  return _resolveServices;
+  return [$_interpreter resolveValue:_resolveServices forContainer:self];
 }
 
 - (void)setService:(NSString *)serviceId instance:(id)service {
@@ -502,8 +475,7 @@ static NSMapTable *registeredStoryboardContainers;
     return [super objectForKeyedSubscript:key];
   }
 
-  GCDINSStringReferenceConverter *converter = [[GCDINSStringReferenceConverter alloc] init];
-  key = [converter resolveReferencesToServices:key];
+  key = [$_interpreter interpretValue:key];
   return [self resolveServices:key];
 }
 
@@ -511,10 +483,10 @@ static NSMapTable *registeredStoryboardContainers;
 
 - (void)setContainerInjectsIntoStoryboards:(BOOL)injects {
   if (injects) {
-    [registeredStoryboardContainers setObject:_identifier forKey:self];
+    [$_registeredStoryboardContainers setObject:_identifier forKey:self];
   }
   else {
-    [registeredStoryboardContainers removeObjectForKey:_identifier];
+    [$_registeredStoryboardContainers removeObjectForKey:_identifier];
   }
 }
 
