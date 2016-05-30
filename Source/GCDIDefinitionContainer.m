@@ -232,18 +232,6 @@ static GCDIInterpreter *$_interpreter;
     [invocation invoke];
   }
 
-  for (GCDIMethodCall *methodCall in definition.methodCalls) {
-    NSInvocation *setupInvocation = [self buildInvocationForClass:[service class]
-                                                     withSelector:methodCall.pSelector
-                                                     andArguments:methodCall.arguments];
-    if (!invocation) {
-      [NSException raise:NSInvalidArgumentException
-                  format:@"Could not invoke method call \"%@\" on service \"%@\"", methodCall.pSelector, serviceId];
-    }
-
-    [setupInvocation invokeWithTarget:service];
-  }
-
   // Configure properties on the service using setters and values.
   for (NSString *setter in definition.setters.allKeys) {
     invocation = [self buildInvocationForClass:[service class]
@@ -255,6 +243,18 @@ static GCDIInterpreter *$_interpreter;
     }
 
     [invocation invokeWithTarget:service];
+  }
+
+  for (GCDIMethodCall *methodCall in definition.methodCalls) {
+    NSInvocation *setupInvocation = [self buildInvocationForClass:[service class]
+                                                     withSelector:methodCall.pSelector
+                                                     andArguments:methodCall.arguments];
+    if (!invocation) {
+      [NSException raise:NSInvalidArgumentException
+                  format:@"Could not invoke method call \"%@\" on service \"%@\"", methodCall.pSelector, serviceId];
+    }
+
+    [setupInvocation invokeWithTarget:service];
   }
 
   // Invoke the configurator and pass the service as the argument.
