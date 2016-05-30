@@ -230,7 +230,7 @@ class CodeTranslator
   def convertPropertyToSetter(property)
     if !property.include?(":")
       property = "#{property}:"
-      if property[0, 3] != 'set'
+      if !(property[0, 4] =~ /^set[A-Z]$/)
         property = "set" + property[0, 1].capitalize + property[1, property.length - 1]
       end
     end
