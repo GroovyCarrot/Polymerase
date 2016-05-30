@@ -12,7 +12,7 @@
 
 @class GCDIAlias;
 
-@protocol GCDIAliasableContainerProtocol <GCDIContainerProtocol>
+@protocol GCDIAliasableContainerProtocol<GCDIContainerProtocol>
 - (void)addAliases:(NSDictionary *)aliases;
 - (void)setAliases:(NSDictionary *)aliases;
 - (void)setAlias:(NSString *)alias to:(id)serviceId;

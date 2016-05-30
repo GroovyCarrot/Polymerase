@@ -17,5 +17,5 @@
 @property (nonatomic, copy) NSDictionary *dictionary;
 @property (nonatomic, copy, getter=getInterpreter) GCDIInterpreter *interpreter;
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-- (void)loadIntoContainer:(id <GCDIDefinitionContainerProtocol>)container;
+- (void)loadIntoContainer:(id<GCDIDefinitionContainerProtocol>)container;
 @end

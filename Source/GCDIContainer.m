@@ -33,7 +33,7 @@ NSString * const kGCDIServiceContainerId = @"service_container";
   return self;
 }
 
-- (id)initWithParameterBag:(id <GCDIParameterBagProtocol>)parameterBag {
+- (id)initWithParameterBag:(id<GCDIParameterBagProtocol>)parameterBag {
   self = [self init];
   if (!self) {
     return nil;

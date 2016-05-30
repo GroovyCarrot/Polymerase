@@ -10,6 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol GCDIResettableContainerProtocol <NSObject>
+@protocol GCDIResettableContainerProtocol<NSObject>
 - (void)reset;
 @end

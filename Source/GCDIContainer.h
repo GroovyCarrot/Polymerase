@@ -15,22 +15,22 @@
 @protocol GCDIParameterBagProtocol,
           GCDIAlternativeSuggesterProtocol;
 
-@interface GCDIContainer : NSObject <GCDIContainerProtocol, GCDIAliasableContainerProtocol, GCDIResettableContainerProtocol> {
+@interface GCDIContainer : NSObject<GCDIContainerProtocol, GCDIAliasableContainerProtocol, GCDIResettableContainerProtocol> {
  @protected
   NSMutableDictionary *_services;
   NSMutableDictionary *_loading;
   NSMutableDictionary *_aliases;
   NSMutableDictionary *_methodMap;
 
-  id <GCDIParameterBagProtocol> _parameterBag;
-  id <GCDIAlternativeSuggesterProtocol> _alternativeSuggester;
+  id<GCDIParameterBagProtocol> _parameterBag;
+  id<GCDIAlternativeSuggesterProtocol> _alternativeSuggester;
 }
 
-@property(nonatomic, strong, readonly, getter=getParameterBag) id <GCDIParameterBagProtocol> parameterBag;
-@property(nonatomic, strong) id <GCDIAlternativeSuggesterProtocol> alternativeSuggester;
+@property(nonatomic, strong, readonly, getter=getParameterBag) id<GCDIParameterBagProtocol> parameterBag;
+@property(nonatomic, strong) id<GCDIAlternativeSuggesterProtocol> alternativeSuggester;
 
 - (id)init;
-- (id)initWithParameterBag:(id <GCDIParameterBagProtocol>)parameterBag;
+- (id)initWithParameterBag:(id<GCDIParameterBagProtocol>)parameterBag;
 - (NSArray *)getServiceIds;
 
 - (id)objectForKeyedSubscript:(NSString*)key;

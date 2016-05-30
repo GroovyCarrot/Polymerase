@@ -10,6 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol GCDIAlternativeSuggesterProtocol <NSObject>
+@protocol GCDIAlternativeSuggesterProtocol<NSObject>
 - (NSArray *)alternativesForItem:(NSString *)item inPossibleOptions:(NSArray *)options;
 @end

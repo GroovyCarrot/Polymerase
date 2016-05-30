@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "GCDIParameterBagProtocol.h"
 
-@interface GCDIParameterBag : NSObject <GCDIParameterBagProtocol>
+@interface GCDIParameterBag : NSObject<GCDIParameterBagProtocol>
 @property(nonatomic, readonly, getter=isResolved) BOOL resolved;
 - (id)init;
 - (id)initWithParameters:(NSDictionary *)parameters;

@@ -16,7 +16,7 @@ static NSMutableDictionary *$_plugins;
 
 @implementation GCDIInterpreter
 
-+ (void)registerInterpreter:(NSObject <GCDIInterpreterPluginProtocol> *)resolver forClass:(Class)klass {
++ (void)registerInterpreter:(id<GCDIInterpreterPluginProtocol>)resolver forClass:(Class)klass {
   if (!$_plugins) {
     $_plugins = @{}.mutableCopy;
   }
@@ -46,7 +46,7 @@ static NSMutableDictionary *$_plugins;
   }
 
   if ([_value isKindOfClass:[NSString class]]) {
-    for (NSObject<GCDIInterpreterPluginProtocol> *resolver in $_plugins.allValues) {
+    for (id<GCDIInterpreterPluginProtocol> resolver in $_plugins.allValues) {
       id value = [resolver interpretStringValue:_value];
       if (value != _value) {
         return value;
@@ -89,7 +89,7 @@ static NSMutableDictionary *$_plugins;
   return $_plugins[NSStringFromClass(klass)] != nil;
 }
 
-- (NSObject<GCDIInterpreterPluginProtocol> *)resolverForClass:(Class)klass {
+- (id<GCDIInterpreterPluginProtocol>)resolverForClass:(Class)klass {
   return $_plugins[NSStringFromClass(klass)];
 }
 

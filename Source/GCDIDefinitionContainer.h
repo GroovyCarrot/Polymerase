@@ -12,7 +12,7 @@
 #import "GCDIContainer.h"
 #import "GCDIDefinitionContainerProtocol.h"
 
-@interface GCDIDefinitionContainer : GCDIContainer <GCDIDefinitionContainerProtocol> {
+@interface GCDIDefinitionContainer : GCDIContainer<GCDIDefinitionContainerProtocol> {
  @protected
   NSMutableDictionary *_definitions;
   NSMutableDictionary *_aliasDefinitions;

@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol GCDIParameterBagProtocol <NSObject>
+@protocol GCDIParameterBagProtocol<NSObject>
 - (void)clearParameters;
 - (void)addParameters:(NSDictionary *)parameters;
 - (NSDictionary *)allParameters;

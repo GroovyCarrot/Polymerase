@@ -15,7 +15,7 @@ typedef enum {
   kNilOnInvalidReference
 } GCDIInvalidBehaviourType;
 
-@protocol GCDIContainerProtocol
+@protocol GCDIContainerProtocol<NSObject>
 - (id)getService:(NSString *)serviceId;
 - (id)getServiceNamed:(NSString *)serviceId withInvalidBehaviour:(GCDIInvalidBehaviourType)invalidBehaviourType;
 - (void)setService:(NSString *)serviceId instance:(id)service;

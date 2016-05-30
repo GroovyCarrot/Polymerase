@@ -11,7 +11,7 @@
 #import "GCDIContainerProtocol.h"
 #import "GCDIDefinition.h"
 
-@protocol GCDIDefinitionContainerProtocol <GCDIContainerProtocol>
+@protocol GCDIDefinitionContainerProtocol<GCDIContainerProtocol>
 - (void)setService:(NSString *)serviceId definition:(GCDIDefinitionBlock)definition;
 - (void)setService:(NSString *)serviceId definitionObject:(GCDIDefinition *)definition;
 - (void)addDefinitions:(NSDictionary *)definitions;

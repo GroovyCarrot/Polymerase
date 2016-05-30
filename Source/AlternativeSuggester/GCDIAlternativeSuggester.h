@@ -11,5 +11,5 @@
 #import <Foundation/Foundation.h>
 #import "GCDIAlternativeSuggesterProtocol.h"
 
-@interface GCDIAlternativeSuggester : NSObject <GCDIAlternativeSuggesterProtocol>
+@interface GCDIAlternativeSuggester : NSObject<GCDIAlternativeSuggesterProtocol>
 @end

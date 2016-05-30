@@ -27,7 +27,7 @@
   return self;
 }
 
-- (void)loadIntoContainer:(NSObject<GCDIDefinitionContainerProtocol> *)container {
+- (void)loadIntoContainer:(id<GCDIDefinitionContainerProtocol>)container {
   if (![[(NSObject *) container class] conformsToProtocol:@protocol(GCDIDefinitionContainerProtocol)]) {
     [NSException raise:NSInvalidArgumentException
                 format:@"Container must conform to protocol GCDIContainerProtocol."];
@@ -37,7 +37,7 @@
   [self parseServiceDefinitionsIntoContainer:container];
 }
 
-- (void)parseParametersIntoContainer:(NSObject<GCDIContainerProtocol> *)container {
+- (void)parseParametersIntoContainer:(id<GCDIContainerProtocol>)container {
   if (!_dictionary[@"Parameters"]) {
     return;
   }
@@ -52,7 +52,7 @@
   }
 }
 
-- (void)parseServiceDefinitionsIntoContainer:(NSObject<GCDIDefinitionContainerProtocol> *)container {
+- (void)parseServiceDefinitionsIntoContainer:(id<GCDIDefinitionContainerProtocol>)container {
   if (!_dictionary[@"Services"]) {
     return;
   }
@@ -71,7 +71,7 @@
 
 - (void)parseDefinition:(id)definition
                        forServiceId:(NSString *)serviceId
-                      intoContainer:(NSObject<GCDIDefinitionContainerProtocol> *)container {
+                      intoContainer:(id<GCDIDefinitionContainerProtocol>)container {
 
   if ([definition isKindOfClass:[NSString class]]) {
     if (![[definition substringToIndex:1] isEqualToString:@"@"]) {
@@ -81,7 +81,7 @@
 
     // Attempt to load alias into container if it supports them.
     if ([[container class] conformsToProtocol:@protocol(GCDIAliasableContainerProtocol)]) {
-      [(NSObject <GCDIAliasableContainerProtocol> *) container setAlias:[definition substringFromIndex:1]
+      [(id<GCDIAliasableContainerProtocol>) container setAlias:[definition substringFromIndex:1]
                                                                      to:serviceId];
     }
 

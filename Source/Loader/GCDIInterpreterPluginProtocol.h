@@ -12,7 +12,7 @@
 
 @class GCDIReference, GCDIDefinitionContainer;
 
-@protocol GCDIInterpreterPluginProtocol <NSObject>
+@protocol GCDIInterpreterPluginProtocol<NSObject>
 - (id)resolveValue:(GCDIReference *)reference forContainer:(GCDIDefinitionContainer *)container;
 - (id)interpretStringValue:(NSString *)value;
 @end

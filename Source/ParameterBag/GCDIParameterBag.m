@@ -16,7 +16,7 @@
 @implementation GCDIParameterBag {
  @private
   NSMutableDictionary *_parameters;
-  id <GCDIAlternativeSuggesterProtocol> _alternativeSuggester;
+  id<GCDIAlternativeSuggesterProtocol> _alternativeSuggester;
 }
 
 @synthesize resolved = _resolved;
@@ -32,7 +32,7 @@
 }
 
 - (id)initWithParameters:(NSDictionary *)parameters
- andAlternativeSuggester:(id <GCDIAlternativeSuggesterProtocol>)alternativeSuggester {
+ andAlternativeSuggester:(id<GCDIAlternativeSuggesterProtocol>)alternativeSuggester {
   self = [super init];
   if (!self) {
     return nil;
