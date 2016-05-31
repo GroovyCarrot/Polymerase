@@ -113,8 +113,10 @@ class ContainerDefinitionParser
       definition['MethodCalls'].each do |methodCall|
         if methodCall.is_a?(Hash)
           @lines.push(@parser.callSetterMethod('definition', 'addMethodCall', @parser.createMethodCall(methodCall['Selector'], methodCall['Arguments']), true))
-        else
+        elsif methodCall.is_a?(Array)
           @lines.push(@parser.callSetterMethod('definition', 'addMethodCall', @parser.createMethodCall(methodCall[0], methodCall[1]), true))
+        else
+          @lines.push(@parser.callSetterMethod('definition', 'addMethodCall', @parser.createMethodCall(methodCall, []), true))
         end
       end
     end
