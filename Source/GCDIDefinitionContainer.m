@@ -196,9 +196,10 @@ static GCDIInterpreter *$_interpreter;
   NSInvocation *invocation;
   if (definition.factory) {
     id factory = [self resolveServices:[self.parameterBag resolveParameterPlaceholders:definition.factory]];
+    NSArray *arguments = definition.arguments.copy;
     invocation = [self buildInvocationForClass:[factory class]
                                   withSelector:definition.initializer
-                                  andArguments:definition.arguments];
+                                  andArguments:&arguments];
 
     // Invoke the required method on the factory object.
     [invocation setTarget:factory];
@@ -222,9 +223,10 @@ static GCDIInterpreter *$_interpreter;
       }
     }
 
+    NSArray *arguments = definition.arguments.copy;
     invocation = [self buildInvocationForClass:klass
                                   withSelector:definition.initializer ?: @"init"
-                                  andArguments:definition.arguments];
+                                  andArguments:&arguments];
 
     service = [klass alloc];
     [invocation setTarget:service];
@@ -234,9 +236,10 @@ static GCDIInterpreter *$_interpreter;
 
   // Configure properties on the service using setters and values.
   for (NSString *setter in definition.setters.allKeys) {
+    NSArray *arguments = @[definition.setters[setter]];
     invocation = [self buildInvocationForClass:[service class]
                                   withSelector:setter
-                                  andArguments:@[definition.setters[setter]]];
+                                  andArguments:&arguments];
     if (!invocation) {
       [NSException raise:NSInvalidArgumentException
                   format:@"Could not apply setter \"%@\" to service \"%@\"", setter, serviceId];
@@ -246,9 +249,10 @@ static GCDIInterpreter *$_interpreter;
   }
 
   for (GCDIMethodCall *methodCall in definition.methodCalls) {
+    NSArray *arguments = methodCall.arguments.copy;
     NSInvocation *setupInvocation = [self buildInvocationForClass:[service class]
                                                      withSelector:methodCall.pSelector
-                                                     andArguments:methodCall.arguments];
+                                                     andArguments:&arguments];
     if (!invocation) {
       [NSException raise:NSInvalidArgumentException
                   format:@"Could not invoke method call \"%@\" on service \"%@\"", methodCall.pSelector, serviceId];
@@ -261,9 +265,10 @@ static GCDIInterpreter *$_interpreter;
   // @todo support configurator arguments.
   if (definition.configurator) {
     id configurator = [self resolveServices:definition.configurator];
+    NSArray *arguments = @[service];
     invocation = [self buildInvocationForClass:[configurator class]
                                   withSelector:definition.configuratorSelector
-                                  andArguments:@[service]];
+                                  andArguments:&arguments];
     if (!invocation) {
       [NSException raise:NSInvalidArgumentException
                   format:@"Could not invoke configurator \"%@\" to service \"%@\"", definition.configurator, serviceId];
@@ -279,7 +284,7 @@ static GCDIInterpreter *$_interpreter;
   return service;
 }
 
-- (NSInvocation *)buildInvocationForClass:(Class)klass withSelector:(NSString *)pSelector andArguments:(NSArray *)arguments {
+- (NSInvocation *)buildInvocationForClass:(Class)klass withSelector:(NSString *)pSelector andArguments:(NSArray **)arguments {
   // Resolve selector name, if necessary.
   pSelector = [self.parameterBag resolveParameterPlaceholders:pSelector];
   pSelector = [self.parameterBag escapeParameterPlaceholders:pSelector];
@@ -295,9 +300,9 @@ static GCDIInterpreter *$_interpreter;
     }
   }
 
-  if (arguments.count != methodSignature.numberOfArguments - 2) {
+  if ((*arguments).count != methodSignature.numberOfArguments - 2) {
     [NSException raise:NSInvalidArgumentException
-                format:@"Invalid amount of arguments (%zd/%zd) provided for method signature for selector \"%@\"", arguments.count, methodSignature.numberOfArguments - 2, pSelector];
+                format:@"Invalid amount of arguments (%td/%td) provided for method signature for selector \"%@\"", (*arguments).count, methodSignature.numberOfArguments - 2, pSelector];
   }
 
   NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
@@ -306,13 +311,13 @@ static GCDIInterpreter *$_interpreter;
   return invocation;
 }
 
-- (void)addArguments:(NSArray *)arguments toInvocation:(NSInvocation *)invocation {
-  arguments = [self.parameterBag resolveParameterPlaceholders:arguments];
-  arguments = [self.parameterBag unescapeParameterPlaceholders:arguments];
-  arguments = [self resolveServices:arguments];
+- (void)addArguments:(NSArray **)arguments toInvocation:(NSInvocation *)invocation {
+  *arguments = [self.parameterBag resolveParameterPlaceholders:*arguments];
+  *arguments = [self.parameterBag unescapeParameterPlaceholders:*arguments];
+  *arguments = [self resolveServices:*arguments];
 
   NSInteger i = 2;
-  for (id argument in arguments) {
+  for (id argument in *arguments) {
     id value = argument;
     if (value == [NSNull null]) {
       value = nil;
