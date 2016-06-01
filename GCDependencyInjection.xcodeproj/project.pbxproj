@@ -204,6 +204,7 @@
 		CAD68A694AE7F2080CA2443F /* GCDIDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDefinition.h; sourceTree = "<group>"; };
 		CAD68A934F782601F50671CD /* GCDIInterpreterPluginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIInterpreterPluginProtocol.h; sourceTree = "<group>"; };
 		CAD68ABD5B31D0D3A6A5D71F /* GCDIInjectedExampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIInjectedExampleService.h; sourceTree = "<group>"; };
+		CAD68AE3A6BC90B1D140AF2A /* GCDIYamlExampleContainer+Params.yml */ = {isa = PBXFileReference; lastKnownFileType = file.yml; path = "GCDIYamlExampleContainer+Params.yml"; sourceTree = "<group>"; };
 		CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIAlias.h; sourceTree = "<group>"; };
 		CAD68B2F5949349CEEE90604 /* GCDIExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIExceptions.h; sourceTree = "<group>"; };
 		CAD68BAC9639333F80F5A647 /* GCDIDefinitionContainer+Yaml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GCDIDefinitionContainer+Yaml.m"; sourceTree = "<group>"; };
@@ -418,6 +419,7 @@
 				CAD68CEAC61DA290574B47F1 /* GCDIExampleFactoryService.m */,
 				CAD685D0616C2311A26DC0A2 /* GCDIExampleFactoryService.h */,
 				CAD68F8780AAB36E94E5AD43 /* GCDIDefinitionContainerSwiftTests.m */,
+				CAD68AE3A6BC90B1D140AF2A /* GCDIYamlExampleContainer+Params.yml */,
 			);
 			path = Tests;
 			sourceTree = "<group>";

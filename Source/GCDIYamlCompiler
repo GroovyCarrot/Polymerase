@@ -12,6 +12,13 @@
 require 'yaml'
 require 'optparse'
 
+class ::Hash
+    def deep_merge(second)
+        merger = proc { |key, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : v2 }
+        self.merge(second, &merger)
+    end
+end
+
 class ContainerYamlCompiler
   @@output
   @@definitionParser
@@ -397,29 +404,20 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-code_writter = CodeTranslator.new()
-code_writter.setLanguage(options[:language])
-writer = ContainerYamlCompiler.new(ContainerDefinitionParser.new, code_writter)
-
-if options[:output] && !options[:outputIsDir]
-  writer.setOutput(File.open(options[:output], 'w+'))
-end
-
-ARGV.each do |file|
+def loadInstructionForFile(file, container_classes, klass = false)
   file = File.expand_path(file)
 
   if !File.exists?(file)
     puts 'File not found: ' + file + '. Skipping.'
-    next
+    return
   end
 
   # Assume the filename is the name of the class that the implementation is for.
-  klass = File.basename(file, '.*')
+  if klass == false
+    klass = File.basename(file, '.*')
+  end
 
   instruction = YAML.load_file(file)
-  if instruction['Language'] && ['objc', 'swift'].include?(instruction['Language'].downcase)
-    code_writter.setLanguage(instruction['Language'].downcase)
-  end
 
   if !instruction.is_a?(Hash)
     instruction = {}
@@ -428,6 +426,44 @@ ARGV.each do |file|
     # write to with ContainerClass key.
     klass = instruction['ContainerClass']
   end
+
+  instruction[:file] = file
+
+  current_instruction = container_classes[klass] ? container_classes[klass] : {};
+  container_classes[klass] = instruction.deep_merge(current_instruction)
+
+  if instruction['Import'].is_a?(Array)
+    instruction['Import'].each do |sfile|
+      loadInstructionForFile(File.dirname(file) + '/' + sfile, container_classes, klass)
+    end
+  end
+end
+
+#
+# Program start.
+#
+
+code_writter = CodeTranslator.new()
+code_writter.setLanguage(options[:language])
+writer = ContainerYamlCompiler.new(ContainerDefinitionParser.new, code_writter)
+
+if options[:output] && !options[:outputIsDir]
+  writer.setOutput(File.open(options[:output], 'w+'))
+end
+
+# Parse YAML files to determine classes and setup instructions.
+container_classes = {}
+ARGV.each do |file|
+  loadInstructionForFile(file, container_classes)
+end
+
+# Build container classes YAML implementation.
+container_classes.each do |klass, instruction|
+  if instruction['Language'] && ['objc', 'swift'].include?(instruction['Language'].downcase)
+    code_writter.setLanguage(instruction['Language'].downcase)
+  end
+
+  file = instruction[:file]
 
   if !options[:output]
     # Write file to the source file directory.

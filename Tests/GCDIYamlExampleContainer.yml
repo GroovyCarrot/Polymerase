@@ -1,7 +1,7 @@
 ContainerClass: 'GCDIYamlExampleContainer'
 
-Parameters:
-  example.parameter: '@example.alias'
+Import:
+  - 'GCDIYamlExampleContainer+Params.yml'
 
 Services:
   example.service.factory:
