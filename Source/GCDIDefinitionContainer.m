@@ -151,10 +151,7 @@ static GCDIInterpreter *$_interpreter;
     definition = [self getDefinitionForService:serviceId];
   }
   @catch (NSException *e) {
-    if (invalidBehaviourType != kExceptionOnInvalidReference) {
-      return nil;
-    }
-    @throw e;
+    return [self handleInvalidBehaviour:invalidBehaviourType withException:e];
   }
 
   if ([definition isLazy]) {
@@ -167,16 +164,24 @@ static GCDIInterpreter *$_interpreter;
     service = [self createServiceNamed:serviceId fromDefinition:definition];
   }
   @catch (NSException *e) {
-    if (invalidBehaviourType != kExceptionOnInvalidReference) {
-      return nil;
-    }
-    @throw e;
+    return [self handleInvalidBehaviour:invalidBehaviourType withException:e];
   }
   @finally {
     [_loading removeObjectForKey:serviceId];
   }
 
   return service;
+}
+
+- (id)handleInvalidBehaviour:(GCDIInvalidBehaviourType)invalidBehaviourType withException:(NSException *)e {
+  switch (invalidBehaviourType) {
+    case kNilOnInvalidReference:
+      return nil;
+
+    case kExceptionOnInvalidReference:
+    default:
+      @throw e;
+  }
 }
 
 - (id)createServiceNamed:(NSString *)serviceId fromDefinition:(GCDIDefinition *)definition {
