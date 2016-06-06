@@ -46,7 +46,7 @@
   return service;
 }
 
-- (id)resolveValue:(GCDIReference *)reference forContainer:(GCDIDefinitionContainer *)container {
+- (id)resolveValue:(GCDIReference *)reference forContainer:(id<GCDIDefinitionContainerProtocol>)container {
   return [container getServiceNamed:reference.serviceId
                withInvalidBehaviour:reference.invalidBehaviourType];
 }

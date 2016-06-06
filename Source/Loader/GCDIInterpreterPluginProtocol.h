@@ -11,8 +11,9 @@
 #import <Foundation/Foundation.h>
 
 @class GCDIReference, GCDIDefinitionContainer;
+@protocol GCDIDefinitionContainerProtocol;
 
 @protocol GCDIInterpreterPluginProtocol<NSObject>
-- (id)resolveValue:(GCDIReference *)reference forContainer:(GCDIDefinitionContainer *)container;
+- (id)resolveValue:(id)reference forContainer:(id<GCDIDefinitionContainerProtocol>)container;
 - (id)interpretStringValue:(NSString *)value;
 @end
