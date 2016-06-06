@@ -11,6 +11,11 @@
 #import <Foundation/Foundation.h>
 
 @interface GCDIExampleService : NSObject
+@property (nonatomic, strong) NSNumber *a;
+@property (nonatomic, strong) NSNumber *b;
+@property (nonatomic, strong) NSNumber *c;
 - (GCDIExampleService *)initService;
 - (BOOL)exampleServiceInitialised;
+- (void)setA:(NSNumber *)a andB:(NSNumber *)b;
+- (void)setA:(NSNumber *)a andB:(NSNumber *)b andC:(NSNumber *)c;
 @end

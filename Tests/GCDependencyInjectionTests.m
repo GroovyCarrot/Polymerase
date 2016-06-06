@@ -116,4 +116,33 @@
   XCTAssertTrue([[service injectedService] exampleServiceInitialised]);
 }
 
+- (void)testMethodCallMultipleArguments {
+  [_container setService:@"example_service.a_and_b" definition:^(GCDIDefinition *definition) {
+    [definition setClass:[GCDIExampleService class]];
+    [definition setMethodCalls:@[
+      [GCDIMethodCall methodCallForSelector:@selector(setA:andB:)
+                               andArguments:@[@100, @200]],
+    ]];
+  }];
+
+  GCDIExampleService *service = [_container getService:@"example_service.a_and_b"];
+  XCTAssertNotNil(service);
+  XCTAssertEqualObjects(service.a, @100);
+  XCTAssertEqualObjects(service.b, @200);
+
+  [_container setService:@"example_service.a_and_b_and_c" definition:^(GCDIDefinition *definition) {
+    [definition setClass:[GCDIExampleService class]];
+    [definition setMethodCalls:@[
+      [GCDIMethodCall methodCallForSelector:@selector(setA:andB:andC:)
+                               andArguments:@[@300, @400, @500]],
+    ]];
+  }];
+
+  service = [_container getService:@"example_service.a_and_b_and_c"];
+  XCTAssertNotNil(service);
+  XCTAssertEqualObjects(service.a, @300);
+  XCTAssertEqualObjects(service.b, @400);
+  XCTAssertEqualObjects(service.c, @500);
+}
+
 @end

@@ -30,4 +30,15 @@
   return _initialised;
 }
 
+- (void)setA:(NSNumber *)a andB:(NSNumber *)b {
+  _a = a;
+  _b = b;
+}
+
+- (void)setA:(NSNumber *)a andB:(NSNumber *)b andC:(NSNumber *)c {
+  _a = a;
+  _b = b;
+  _c = c;
+}
+
 @end
