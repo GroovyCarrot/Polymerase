@@ -329,6 +329,7 @@ static GCDIInterpreter *$_interpreter;
     }
 
     [invocation setArgument:&value atIndex:i];
+    i++;
   }
 }
 
