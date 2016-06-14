@@ -186,7 +186,7 @@ import GCDependencyInjection
 
 ##### Libraries for embedding
 
-[Download 1.0.0-alpha2 frameworks for iOS and OSX (Objective C and Swift)](https://github.com/GroovyCarrot/GCDependencyInjection/releases/download/1.0.0-alpha2/GCDependencyInjection-1.0.0-alpha2.zip)
+[Download 1.0.0-alpha3 frameworks for iOS and OSX (Objective C and Swift)](https://github.com/GroovyCarrot/GCDependencyInjection/releases/download/1.0.0-alpha3/GCDependencyInjection-1.0.0-alpha3.zip)
 
 ***
 
