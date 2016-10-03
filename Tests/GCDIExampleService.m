@@ -41,4 +41,12 @@
   _c = c;
 }
 
+- (void)setANSInteger:(NSInteger)a {
+  _a = @(a);
+}
+
+- (void)setAFloat:(float)a {
+  _a = [NSDecimalNumber numberWithFloat:a];
+}
+
 @end
