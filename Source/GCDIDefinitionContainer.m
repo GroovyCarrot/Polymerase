@@ -484,18 +484,6 @@ static GCDIInterpreter *$_interpreter;
   return services.copy;
 }
 
-- (id)objectForKeyedSubscript:(id)key {
-  key = [self.parameterBag resolveParameterPlaceholders:key];
-  key = [self.parameterBag unescapeParameterPlaceholders:key];
-
-  if ([key isKindOfClass:[NSString class]] && ![[key substringToIndex:1] isEqualToString:@"@"]) {
-    return [super objectForKeyedSubscript:key];
-  }
-
-  key = [$_interpreter interpretValue:key];
-  return [self resolveServices:key];
-}
-
 # pragma mark Storyboard injection
 
 - (void)setContainerInjectsIntoStoryboards:(BOOL)injects {
