@@ -330,11 +330,16 @@ static GCDIInterpreter *$_interpreter;
 
     // If this is a concrete value, then assume that the method is expecting it.
     if ([value class] == objc_getClass("NSConcreteValue")) {
-      id oValue = value;
-      [oValue getValue:&value];
+      void *cValue;
+      NSValue *oValue = argument;
+      [oValue getValue:&cValue];
+
+      [invocation setArgument:&cValue atIndex:i];
+    }
+    else {
+      [invocation setArgument:&value atIndex:i];
     }
 
-    [invocation setArgument:&value atIndex:i];
     i++;
   }
 }
