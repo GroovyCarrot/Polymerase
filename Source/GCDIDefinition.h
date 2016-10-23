@@ -19,10 +19,10 @@
 @property (nonatomic, copy, getter=getInitializer, setter=setInitializer:) NSString *initializer;
 @property (nonatomic, copy) NSString *pathToLibrary;
 
-@property (nonatomic, copy) NSMutableArray *arguments;
-@property (nonatomic, copy) NSMutableDictionary *setters;
-@property (nonatomic, copy) NSMutableArray *methodCalls;
-@property (nonatomic, copy) NSMutableDictionary *tags;
+@property (nonatomic, copy) NSArray *arguments;
+@property (nonatomic, copy) NSDictionary *setters;
+@property (nonatomic, copy) NSArray *methodCalls;
+@property (nonatomic, copy) NSDictionary *tags;
 
 @property (nonatomic, strong) id configurator;
 @property (nonatomic, copy) NSString *configuratorSelector;

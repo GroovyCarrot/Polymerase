@@ -11,7 +11,15 @@
 #import "GCDIDefinition.h"
 #import "GCDIMethodCall.h"
 
-@implementation GCDIDefinition
+@implementation GCDIDefinition {
+ @protected
+  // Internally, we will use mutable objects for more efficient memory
+  // management.
+  NSMutableArray *_arguments;
+  NSMutableDictionary *_setters;
+  NSMutableArray *_methodCalls;
+  NSMutableDictionary *_tags;
+}
 
 @synthesize isPublic = _public;
 
