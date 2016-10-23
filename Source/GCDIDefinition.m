@@ -15,10 +15,12 @@
  @protected
   // Internally, we will use mutable objects for more efficient memory
   // management.
-  NSMutableArray *_arguments;
-  NSMutableDictionary *_setters;
-  NSMutableArray *_methodCalls;
-  NSMutableDictionary *_tags;
+  NSMutableArray<id> *_arguments;
+  NSMutableDictionary<NSString *, id> *_setters;
+  NSMutableArray<GCDIMethodCall *> *_methodCalls;
+  // @todo switch string based tags for dictionary tags, to allow a tag to have
+  // attributes.
+  NSMutableDictionary<NSString *, NSString *> *_tags;
 }
 
 @synthesize isPublic = _public;
@@ -66,19 +68,19 @@
   _initializer = NSStringFromSelector(pSelector).copy;
 }
 
-- (void)setArguments:(NSArray *)arguments {
+- (void)setArguments:(NSArray<id> *)arguments {
   _arguments = arguments.mutableCopy;
 }
 
-- (void)setSetters:(NSDictionary *)setters {
+- (void)setSetters:(NSDictionary<NSString *, id> *)setters {
   _setters = setters.mutableCopy;
 }
 
-- (void)setMethodCalls:(NSArray *)methodCalls {
+- (void)setMethodCalls:(NSArray<GCDIMethodCall *> *)methodCalls {
   _methodCalls = methodCalls.mutableCopy;
 }
 
-- (void)setTags:(NSDictionary *)tags {
+- (void)setTags:(NSDictionary<NSString *, NSString *> *)tags {
   _tags = tags.mutableCopy;
 }
 
@@ -88,7 +90,7 @@
   _arguments[_arguments.count] = argument;
 }
 
-- (void)replaceArgument:(id)argument atIndex:(NSUInteger)index {
+- (void)replaceArgumentAtIndex:(NSUInteger)index with:(id)argument {
   _arguments[index] = argument;
 }
 

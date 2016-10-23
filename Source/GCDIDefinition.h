@@ -19,10 +19,10 @@
 @property (nonatomic, copy, getter=getInitializer, setter=setInitializer:) NSString *initializer;
 @property (nonatomic, copy) NSString *pathToLibrary;
 
-@property (nonatomic, copy) NSArray *arguments;
-@property (nonatomic, copy) NSDictionary *setters;
-@property (nonatomic, copy) NSArray *methodCalls;
-@property (nonatomic, copy) NSDictionary *tags;
+@property (nonatomic, copy) NSArray<id> *arguments;
+@property (nonatomic, copy) NSDictionary<NSString *, id> *setters;
+@property (nonatomic, copy) NSArray<GCDIMethodCall *> *methodCalls;
+@property (nonatomic, copy) NSDictionary<NSString *, NSString *> *tags;
 
 @property (nonatomic, strong) id configurator;
 @property (nonatomic, copy) NSString *configuratorSelector;
@@ -39,13 +39,10 @@
 
 - (void)setClass:(Class)klass;
 - (void)setInitializerSelector:(SEL)pSelector;
-- (void)setArguments:(NSArray *)arguments;
-- (void)setSetters:(NSDictionary *)setters;
-- (void)setMethodCalls:(NSArray *)methodCalls;
-- (void)setTags:(NSDictionary *)tags;
 
 - (void)addArgument:(id)argument;
-- (void)replaceArgument:(id)argument atIndex:(NSUInteger)index;
+
+- (void)replaceArgumentAtIndex:(NSUInteger)index with:(id)argument;
 
 - (void)addMethodCall:(GCDIMethodCall *)methodCall;
 - (void)removeMethodCall:(GCDIMethodCall *)methodCall;
