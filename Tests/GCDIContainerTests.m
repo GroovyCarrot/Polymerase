@@ -9,7 +9,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <GCDependencyInjection/GCDependencyInjection.h>
+#import "Polymerase.h"
 #import "GCDIExampleService.h"
 
 @interface GCDIContainer (Tests)

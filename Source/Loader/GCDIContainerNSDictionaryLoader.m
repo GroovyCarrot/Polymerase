@@ -96,7 +96,7 @@
   GCDIDefinition *serviceDefinition = [[GCDIDefinition alloc] init];
 
   if (definitionDictionary[@"Class"]) {
-    [serviceDefinition setClassName:definitionDictionary[@"Class"]];
+    [serviceDefinition useClassNamed:definitionDictionary[@"Class"]];
   }
 
   if (definitionDictionary[@"Factory"]) {
@@ -104,7 +104,7 @@
   }
 
   if (definitionDictionary[@"Selector"]) {
-    [serviceDefinition setInitializer:definitionDictionary[@"Selector"]];
+    [serviceDefinition useInitializerNamed:definitionDictionary[@"Selector"]];
   }
   else if(definitionDictionary[@"Factory"]) {
     [NSException raise:NSParseErrorException
@@ -112,7 +112,7 @@
   }
 
   if (definitionDictionary[@"Arguments"]) {
-    [serviceDefinition setArguments:[self.interpreter interpretValue:definitionDictionary[@"Arguments"]]];
+    [serviceDefinition injectArguments:[self.interpreter interpretValue:definitionDictionary[@"Arguments"]]];
   }
 
   if (definitionDictionary[@"Setters"]) {

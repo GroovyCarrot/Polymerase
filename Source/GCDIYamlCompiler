@@ -12,6 +12,8 @@
 require 'yaml'
 require 'optparse'
 
+FRAMEWORK_NAME = 'Polymerase'
+
 class ::Hash
     def deep_merge(second)
         merger = proc { |key, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : v2 }
@@ -203,7 +205,7 @@ class CodeTranslator
   def setParameter(parameter, value)
     case @language
     when 'swift'
-      return 'self.setParameter(' + self.parse(parameter) + ', value:' + self.parse(value) + ')'
+      return 'self.setParameter(' + self.parse(parameter) + ', value:' + self.parse(value) + ');'
     else
       return '[self setParameter:' + self.parse(parameter) + ' value:' + self.parse(value) + '];'
     end
@@ -212,7 +214,7 @@ class CodeTranslator
   def setAlias(service, definition)
     case @language
     when 'swift'
-      return 'self.setAlias(' + self.parse(service) + ', to:' + self.parse(definition[1, definition.length - 1]) + ')'
+      return 'self.setAlias(' + self.parse(service) + ', to:' + self.parse(definition[1, definition.length - 1]) + ');'
     else
       return '[self setAlias:' + self.parse(service) + ' to:' + self.parse(definition[1, definition.length - 1]) + '];'
     end
@@ -221,7 +223,7 @@ class CodeTranslator
   def setService(service, implementation)
     case @language
     when 'swift'
-      return 'self.setService(' + self.parse(service) + ') ' + implementation
+      return 'self.setService(' + self.parse(service) + ', definition:' + implementation + ');'
     else
       return '[self setService:' + self.parse(service) + " definition:" + implementation + "];"
     end
@@ -230,7 +232,7 @@ class CodeTranslator
   def setProperty(variable, property, value, parsed = false)
     case @language
     when 'swift'
-      return variable + '.' + property + ' = ' + (parsed ? value : self.parse(value))
+      return variable + '!.' + property + ' = ' + (parsed ? value : self.parse(value)) + ';'
     else
       return variable + '.' + property + ' = ' + (parsed ? value : self.parse(value)) + ';'
     end
@@ -249,7 +251,7 @@ class CodeTranslator
   def callSetterMethod(variable, method, argument, parsed = false)
     case @language
     when 'swift'
-      return variable + '.' + method + '(' + (parsed ? argument : self.parse(argument)) + ')'
+      return variable + '!.' + method + '(' + (parsed ? argument : self.parse(argument)) + ');'
     else
       return '[' + variable + ' ' + method + ':' + (parsed ? argument : self.parse(argument)) + '];'
     end
@@ -341,10 +343,10 @@ class CodeTranslator
     case @language
     when 'swift'
       output.push('import Foundation')
-      output.push('import GCDependencyInjection')
+      output.push('import ' + FRAMEWORK_NAME)
       output.push('')
     else
-      output.push('#import <GCDependencyInjection/GCDependencyInjection.h>')
+      output.push('#import <' + FRAMEWORK_NAME + '/' + FRAMEWORK_NAME + '.h>')
       output.push('')
     end
     return output
@@ -354,19 +356,19 @@ class CodeTranslator
     output = []
     case @language
     when 'swift'
-      output.push('extension ' + klass + ' {')
-      output.push('  func yamlProvisionContainer() {')
-      output.push(self.outputCodeWithIndentation(implementation, 4))
-      output.push('  }')
-      output.push('}')
-    else
-      output.push('@interface ' + klass + ' : GCDIDefinitionContainer')
-      output.push('@end')
-      output.push('@implementation ' + klass + ' (Yaml)')
-      output.push('- (void)yamlProvisionContainer {')
+      output.push(self.outputCodeWithIndentation('extension ' + klass + "\n{", 0))
+      output.push(self.outputCodeWithIndentation("func yamlProvisionContainer()\n{", 1))
       output.push(self.outputCodeWithIndentation(implementation, 2))
-      output.push('}')
-      output.push('@end')
+      output.push(self.outputCodeWithIndentation('}', 1))
+      output.push(self.outputCodeWithIndentation('}', 0))
+    else
+      output.push(self.outputCodeWithIndentation('@interface ' + klass + ' : GCDIDefinitionContainer', 0))
+      output.push(self.outputCodeWithIndentation('@end', 0))
+      output.push(self.outputCodeWithIndentation('@implementation ' + klass + ' (Yaml)', 0))
+      output.push(self.outputCodeWithIndentation('- (void)yamlProvisionContainer {', 0))
+      output.push(self.outputCodeWithIndentation(implementation, 1))
+      output.push(self.outputCodeWithIndentation('}', 0))
+      output.push(self.outputCodeWithIndentation('@end', 0))
     end
     return output
   end
@@ -374,13 +376,14 @@ class CodeTranslator
   def createDefinitionBlockFromImplementation(implementation)
     case @language
     when 'swift'
-      return "{ definition in\n" + self.outputCodeWithIndentation(implementation, 2) + "\n}"
+      return "{ (definition: GCDIDefinition?) in\n" + self.outputCodeWithIndentation(implementation, 1) + "\n}"
     else
-      return "^(GCDIDefinition *definition) {\n" + self.outputCodeWithIndentation(implementation, 2) + "\n}"
+      return "^(GCDIDefinition *definition) {\n" + self.outputCodeWithIndentation(implementation, 1) + "\n}"
     end
   end
 
   def outputCodeWithIndentation(code, n)
+    n = n * 4
     return (' ' * n) + code.split("\n").join("\n" + (' ' * n))
   end
 end
@@ -429,7 +432,7 @@ def loadInstructionForFile(file, container_classes, klass = false)
 
   instruction[:file] = file
 
-  current_instruction = container_classes[klass] ? container_classes[klass] : {};
+  current_instruction = container_classes[klass] ? container_classes[klass] : {}
   container_classes[klass] = instruction.deep_merge(current_instruction)
 
   if instruction['Import'].is_a?(Array)

@@ -60,15 +60,15 @@
 
 # pragma mark - Setters
 
-- (void)setClass:(Class)klass {
+- (void)useClass:(Class)klass {
   _klass = NSStringFromClass(klass).copy;
 }
 
-- (void)setInitializerSelector:(SEL)pSelector {
+- (void)useInitializer:(SEL)pSelector {
   _initializer = NSStringFromSelector(pSelector).copy;
 }
 
-- (void)setArguments:(NSArray<id> *)arguments {
+- (void)injectArguments:(NSArray<id> *)arguments {
   _arguments = arguments.mutableCopy;
 }
 

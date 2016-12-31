@@ -71,10 +71,10 @@
 		F6329B711CF09A6800D6CFA3 /* GCDIYamlCompiler in Resources */ = {isa = PBXBuildFile; fileRef = CAD68108AC8889F396575881 /* GCDIYamlCompiler */; };
 		F66978AB1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD687DAD9A648042C977B74 /* GCDIContainerNSDictionaryLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F66978AC1CC40DE500370E80 /* GCDIContainerNSDictionaryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD684367E8FFCBD523D49B8 /* GCDIContainerNSDictionaryLoader.m */; };
-		F689F97D1CAD5F8800F6C8ED /* GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F689F97D1CAD5F8800F6C8ED /* Polymerase.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* Polymerase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6B3D9111DA3161E0046CBE7 /* NSValue+GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68AAA51D2AFF6F4EBA878 /* NSValue+GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6B3D9121DA316250046CBE7 /* NSValue+GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68AAA51D2AFF6F4EBA878 /* NSValue+GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F6CA90161CEBA22B00924094 /* GCDependencyInjection.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6CA90161CEBA22B00924094 /* Polymerase.h in Headers */ = {isa = PBXBuildFile; fileRef = F689F97C1CAD5F8800F6C8ED /* Polymerase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6CA90171CEBA22B00924094 /* GCDIContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6CA90181CEBA22B00924094 /* GCDIAliasableContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6CA90191CEBA22B00924094 /* GCDIDefinitionContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -215,6 +215,7 @@
 		CAD68AE3A6BC90B1D140AF2A /* GCDIYamlExampleContainer+Params.yml */ = {isa = PBXFileReference; lastKnownFileType = file.yml; path = "GCDIYamlExampleContainer+Params.yml"; sourceTree = "<group>"; };
 		CAD68B218A12982F2FA9EF5B /* GCDIAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIAlias.h; sourceTree = "<group>"; };
 		CAD68B2F5949349CEEE90604 /* GCDIExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIExceptions.h; sourceTree = "<group>"; };
+		CAD68B3B029DBBB8B75D8B39 /* Polymerase.podspec */ = {isa = PBXFileReference; lastKnownFileType = file.podspec; path = Polymerase.podspec; sourceTree = "<group>"; };
 		CAD68BAC9639333F80F5A647 /* GCDIDefinitionContainer+Yaml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GCDIDefinitionContainer+Yaml.m"; sourceTree = "<group>"; };
 		CAD68BE609EDF89384B61BAA /* GCDIExampleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIExampleService.m; sourceTree = "<group>"; };
 		CAD68C4536C3B9C227D0F2EE /* GCDIDefinitionContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIDefinitionContainer.h; sourceTree = "<group>"; };
@@ -230,13 +231,13 @@
 		CAD68F8780AAB36E94E5AD43 /* GCDIDefinitionContainerSwiftTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIDefinitionContainerSwiftTests.m; sourceTree = "<group>"; };
 		CAD68FD440CFD650C53FB412 /* GCDIResettableContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDIResettableContainerProtocol.h; sourceTree = "<group>"; };
 		CAD68FEC169BD5574D0AFDB0 /* GCDIYamlCompilerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDIYamlCompilerTests.m; sourceTree = "<group>"; };
-		F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDependencyInjection.h; sourceTree = "<group>"; };
+		F689F9791CAD5F8800F6C8ED /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GCDependencyInjection.framework; path = Polymerase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F689F97C1CAD5F8800F6C8ED /* Polymerase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Polymerase.h; sourceTree = "<group>"; };
 		F689F9831CAD5F8900F6C8ED /* GCDependencyInjectioniOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectioniOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F689F9881CAD5F8900F6C8ED /* GCDependencyInjectionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDependencyInjectionTests.m; sourceTree = "<group>"; };
 		F689F98A1CAD5F8900F6C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../GCDependencyInjectioniOSTests/Info.plist; sourceTree = "<group>"; };
 		F69DF2B41CF652C70056729E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDependencyInjection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6CA900E1CEBA18700924094 /* GCDependencyInjection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GCDependencyInjection.framework; path = Polymerase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6CA90121CEBA18700924094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6CA90371CECB6CB00924094 /* GCDependencyInjectionOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GCDependencyInjectionOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6CA903B1CECB6CB00924094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -370,6 +371,7 @@
 				F69DF2B31CF652C70056729E /* GCDependencyInjectioniOSTests */,
 				F689F97A1CAD5F8800F6C8ED /* Products */,
 				CAD6884B93949B637DAF8B0E /* README.md */,
+				CAD68B3B029DBBB8B75D8B39 /* Polymerase.podspec */,
 			);
 			sourceTree = "<group>";
 		};
@@ -391,7 +393,7 @@
 				CAD686DB1164F00B82F5E524 /* Exception */,
 				CAD6823BBB2FD74B245704E6 /* Loader */,
 				CAD68C4EEA3D2967701E4CAB /* ParameterBag */,
-				F689F97C1CAD5F8800F6C8ED /* GCDependencyInjection.h */,
+				F689F97C1CAD5F8800F6C8ED /* Polymerase.h */,
 				CAD68C5CEFEF05E0E6BD968B /* GCDIContainerProtocol.h */,
 				CAD68CA2E72E79AF077C31B4 /* GCDIAliasableContainerProtocol.h */,
 				CAD68086226A46D281CDB2C9 /* GCDIDefinitionContainerProtocol.h */,
@@ -475,7 +477,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F689F97D1CAD5F8800F6C8ED /* GCDependencyInjection.h in Headers */,
+				F689F97D1CAD5F8800F6C8ED /* Polymerase.h in Headers */,
 				CAD68CF10CB8EDF4942C14F8 /* GCDIAlternativeSuggester.h in Headers */,
 				CAD6862C76D3F8A73CA47A96 /* GCDIAlternativeSuggesterProtocol.h in Headers */,
 				CAD68C1BE2E9EA011D5CDE0F /* GCDIDefinitionContainerProtocol.h in Headers */,
@@ -513,7 +515,7 @@
 				F6CA90301CEBA25100924094 /* GCDIAlternativeSuggester.h in Headers */,
 				F6CA90221CEBA22B00924094 /* GCDIDefinitionContainer.h in Headers */,
 				F6CA90191CEBA22B00924094 /* GCDIDefinitionContainerProtocol.h in Headers */,
-				F6CA90161CEBA22B00924094 /* GCDependencyInjection.h in Headers */,
+				F6CA90161CEBA22B00924094 /* Polymerase.h in Headers */,
 				F6CA90171CEBA22B00924094 /* GCDIContainerProtocol.h in Headers */,
 				F6CA90241CEBA22B00924094 /* GCDIReference.h in Headers */,
 				F6CA901E1CEBA22B00924094 /* GCDIContainer.h in Headers */,
@@ -704,7 +706,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -e \"${SYMROOT}/Release-iphoneos+simulator\" ]; then\n  rm -r \"${SYMROOT}/Release-iphoneos+simulator\"\nfi\n\nmkdir \"${SYMROOT}/Release-iphoneos+simulator\"\n\nset -e\n\nxcodebuild -target \"${PROJECT_NAME}iOS\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}iOS\" -configuration ${CONFIGURATION} -sdk iphonesimulator -arch x86_64 -arch i386  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\ncp -r \"${SYMROOT}/Release-iphoneos/${PROJECT_NAME}.framework\" \"${SYMROOT}/Release-iphoneos+simulator/${PROJECT_NAME}.framework\"\n\nlipo -create -output \"${SYMROOT}/Release-iphoneos+simulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${SYMROOT}/Release-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${SYMROOT}/Release-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n";
+			shellScript = "if [ -e \"${SYMROOT}/Release-iphoneos+simulator\" ]; then\n  rm -r \"${SYMROOT}/Release-iphoneos+simulator\"\nfi\n\nmkdir \"${SYMROOT}/Release-iphoneos+simulator\"\n\nset -e\n\nxcodebuild -target \"${PROJECT_NAME}iOS\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}iOS\" -configuration ${CONFIGURATION} -sdk iphonesimulator -arch x86_64 -arch i386  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\ncp -r \"${SYMROOT}/Release-iphoneos/${PRODUCT_NAME}.framework\" \"${SYMROOT}/Release-iphoneos+simulator/${PRODUCT_NAME}.framework\"\n\nlipo -create -output \"${SYMROOT}/Release-iphoneos+simulator/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${SYMROOT}/Release-iphoneos/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${SYMROOT}/Release-iphonesimulator/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -814,14 +816,14 @@
 		F6329B601CF03CBD00D6CFA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Polymerase;
 			};
 			name = Debug;
 		};
 		F6329B611CF03CBD00D6CFA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Polymerase;
 			};
 			name = Release;
 		};
@@ -928,7 +930,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(PROJECT_NAME)";
+				PRODUCT_NAME = Polymerase;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -952,7 +954,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjection;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(PROJECT_NAME)";
+				PRODUCT_NAME = Polymerase;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -995,7 +997,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionOSX;
-				PRODUCT_NAME = "$(PROJECT_NAME)";
+				PRODUCT_NAME = Polymerase;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1016,7 +1018,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.groovycarrot.GCDependencyInjectionOSX;
-				PRODUCT_NAME = "$(PROJECT_NAME)";
+				PRODUCT_NAME = Polymerase;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};

@@ -9,7 +9,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GCDependencyInjection/GCDependencyInjection.h>
+#import "Polymerase.h"
 
 @interface GCDIYamlExampleContainer : GCDIDefinitionContainer
 @end

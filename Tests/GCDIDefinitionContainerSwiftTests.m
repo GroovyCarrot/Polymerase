@@ -9,8 +9,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <GCDependencyInjection/GCDependencyInjection.h>
-#import <GCDependencyInjection/GCDIDefinitionContainer+Swift.h>
+#import <Polymerase/Polymerase.h>
+#import <Polymerase/GCDIDefinitionContainer+Swift.h>
 
 @interface GCDependencyInjectionContainerSwiftTests : XCTestCase
 @property (nonatomic, strong) GCDIDefinitionContainer *container;

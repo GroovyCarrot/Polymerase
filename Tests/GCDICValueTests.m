@@ -9,7 +9,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <GCDependencyInjection/GCDependencyInjection.h>
+#import "Polymerase.h"
 #import "GCDIExampleService.h"
 
 @interface GCDICValueTests : XCTestCase
@@ -18,33 +18,6 @@
 
 @implementation GCDICValueTests {
   NSValue *_value;
-}
-
-- (void)setUp {
-  [super setUp];
-
-  _container = [[GCDIDefinitionContainer alloc] init];
-
-  [_container setService:@"example.test.NSInteger" definition:^(GCDIDefinition *definition) {
-    [definition setClass:[GCDIExampleService class]];
-    [definition addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(setANSInteger:)
-                                                       andArguments:@[[NSValue valueWithInteger:999]]]];
-  }];
-
-  [_container setService:@"example.test.float" definition:^(GCDIDefinition *definition) {
-    [definition setClass:[GCDIExampleService class]];
-    [definition addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(setAFloat:)
-                                                       andArguments:@[[NSValue valueWithFloat:99.999]]]];
-  }];
-
-  // Test using a raw float value, wrapped in NSValue.
-  float aValue = 99.999;
-  [_container setService:@"example.test.float.raw" definition:^(GCDIDefinition *definition) {
-    [definition setClass:[GCDIExampleService class]];
-    [definition addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(setAFloat:)
-                                                       andArguments:@[[NSValue valueWithBytes:&aValue
-                                                                                     objCType:@encode(float)]]]];
-  }];
 }
 
 - (void)testValueWithFloat {
@@ -56,7 +29,7 @@
   XCTAssertNotEqual(test1CValue, (float) -99.999);
 
   // Negative float check.
-  _value = [NSValue valueWithFloat:-99.999];
+  _value = [NSValue valueWithFloat:(float) -99.999];
   float test2CValue;
   [_value getValue:&test2CValue];
   XCTAssertEqual(test2CValue, (float) -99.999);
@@ -264,6 +237,29 @@
 }
 
 - (void)testContainerCValueInterpreter {
+  _container = [[GCDIDefinitionContainer alloc] init];
+
+  [_container setService:@"example.test.NSInteger" definition:^(GCDIDefinition *definition) {
+    [definition useClass:[GCDIExampleService class]];
+    [definition addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(setANSInteger:)
+                                                       andArguments:@[[NSValue valueWithInteger:999]]]];
+  }];
+
+  [_container setService:@"example.test.float" definition:^(GCDIDefinition *definition) {
+    [definition useClass:[GCDIExampleService class]];
+    [definition addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(setAFloat:)
+                                                       andArguments:@[[NSValue valueWithFloat:99.999]]]];
+  }];
+
+  // Test using a raw float value, wrapped in NSValue.
+  float aValue = 99.999;
+  [_container setService:@"example.test.float.raw" definition:^(GCDIDefinition *definition) {
+    [definition useClass:[GCDIExampleService class]];
+    [definition addMethodCall:[GCDIMethodCall methodCallForSelector:@selector(setAFloat:)
+                                                       andArguments:@[[NSValue valueWithBytes:&aValue
+                                                                                     objCType:@encode(float)]]]];
+  }];
+
   GCDIExampleService *exampleService = [_container getService:@"example.test.NSInteger"];
   XCTAssert([exampleService.a isEqualToNumber:@(999)]);
 

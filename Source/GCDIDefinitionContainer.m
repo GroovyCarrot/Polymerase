@@ -369,8 +369,8 @@ static GCDIInterpreter *$_interpreter;
 
 - (void)registerService:(NSString *)serviceId forClass:(Class)klass andSelector:(SEL)pSelector {
   [self setService:serviceId definition:^(GCDIDefinition *definition) {
-    [definition setClass:klass];
-    [definition setInitializerSelector:pSelector];
+    [definition useClass:klass];
+    [definition useInitializer:pSelector];
   }];
 }
 

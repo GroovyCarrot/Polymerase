@@ -1,13 +1,15 @@
-## GCDependencyInjection
+## Polymerase
 
-##### A dependency injection framework for iOS and OS X, with easy Storyboard integration, and parameter support.
+##### A service-oriented, Objective C and Swift dependency injection framework, for macOS and iOS.
+
+Features dynamic Xcode storyboard integration for services and parameters.
 
 This framework provides a dependency injection container class
 (`GCDIDefinitionContainer`) that has a standardised way of defining services
-(objects) within the application. The premise is quite simple: all you have to
-do, is inform the container how to construct your service, for when it is
-requested. A service may require other services to be injected into it via the
-initialiser, or setters.
+(objects) within the application. The premise is quite simple: you have to
+tell the container how to construct your service, for when it is asked for. A
+service may require other services to be injected into it via the initialiser,
+or setters.
 
 Services in the container are assigned identifiers, which are used to create
 references to them. A service definition is added to the container using the
@@ -15,19 +17,21 @@ following code.
 
 ```objective-c
 [_container setService:@"example_service" definition:^(GCDIDefinition *definition) {
-  [definition setClassName:@"MyExampleClass"];
-  [definition setInitializer:@"initWithDependency:"];
-  [definition setArguments:@[
+  [definition useClassNamed:@"MyExampleClass"];
+  [definition useInitializerNamed:@"initWithDependency:"];
+  [definition injectArguments:@[
     [GCDIReference referenceForServiceId:@"dependency_service"],
   ]];
 }];
 ```
 ```swift
-container.setService("example_service") { definition in
-  definition.klass = "MyExampleService" // Or with namespace: MyApplication.MyExampleService
-  definition.initializer = "init(dependency:)"
-  definition.arguments = [GCDIReference(forServiceId:"dependency_service")]
-}
+container.setService("example_service", definition:{ (definition: GCDIDefinition?) in
+    definition!.klass = "MyExampleService" // Or with namespace: MyApplication.MyExampleService
+    definition!.initializer = "init(dependency:)"
+    definition!.arguments = [
+        GCDIReference(forServiceId:"dependency_service"),
+    ];
+});
 ```
 
 It may seem strange to record a class name and a selector as a string;
@@ -36,6 +40,27 @@ wanted to add definitions to the container using code, definitions do still
 convert the `Class` into a string. The benefit of recording this data in
 string format, means that do not need to use code to store the definitions for
 all of our services, and code can be used for actual logic.
+
+Examples using `Class` and `SEL` types:
+
+```objective-c
+[_container setService:@"example_service" definition:^(GCDIDefinition *definition) {
+  [definition useClass:[MyExampleClass class]];
+  [definition useInitializer:@"initWithDependency:"];
+  [definition injectArguments:@[
+    [GCDIReference referenceForServiceId:@"dependency_service"],
+  ]];
+}];
+```
+```swift
+container.setService("example_service", definition:{ (definition: GCDIDefinition?) in
+    definition!.use(MyExampleService.self)
+    definition!.useInitializer(#selector(MyExampleService.init(dependency:)))
+    definition!.arguments = [
+        GCDIReference(forServiceId:"dependency_service"),
+    ];
+});
+```
 
 ### Move over, property list.
 
@@ -71,17 +96,17 @@ Parameters:
 # Service definitions are listed here.
 Services:
   car_factory:
-    Class: '%car_factory.class%' # Reference a parameter.
-
-  a_spark_plug_factory:
-    Class: EngineSparkPlugFactory
+    Class: '%car_factory.class%' # Parameter substituted.
+    # Initializer: 'init' is used by default.
 
   engine_factory:
     Class: EngineFactory
     Initializer: 'initWithSparkPlugFactory:' # 'init(sparkPlugFactory:)' in swift.
-                                             # Uses 'init' by default.
     Arguments:
-      - '%spark_plug_factory%'
+      - '%spark_plug_factory%' # Parameter substituted.
+
+  a_spark_plug_factory:
+    Class: EngineSparkPlugFactory
 ```
 
 #### Parameters
@@ -178,10 +203,10 @@ available in the YAML file are valid, such as passing parameters with esclosing
 ## Include framework
 
 ```objective-c
-#import <GCDependencyInjection/GCDependencyInjection.h>
+#import <Polymerase/Polymerase.h>
 ```
 ```swift
-import GCDependencyInjection
+import Polymerase
 ```
 
 ##### Libraries for embedding

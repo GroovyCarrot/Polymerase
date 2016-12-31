@@ -9,7 +9,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <GCDependencyInjection/GCDependencyInjection.h>
+#import "Polymerase.h"
 
 @interface GCDIParameterBagTests : XCTestCase
 @property (nonatomic, strong) GCDIParameterBag *parameterBag;

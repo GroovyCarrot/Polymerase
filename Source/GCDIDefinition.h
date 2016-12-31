@@ -14,12 +14,12 @@
 
 @interface GCDIDefinition : NSObject
 
-@property (nonatomic, copy, setter=setClassName:) NSString *klass;
+@property (nonatomic, copy, setter=useClassNamed:) NSString *klass;
 @property (nonatomic, strong) id factory;
-@property (nonatomic, copy, getter=getInitializer, setter=setInitializer:) NSString *initializer;
+@property (nonatomic, copy, getter=getInitializer, setter=useInitializerNamed:) NSString *initializer;
 @property (nonatomic, copy) NSString *pathToLibrary;
 
-@property (nonatomic, copy) NSArray<id> *arguments;
+@property (nonatomic, copy, setter=injectArguments:) NSArray<id> *arguments;
 @property (nonatomic, copy) NSDictionary<NSString *, id> *setters;
 @property (nonatomic, copy) NSArray<GCDIMethodCall *> *methodCalls;
 @property (nonatomic, copy) NSDictionary<NSString *, NSString *> *tags;
@@ -37,8 +37,8 @@
 
 - (GCDIDefinition *)initForClassNamed:(NSString *)klass withSelector:(NSString *)pSelector andArguments:(NSArray *)arguments;
 
-- (void)setClass:(Class)klass;
-- (void)setInitializerSelector:(SEL)pSelector;
+- (void)useClass:(Class)klass;
+- (void)useInitializer:(SEL)initializer;
 
 - (void)addArgument:(id)argument;
 
